@@ -12,6 +12,13 @@ public class PortMapInfo extends JSONObject{
     private TypeIdInfo mapped;
     private PortMap_portInfo port;
 
+    public PortMapInfo(){}
+    public PortMapInfo (String vlan, TypeIdInfo node, PortMap_portInfo port){
+        this.vlan = vlan;
+        this.node = node;
+        this.port = port;
+    }
+
     public String getVlan() {
         return vlan;
     }

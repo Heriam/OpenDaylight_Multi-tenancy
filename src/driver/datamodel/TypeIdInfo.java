@@ -9,9 +9,11 @@ public class TypeIdInfo extends JSONObject{
     private String type;
     private String id;
 
-    public TypeIdInfo(String type, String id){
+    public TypeIdInfo(){}
+
+    public TypeIdInfo(String id){
         this.id = id;
-        this.type = type;
+        this.type = "OF";
     }
 
     public String getType() {

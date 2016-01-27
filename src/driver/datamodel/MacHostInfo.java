@@ -1,12 +1,14 @@
 package driver.datamodel;
 
-import org.json.JSONArray;
+
+import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
  * Created by Hao on 1/16/16.
  */
-public class MacHostInfo extends JSONArray{
+public class MacHostInfo extends JSONObject {
+
     private ArrayList<MacInfo> machost;
 
     public ArrayList<MacInfo> getMachost() {
@@ -16,6 +18,8 @@ public class MacHostInfo extends JSONArray{
     public void setMachost(ArrayList<MacInfo> machost) {
         this.machost = machost;
     }
+
+    public void addMachost(MacInfo macInfo) { this.machost.add(macInfo); }
 
     public String toString() {
         return "{\"machost\":"+machost+"}";

@@ -12,12 +12,13 @@ public class BridgeInfo extends JSONObject {
     private String state;
     private String ageInterval;
 
+
     public BridgeInfo(){}
 
     public BridgeInfo(String name, String ageInterval){
         this.name = name;
         this.ageInterval = ageInterval;
-        this.description = "this is" + name;
+        this.description = "this is " + name;
     }
 
     public String getDescription() {

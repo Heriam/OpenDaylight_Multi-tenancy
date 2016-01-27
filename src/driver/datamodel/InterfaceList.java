@@ -1,14 +1,13 @@
 package driver.datamodel;
 
 import com.owlike.genson.annotation.JsonProperty;
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 
 /**
  * Created by Hao on 1/13/16.
  */
-public class InterfaceList extends JSONArray{
+public class InterfaceList{
 
     @JsonProperty(value = "interface")
     private ArrayList<InterfaceInfo> interfaceField;

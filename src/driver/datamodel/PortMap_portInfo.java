@@ -1,6 +1,7 @@
 package driver.datamodel;
 
 import org.json.JSONObject;
+import org.omg.CORBA.portable.Streamable;
 
 /**
  * Created by Hao on 1/13/16.
@@ -9,6 +10,13 @@ public class PortMap_portInfo extends JSONObject{
     private String name;
     private String type;
     private String id;
+
+    public PortMap_portInfo(){}
+    public PortMap_portInfo (String name, String id){
+        this.type = "OF";
+        this.name = name;
+        this.id = id;
+    }
 
     public String getName() {
         return name;

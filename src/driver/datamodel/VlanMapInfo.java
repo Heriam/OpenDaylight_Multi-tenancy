@@ -4,11 +4,20 @@ import org.json.JSONObject;
 
 /**
  * Created by Hao on 1/13/16.
+ * Not Realized Yet
  */
 public class VlanMapInfo extends JSONObject{
     private String id;
     private String vlan;
     TypeIdInfo node;
+
+    public VlanMapInfo(){}
+
+    public VlanMapInfo(String id, String vlan, TypeIdInfo node){
+        this.id = id;
+        this.vlan = vlan;
+        this.node = node;
+    }
 
     public String getId() {
         return id;

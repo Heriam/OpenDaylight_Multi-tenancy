@@ -12,6 +12,14 @@ public class InterfaceInfo extends JSONObject{
     private String state;
     private String entityState;
 
+    public InterfaceInfo(){}
+
+    public InterfaceInfo(String name, boolean enabled){
+        this.description = "This is interface "+name;
+        this.enabled = enabled;
+        this.name = name;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -56,7 +64,7 @@ public class InterfaceInfo extends JSONObject{
     public String toString() {
         return "{" +
                 "\"description\":\"" + description + '\"' +
-                ", \"enabled\":\"" + enabled + '\"' +
+                ", \"enabled\":" + enabled +
                 ", \"name\":\"" + name + '\"' +
                 ", \"state\":\"" + state + '\"' +
                 ", \"entityState\":\"" + entityState + '\"' +

@@ -1,13 +1,12 @@
 package driver.datamodel;
 
-import org.json.JSONArray;
 
 import java.util.ArrayList;
 
 /**
  * Created by Hao on 08/01/16.
  */
-public class VTNList extends JSONArray{
+public class VTNList{
     private ArrayList<VTNInfo> vtn;
 
     public ArrayList<VTNInfo> getVtn() {

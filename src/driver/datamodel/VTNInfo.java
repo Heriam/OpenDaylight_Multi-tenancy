@@ -17,7 +17,7 @@ public class VTNInfo extends JSONObject{
         this.name = name;
         this.hardTimeout = hardTimeout;
         this.idleTimeout = idleTimeout;
-        this.description = "This is" + name + "\'s virtual network.";
+        this.description = "This is " + name + "\'s virtual network.";
     }
 
     public String getDescription() {
