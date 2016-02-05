@@ -5,6 +5,7 @@ import driver.Requester;
 import driver.IMessagable;
 import driver.Message;
 import driver.aaadatamodel.UserInfo;
+import driver.aaadatamodel.UserList;
 
 
 /**
@@ -21,9 +22,9 @@ public class AAARequests {
 
         //Create a User
         Requester req = new Requester();
-        IMessagable userJue = new Message(new UserInfo("Yeue", "931026"), "auth/v1/users/7", adminAuth);
+        IMessagable userJue = new Message(new UserInfo("hao.jiang", "931026"), "auth/v1/users", adminAuth);
 //        req.Post(userJue);
-        System.out.println(req.Get(userJue).getEntity(UserInfo.class));
+        System.out.println(req.Get(userJue).getEntity(UserList.class));
 
     }
 }
