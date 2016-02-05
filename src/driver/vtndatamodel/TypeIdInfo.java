@@ -1,35 +1,16 @@
 package driver.vtndatamodel;
 
-import driver.IMessagable;
 import org.json.JSONObject;
 
 /**
  * Created by Hao on 1/13/16.
  * This is a common used Type-ID data strucdture
  */
-public class TypeIdInfo extends JSONObject implements IMessagable{
+public class TypeIdInfo extends JSONObject {
     private String type;
     private String id;
 
-    private String URL;
-    private String Auth;
-    @Override
-    public String getURL() {
-        return URL;
-    }
-    @Override
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
 
-    @Override
-    public String getAuth() {
-        return Auth;
-    }
-    @Override
-    public void setAuth(String auth) {
-        Auth = auth;
-    }
 
     public TypeIdInfo(){}
 

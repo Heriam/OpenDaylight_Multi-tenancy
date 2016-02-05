@@ -1,7 +1,6 @@
 package driver.vtndatamodel;
 
 
-import driver.IMessagable;
 import org.json.JSONObject;
 
 /**
@@ -63,31 +62,13 @@ import org.json.JSONObject;
 
  *
  */
-public class PortMapInfo extends JSONObject implements IMessagable{
+public class PortMapInfo extends JSONObject {
     private String vlan;
     private TypeIdInfo node;
     private TypeIdInfo mapped;
     private PortMap_portInfo port;
 
-    private String URL;
-    private String Auth;
-    @Override
-    public String getURL() {
-        return URL;
-    }
-    @Override
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
 
-    @Override
-    public String getAuth() {
-        return Auth;
-    }
-    @Override
-    public void setAuth(String auth) {
-        Auth = auth;
-    }
 
     public PortMapInfo(){}
     public PortMapInfo (String vlan, TypeIdInfo node, PortMap_portInfo port){

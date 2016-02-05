@@ -1,33 +1,13 @@
 package driver.vtndatamodel;
 
-import driver.IMessagable;
 import org.json.JSONObject;
 
 /**
  * Created by Hao on 1/16/16.
  * Note: MAC mapping will not be activated just by configuring it, a two end communication needs to be establihed to activate Mac Mapping.
  */
-public class MacInfo extends JSONObject implements IMessagable{
+public class MacInfo extends JSONObject {
 
-    private String URL;
-    private String Auth;
-    @Override
-    public String getURL() {
-        return URL;
-    }
-    @Override
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
-
-    @Override
-    public String getAuth() {
-        return Auth;
-    }
-    @Override
-    public void setAuth(String auth) {
-        Auth = auth;
-    }
 
     //-------------------------------------------------------------------------------------
 

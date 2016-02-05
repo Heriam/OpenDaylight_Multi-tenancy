@@ -1,6 +1,5 @@
 package driver.vtndatamodel;
 
-import driver.IMessagable;
 import org.json.JSONObject;
 
 /*
@@ -25,31 +24,13 @@ import org.json.JSONObject;
 
 
  */
-public class VTNInfo extends JSONObject implements IMessagable{
+public class VTNInfo extends JSONObject {
     private String description;
     private String name;
     private String hardTimeout;
     private String idleTimeout;
 
-    private String URL;
-    private String Auth;
-    @Override
-    public String getURL() {
-        return URL;
-    }
-    @Override
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
 
-    @Override
-    public String getAuth() {
-        return Auth;
-    }
-    @Override
-    public void setAuth(String auth) {
-        Auth = auth;
-    }
 
     public VTNInfo(){}
 

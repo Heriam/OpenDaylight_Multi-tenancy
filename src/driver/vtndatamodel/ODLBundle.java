@@ -1,6 +1,5 @@
 package driver.vtndatamodel;
 
-import driver.IMessagable;
 import org.json.JSONObject;
 
 /**
@@ -17,31 +16,13 @@ import org.json.JSONObject;
      qualifier component of OSGi bundle version is configured.
      qualifier is omitted if qualifier is not set in OSGi bundle version.
  */
-public class ODLBundle extends JSONObject implements IMessagable{
+public class ODLBundle extends JSONObject {
     private String major;
     private String minor;
     private String micro;
     private String qualifier;
 
-    private String URL;
-    private String Auth;
-    @Override
-    public String getURL() {
-        return URL;
-    }
-    @Override
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
 
-    @Override
-    public String getAuth() {
-        return Auth;
-    }
-    @Override
-    public void setAuth(String auth) {
-        Auth = auth;
-    }
 
     public String getMajor() {
         return major;

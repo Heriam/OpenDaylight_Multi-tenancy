@@ -1,7 +1,6 @@
 package driver.vtndatamodel;
 
 
-import driver.IMessagable;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -9,27 +8,8 @@ import java.util.ArrayList;
 /**
  * Created by Hao on 1/16/16.
  */
-public class MacListInfo extends JSONObject implements IMessagable{
+public class MacListInfo extends JSONObject{
 
-    private String URL;
-    private String Auth;
-    @Override
-    public String getURL() {
-        return URL;
-    }
-    @Override
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
-
-    @Override
-    public String getAuth() {
-        return Auth;
-    }
-    @Override
-    public void setAuth(String auth) {
-        Auth = auth;
-    }
 //-----------------------------------------------------------------------------------------
 
 

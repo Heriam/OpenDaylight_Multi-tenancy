@@ -1,6 +1,5 @@
 package driver.vtndatamodel;
 
-import driver.IMessagable;
 import org.json.JSONObject;
 
 /**
@@ -32,32 +31,12 @@ import org.json.JSONObject;
  *Further, the status of network elements are configured irrespective of whether interface is enabled or not. E.g., even if the interface is disabled, 1 will be configured in entityState if the mapped network elements are operating.
  */
 
-public class InterfaceInfo extends JSONObject implements IMessagable{
+public class InterfaceInfo extends JSONObject{
     private String description;
     private boolean enabled;
     private String name;
     private String state;
     private String entityState;
-
-    private String URL;
-    private String Auth;
-    @Override
-    public String getURL() {
-        return URL;
-    }
-    @Override
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
-
-    @Override
-    public String getAuth() {
-        return Auth;
-    }
-    @Override
-    public void setAuth(String auth) {
-        Auth = auth;
-    }
 
     public InterfaceInfo(){}
 

@@ -1,6 +1,5 @@
 package driver.vtndatamodel;
 
-import driver.IMessagable;
 import org.json.JSONObject;
 
 /**
@@ -24,30 +23,11 @@ import org.json.JSONObject;
          Specify the string representation of DPID for OpenFlow switch.
  *
  */
-public class VlanMapInfo extends JSONObject implements IMessagable{
+public class VlanMapInfo extends JSONObject {
     private String id;
     private String vlan;
     TypeIdInfo node;
 
-    private String URL;
-    private String Auth;
-    @Override
-    public String getURL() {
-        return URL;
-    }
-    @Override
-    public void setURL(String URL) {
-        this.URL = URL;
-    }
-
-    @Override
-    public String getAuth() {
-        return Auth;
-    }
-    @Override
-    public void setAuth(String auth) {
-        Auth = auth;
-    }
 
     public VlanMapInfo(){}
 
