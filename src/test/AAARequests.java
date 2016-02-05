@@ -21,9 +21,9 @@ public class AAARequests {
 
         //Create a User
         Requester req = new Requester();
-        IMessagable userJue = new Message(new UserInfo("Yeue", "931026"), "auth/v1/users", adminAuth);
-        req.Post(userJue);
-//        System.out.println(req.Get(userJue).getEntity(UserInfo.class));
+        IMessagable userJue = new Message(new UserInfo("Yeue", "931026"), "auth/v1/users/7", adminAuth);
+//        req.Post(userJue);
+        System.out.println(req.Get(userJue).getEntity(UserInfo.class));
 
     }
 }
