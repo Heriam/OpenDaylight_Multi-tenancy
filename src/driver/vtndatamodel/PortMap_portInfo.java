@@ -1,15 +1,36 @@
-package driver.datamodel;
+package driver.vtndatamodel;
 
+import driver.IMessagable;
 import org.json.JSONObject;
-import org.omg.CORBA.portable.Streamable;
 
 /**
  * Created by Hao on 1/13/16.
+ * This section describes the data showing Port mapping configuration information.
  */
-public class PortMap_portInfo extends JSONObject{
+public class PortMap_portInfo extends JSONObject implements IMessagable{
     private String name;
     private String type;
     private String id;
+
+    private String URL;
+    private String Auth;
+    @Override
+    public String getURL() {
+        return URL;
+    }
+    @Override
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
+
+    @Override
+    public String getAuth() {
+        return Auth;
+    }
+    @Override
+    public void setAuth(String auth) {
+        Auth = auth;
+    }
 
     public PortMap_portInfo(){}
     public PortMap_portInfo (String name, String id){

@@ -5,31 +5,26 @@ package driver;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import org.json.JSONObject;
 
 /**
  * Created by Hao on 06/01/16.
  */
 
-public class Requester implements Request{
+public class Requester implements IRequestODL {
 
-    private static final String json = "application/json";
-    private static final String authZ = "Basic YWRtaW46YWRtaW4=";
-    private static final String odlIP = "10.10.10.2";
     private static final Client client =  Client.create();
     private static WebResource webResource;
     private static ClientResponse response;
 
-    public Requester(String requestURL){
-        this.webResource = client.resource("http://"+odlIP+":"+requestURL);
-    }
+    public Requester(){
+        webResource = client.resource(ODLIP);}
 
-    public void Post(JSONObject payload, String requestPath) throws RuntimeException{
+    public void Post(IMessagable message) throws RuntimeException{
         try {
-            response = webResource.path(requestPath)
-                    .header("Content-Type", json)
-                    .header("Authorization", authZ)
-                    .post(ClientResponse.class, payload);
+            response = webResource.path(message.getURL())
+                    .header("Content-Type", JSON)
+                    .header("Authorization", message.getAuth())
+                    .post(ClientResponse.class, message);
 
             if (!(response.getStatus() == 201 || response.getStatus() == 200)) {
                 throw new RuntimeException("Failed : HTTP error " + response.getStatus() + ": "+response.getEntity(String.class));
@@ -40,12 +35,12 @@ public class Requester implements Request{
         }
     }
 
-    public ClientResponse Get(String requestPath) throws RuntimeException{
+    public ClientResponse Get(IMessagable message) throws RuntimeException{
         try {
-            response = webResource.path(requestPath)
-                    .header("Content-Type", json)
-                    .header("Accept", json)
-                    .header("Authorization", authZ)
+            response = webResource.path(message.getURL())
+                    .header("Content-Type", JSON)
+                    .header("Accept", JSON)
+                    .header("Authorization", message.getAuth())
                     .get(ClientResponse.class);
 
             if (!(response.getStatus() == 201 || response.getStatus() == 200)) {
@@ -59,12 +54,12 @@ public class Requester implements Request{
         }
     }
 
-    public void Put(JSONObject payload, String requestPath) throws RuntimeException{
+    public void Put(IMessagable message) throws RuntimeException{
         try{
-            response = webResource.path(requestPath)
-                    .header("Content-Type", json)
-                    .header("Authorization", authZ)
-                    .put(ClientResponse.class, payload);
+            response = webResource.path(message.getURL())
+                    .header("Content-Type", JSON)
+                    .header("Authorization", message.getAuth())
+                    .put(ClientResponse.class, message);
 
             if (!(response.getStatus() == 201 || response.getStatus() == 200)) {
                 throw new RuntimeException("Failed : HTTP error " + response.getStatus() + ": "+response.getEntity(String.class));
@@ -73,11 +68,11 @@ public class Requester implements Request{
             e.printStackTrace();
     }}
 
-    public void Delete(String requestPath) throws RuntimeException{
+    public void Delete(IMessagable message) throws RuntimeException{
         try{
-            response = webResource.path(requestPath)
-                    .header("Content-Type", json)
-                    .header("Authorization", authZ)
+            response = webResource.path(message.getURL())
+                    .header("Content-Type", JSON)
+                    .header("Authorization", message.getAuth())
                     .delete(ClientResponse.class);
             if (!(response.getStatus() == 201 || response.getStatus() == 200)) {
                 throw new RuntimeException("Failed : HTTP error " + response.getStatus() + ": "+response.getEntity(String.class));
