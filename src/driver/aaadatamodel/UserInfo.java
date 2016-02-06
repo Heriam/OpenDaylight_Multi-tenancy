@@ -1,7 +1,6 @@
 package driver.aaadatamodel;
 
 
-import driver.IMessagable;
 import org.json.JSONObject;
 
 /**

@@ -7,17 +7,14 @@ import com.sun.jersey.api.client.WebResource;
 /**
  * Created by Hao on 2/5/16.
  */
-public class Requester implements IRequestODL {
-    String ODLIP = "http://172.23.225.48:8282";
-    String JSON = "application/json";
+public class ODLDriver {
+    private static String ODLIP = "http://172.23.225.48:8282";
+    private static final String JSON = "application/json";
     private static final Client client =  Client.create();
-    private static WebResource webResource;
+    private static WebResource webResource= client.resource(ODLIP);
     private static ClientResponse response;
 
-    public Requester(){
-        webResource = client.resource(ODLIP);}
-
-    public void Post(IMessagable message) throws RuntimeException{
+    public static void Post(IMappable message) throws RuntimeException{
         try {
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
@@ -33,26 +30,19 @@ public class Requester implements IRequestODL {
         }
     }
 
-    public ClientResponse Get( IMessagable message) throws RuntimeException{
-        try {
+    public static ClientResponse Get( IMappable message){
+
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
                     .header("Accept", JSON)
                     .header("Authorization", message.getAuth())
                     .get(ClientResponse.class);
 
-            if (!(response.getStatus() == 201 || response.getStatus() == 200)) {
-                throw new RuntimeException("Failed : HTTP error " + response.getStatus() + ": "+response.getEntity(String.class));
-            }
-
             return response;
-        } catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
+
     }
 
-    public void Put(IMessagable message) throws RuntimeException{
+    public static void Put(IMappable message) throws RuntimeException{
         try{
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
@@ -66,7 +56,7 @@ public class Requester implements IRequestODL {
             e.printStackTrace();
         }}
 
-    public void Delete(IMessagable message) throws RuntimeException{
+    public static void Delete(IMappable message) throws RuntimeException{
         try{
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)

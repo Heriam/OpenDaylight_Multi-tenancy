@@ -1,11 +1,12 @@
 package test;
 
 
-import driver.Requester;
-import driver.IMessagable;
-import driver.Message;
-import driver.aaadatamodel.UserInfo;
-import driver.aaadatamodel.UserList;
+import driver.IMappable;
+import driver.MappableMsg;
+import driver.ODLDriver;
+import driver.aaadatamodel.*;
+
+import java.util.Base64;
 
 
 /**
@@ -18,13 +19,34 @@ public class AAARequests {
         String pswdAdmin = "admin";
 
         String usernameAndPassword = userAdmin + ":" + pswdAdmin;
-        String adminAuth = "Basic " + java.util.Base64.getEncoder().encodeToString( usernameAndPassword.getBytes());
+        String adminAuth = "Basic " + Base64.getEncoder().encodeToString( usernameAndPassword.getBytes());
+
 
         //Create a User
-        Requester req = new Requester();
-        IMessagable userJue = new Message(new UserInfo("hao.jiang", "931026"), "auth/v1/users", adminAuth);
-//        req.Post(userJue);
-        System.out.println(req.Get(userJue).getEntity(UserList.class));
+        IMappable userJue = new MappableMsg(new UserInfo("hao.jiang", "931026"), "auth/v1/users", adminAuth);
+//        ODLDriver.Post(userJue);
+        System.out.println(ODLDriver.Get(userJue).getEntity(UserList.class));
+
+
+        //Create a Domain
+        IMappable domainJue = new MappableMsg(new DomainInfo("hao.jiang"), "auth/v1/domains", adminAuth);
+//        ODLDriver.Post(domainJue);
+        System.out.println(ODLDriver.Get(domainJue).getEntity(DomainList.class));
+
+
+        //Create a Role
+        IMappable rolePartner = new MappableMsg(new RoleInfo("Partner", "Partner role"), "auth/v1/roles", adminAuth);
+//        ODLDriver.Post(rolePartner);
+        System.out.println(ODLDriver.Get(rolePartner).getEntity(RoleList.class));
+
+        IMappable servRestConf = new MappableMsg(new PolicyInfo("admin", "*", "RestConfService"),
+                                               "/restconf/config/authorization-schema:simple-authorization/policies/RestConfService",
+                                               adminAuth);
+//        ODLDriver.Put(servRestConf);
+        System.out.println(ODLDriver.Get(servRestConf).getEntity(PolicyList.class));
+
+
+
 
     }
 }
