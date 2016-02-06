@@ -10,6 +10,9 @@ public interface IMappable {
     void setOption(boolean option);
     boolean isOption();
 
+    void setUserID(int userID);
+    int getUserID();
+
     JSONObject getBody();
     void setBody(JSONObject body);
 
@@ -30,4 +33,6 @@ public interface IMappable {
 
     int getPriority();
     void setPriority(int priority);
+
+
 }

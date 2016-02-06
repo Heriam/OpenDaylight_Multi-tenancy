@@ -1,4 +1,4 @@
-package service;
+package aaa;
 
 import driver.IMappable;
 import tenant.Tenant;
@@ -8,10 +8,8 @@ import tenant.Tenant;
  */
 public interface IAuthorizable {
 
-    String CREATE = "VTN Creation";
-    String CREDTOPO = "EDIT Topology";
+    String SERVREQ = "Create";
 
     boolean isAuthorized(IMappable request);
-    int getPriority(Tenant tenant);
 
 }

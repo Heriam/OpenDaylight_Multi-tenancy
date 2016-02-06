@@ -15,12 +15,23 @@ public class MappableMsg implements IMappable {
     private String servID;
     private boolean option = false;
     private int priority;
+    private int userID;
 
     public MappableMsg(){}
     public MappableMsg(JSONObject body, String URL, String Auth){
         this.setBody(body);
         this.setURL(URL);
         this.setAuth(Auth);
+    }
+
+    @Override
+    public int getUserID() {
+        return userID;
+    }
+
+    @Override
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     @Override

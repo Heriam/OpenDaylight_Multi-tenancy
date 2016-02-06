@@ -1,11 +1,11 @@
 package test;
 
+import aaa.AAAProxy;
 import driver.IMappable;
 import driver.MappableMsg;
 import driver.ODLDriver;
 import driver.vtndatamodel.*;
-import service.AAAProxy;
-import service.IAuthorizable;
+import aaa.IAuthorizable;
 
 import java.util.Base64;
 
@@ -26,10 +26,10 @@ public class VTNRequests {
 //      Define a VTN Data
           IMappable vtnHao = new MappableMsg(new VTNInfo("Tenant_Hao", "300","0"), "controller/nb/v2/vtn/default/vtns/Tenant_Hao", adminAuth);
           vtnHao.setDomainID("2");
-          vtnHao.setServID(IAuthorizable.CREATE);
+          vtnHao.setServID(IAuthorizable.SERVREQ);
 //          ODLDriver.Post(vtnHao);
 
-          AAAProxy aaaProxy = new AAAProxy();
+          IAuthorizable aaaProxy = new AAAProxy();
 
           System.out.println(aaaProxy.isAuthorized(vtnHao));
 
