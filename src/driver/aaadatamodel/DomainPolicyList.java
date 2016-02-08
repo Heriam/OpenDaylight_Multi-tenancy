@@ -5,24 +5,21 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * Created by Hao on 2/5/16.
+ * Created by Hao on 2/8/16.
  */
-public class DomainList extends JSONObject {
+public class DomainPolicyList extends JSONObject {
+    private ArrayList<DomainPolicies> domains;
 
-    private ArrayList<DomainInfo> domains;
-
-    public ArrayList<DomainInfo> getDomains() {
+    public ArrayList<DomainPolicies> getDomains() {
         return domains;
     }
 
-    public void setDomains(ArrayList<DomainInfo> domains) {
+    public void setDomains(ArrayList<DomainPolicies> domains) {
         this.domains = domains;
     }
+
 
     public String toString() {
         return "{\"domains\":"+domains+"}";
     }
-
-
-
 }

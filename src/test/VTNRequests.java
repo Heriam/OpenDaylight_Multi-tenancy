@@ -1,13 +1,14 @@
 package test;
 
-import aaa.AAAProxy;
+import aaa.AuthZ;
+import aaa.Authorizer;
 import driver.IMappable;
 import driver.MappableMsg;
 import driver.ODLDriver;
 import driver.vtndatamodel.*;
-import aaa.IAuthorizable;
 
 import java.util.Base64;
+import java.util.List;
 
 public class VTNRequests {
 
@@ -21,19 +22,18 @@ public class VTNRequests {
           System.out.println(adminAuth);
 
 
-
-
 //      Define a VTN Data
-          IMappable vtnHao = new MappableMsg(new VTNInfo("Tenant_Hao", "300","0"), "controller/nb/v2/vtn/default/vtns/Tenant_Hao", adminAuth);
-          vtnHao.setDomainID("2");
-          vtnHao.setServID(IAuthorizable.SERVREQ);
+          IMappable vtnHao = new MappableMsg(new VTNInfo("Tenant_esd", "300","0"), AuthZ.userUrl, adminAuth);
+          vtnHao.setServID("GuestVisit");
+          vtnHao.setMsgType(AuthZ.GET);
+          vtnHao.setUserID("3:1");
 //          ODLDriver.Post(vtnHao);
 
-          IAuthorizable aaaProxy = new AAAProxy();
+          Authorizer authorizer = new Authorizer();
 
-          System.out.println(aaaProxy.isAuthorized(vtnHao));
-
-          System.out.println(ODLDriver.Get(vtnHao).getEntity(VTNInfo.class));
+          System.out.println(authorizer.isAuthorized(vtnHao));
+//          System.out.println(getNull().contains("1"));
+//          System.out.println(ODLDriver.Get(vtnHao).getEntity(VTNInfo.class));
 
 
 //      Define a Bridge Data
@@ -66,5 +66,12 @@ public class VTNRequests {
           IMappable macMap = new MappableMsg(new MacMapInfo(), "controller/nb/v2/vtn/default/vtns/Tenant_Hao/vbridges/bridge1/macmap", adminAuth);
 //          ODLDriver.Put(macMap);
           System.out.println(ODLDriver.Get(macMap).getEntity(MacMapInfo.class));
+
+
+
+
     }
+      public static List<String> getNull() {
+            return null;
+      }
 }

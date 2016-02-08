@@ -10,12 +10,11 @@ public class MappableMsg implements IMappable {
     private JSONObject body;
     private String URL;
     private String Auth;
-    private String domainID;
     private String msgType;
     private String servID;
     private boolean option = false;
     private int priority;
-    private int userID;
+    private String userID;
 
     public MappableMsg(){}
     public MappableMsg(JSONObject body, String URL, String Auth){
@@ -25,12 +24,12 @@ public class MappableMsg implements IMappable {
     }
 
     @Override
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
     @Override
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 
@@ -54,14 +53,7 @@ public class MappableMsg implements IMappable {
     public void setServID(String servID) {
         this.servID = servID;
     }
-    @Override
-    public String getDomainID() {
-        return domainID;
-    }
-    @Override
-    public void setDomainID(String domainID) {
-        this.domainID = domainID;
-    }
+
     @Override
     public String getMsgType() {
         return msgType;

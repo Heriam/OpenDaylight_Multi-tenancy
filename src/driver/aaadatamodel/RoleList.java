@@ -1,5 +1,7 @@
 package driver.aaadatamodel;
 
+
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by Hao on 2/5/16.
  */
-public class RoleList extends JSONObject {
+public class RoleList extends JSONObject{
 
     private ArrayList<RoleInfo> roles;
 
@@ -22,5 +24,7 @@ public class RoleList extends JSONObject {
     public String toString() {
         return "{\"roles\":"+roles+"}";
     }
+
+
 
 }

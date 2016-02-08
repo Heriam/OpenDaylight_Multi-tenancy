@@ -5,9 +5,9 @@ import org.json.JSONObject;
 /**
  * Created by Hao on 2/5/16.
  */
-public class DomainInfo extends JSONObject {
+public class DomainInfo extends JSONObject{
 
-    private int domainid;
+    private String domainid;
     private String name;
     private String description;
     private String enabled;
@@ -22,11 +22,11 @@ public class DomainInfo extends JSONObject {
     }
 
 
-    public int getDomainid() {
+    public String getDomainid() {
         return domainid;
     }
 
-    public void setDomainid(int domainid) {
+    public void setDomainid(String domainid) {
         this.domainid = domainid;
     }
 

@@ -10,8 +10,8 @@ public interface IMappable {
     void setOption(boolean option);
     boolean isOption();
 
-    void setUserID(int userID);
-    int getUserID();
+    void setUserID(String userID);
+    String getUserID();
 
     JSONObject getBody();
     void setBody(JSONObject body);
@@ -21,9 +21,6 @@ public interface IMappable {
 
     String getURL();
     void setURL(String URL);
-
-    String getDomainID();
-    void setDomainID(String domainID);
 
     String getMsgType();
     void setMsgType(String msgType);

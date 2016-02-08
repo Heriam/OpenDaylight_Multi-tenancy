@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by Hao on 2/6/16.
  */
-public class PolicyList extends JSONObject {
+public class PolicyList extends JSONObject{
 
     private ArrayList<PolicyInfo> policies;
 

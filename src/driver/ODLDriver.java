@@ -8,11 +8,19 @@ import com.sun.jersey.api.client.WebResource;
  * Created by Hao on 2/5/16.
  */
 public class ODLDriver {
-    private static String ODLIP = "http://172.23.225.48:8282";
-    private static final String JSON = "application/json";
-    private static final Client client =  Client.create();
-    private static WebResource webResource= client.resource(ODLIP);
+    private static String ODLIP = "http://172.23.225.48:";
+    private static String VTNPORT = "8282";
+    private static String JSON = "application/json";
+    private static Client client =  Client.create();
+    private static WebResource webResource = client.resource(ODLIP+VTNPORT);
     private static ClientResponse response;
+
+//    public ODLDriver(){
+//        webResource = client.resource(ODLIP+VTNPORT);
+//    }
+//    public ODLDriver(String port){
+//        webResource = client.resource(ODLIP+port);
+//    }
 
     public static void Post(IMappable message) throws RuntimeException{
         try {

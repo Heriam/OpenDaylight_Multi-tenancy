@@ -5,7 +5,7 @@ import org.json.JSONObject;
 /**
  * Created by Hao on 2/5/16.
  */
-public class RoleInfo extends JSONObject {
+public class RoleInfo extends JSONObject{
 
     private int roleid;
     private String name;

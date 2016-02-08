@@ -5,7 +5,7 @@ import org.json.JSONObject;
 /**
  * Created by Hao on 2/6/16.
  */
-public class PolicyInfo extends JSONObject {
+public class PolicyInfo extends JSONObject{
 
     private enum authorization{}
     private String role;
@@ -44,8 +44,6 @@ public class PolicyInfo extends JSONObject {
     public void setService(String service) {
         this.service = service;
     }
-
-
 
     @Override
     public String toString() {
