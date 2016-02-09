@@ -5,7 +5,7 @@ import org.json.JSONObject;
 /**
  * Created by Hao on 2/5/16.
  */
-public class MappableMsg implements IMappable {
+public class MappableMsg implements Mappable {
 
     private JSONObject body;
     private String URL;
@@ -29,8 +29,17 @@ public class MappableMsg implements IMappable {
     }
 
     @Override
-    public void setUserID(String userID) {
+    public boolean setUserID(String userID) {
+        try {
+        String[] userDomainPair = userID.split(":");
+        if(userDomainPair.length>2) {
+            throw new RuntimeException("Failed : Userid field not match");
+        }} catch (Exception e) {
+            e.printStackTrace();
+            return false;
+    }
         this.userID = userID;
+        return true;
     }
 
     @Override
@@ -100,4 +109,5 @@ public class MappableMsg implements IMappable {
     public void setAuth(String auth) {
         Auth = auth;
     }
+
 }

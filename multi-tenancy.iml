@@ -17,5 +17,10 @@
     <orderEntry type="library" name="jackson-core-2.6.4" level="project" />
     <orderEntry type="library" name="jersey-client" level="project" />
     <orderEntry type="library" name="aopalliance-repackaged-2.4.0-b31" level="project" />
+    <orderEntry type="library" name="org.apache.shiro:shiro-core:1.2.4" level="project" />
+    <orderEntry type="library" name="org.slf4j:slf4j-jdk14:1.7.12" level="project" />
+    <orderEntry type="library" name="junit:junit:4.10" level="project" />
+    <orderEntry type="library" name="mysql:mysql-connector-java:5.1.38" level="project" />
+    <orderEntry type="library" name="druid-1.0.16" level="project" />
   </component>
 </module>

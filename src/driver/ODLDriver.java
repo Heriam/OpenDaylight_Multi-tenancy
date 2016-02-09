@@ -7,22 +7,19 @@ import com.sun.jersey.api.client.WebResource;
 /**
  * Created by Hao on 2/5/16.
  */
-public class ODLDriver {
-    private static String ODLIP = "http://172.23.225.48:";
-    private static String VTNPORT = "8282";
-    private static String JSON = "application/json";
+public class ODLDriver implements ToODL {
+    private static final String ODLIP = "http://192.168.0.101:";
+    private static final String JSON = "application/json";
     private static Client client =  Client.create();
-    private static WebResource webResource = client.resource(ODLIP+VTNPORT);
+    private static WebResource webResource;
     private static ClientResponse response;
 
-//    public ODLDriver(){
-//        webResource = client.resource(ODLIP+VTNPORT);
-//    }
-//    public ODLDriver(String port){
-//        webResource = client.resource(ODLIP+port);
-//    }
-
-    public static void Post(IMappable message) throws RuntimeException{
+    public ODLDriver(){}
+    public ODLDriver(int port){
+        webResource = client.resource(ODLIP+port);
+    }
+    @Override
+    public void Post(Mappable message) throws RuntimeException{
         try {
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
@@ -37,20 +34,26 @@ public class ODLDriver {
             e.printStackTrace();
         }
     }
-
-    public static ClientResponse Get( IMappable message){
-
+    @Override
+    public ClientResponse Get( Mappable message){
+        try{
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
                     .header("Accept", JSON)
                     .header("Authorization", message.getAuth())
                     .get(ClientResponse.class);
 
-            return response;
-
+            if (!(response.getStatus() == 201 || response.getStatus() == 200)) {
+                throw new RuntimeException("Failed : HTTP error " + response.getStatus() + ": "+response.getEntity(String.class));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return response;
     }
-
-    public static void Put(IMappable message) throws RuntimeException{
+    @Override
+    public void Put(Mappable message) throws RuntimeException{
         try{
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
@@ -62,9 +65,10 @@ public class ODLDriver {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }}
-
-    public static void Delete(IMappable message) throws RuntimeException{
+        }
+    }
+    @Override
+    public void Delete(Mappable message) throws RuntimeException{
         try{
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)

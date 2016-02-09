@@ -5,12 +5,12 @@ import org.json.JSONObject;
 /**
  * Created by Hao on 2/5/16.
  */
-public interface IMappable {
+public interface Mappable {
 
     void setOption(boolean option);
     boolean isOption();
 
-    void setUserID(String userID);
+    boolean setUserID(String userID);
     String getUserID();
 
     JSONObject getBody();
@@ -30,6 +30,14 @@ public interface IMappable {
 
     int getPriority();
     void setPriority(int priority);
+
+    static int getDomainID(Mappable message){
+        return Integer.getInteger(message.getUserID().split(":")[1]);
+    }
+
+    static int getUserID(Mappable message){
+        return Integer.getInteger(message.getUserID().split(":")[0]);
+    }
 
 
 }

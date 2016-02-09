@@ -1,9 +1,9 @@
 package test;
 
 
-import driver.IMappable;
+import driver.Mappable;
 import driver.MappableMsg;
-import driver.ODLDriver;
+import driver.ToODL;
 import driver.aaadatamodel.*;
 
 import java.util.Base64;
@@ -23,27 +23,27 @@ public class AAARequests {
 
 
         //Create a User
-        IMappable userJue = new MappableMsg(new UserInfo("hao.jiang", "931026"), "auth/v1/users", adminAuth);
-//        ODLDriver.Post(userJue);
-        System.out.println(ODLDriver.Get(userJue).getEntity(UserList.class));
+        Mappable userJue = new MappableMsg(new UserInfo("hao.jiang", "931026"), "auth/v1/users", adminAuth);
+//        ToODL.VTN().Post(userJue);
+        System.out.println(ToODL.VTN().Get(userJue).getEntity(UserList.class));
 
 
         //Create a Domain
-        IMappable domainJue = new MappableMsg(new DomainInfo("hao.jiang"), "auth/v1/domains", adminAuth);
-//        ODLDriver.Post(domainJue);
-        System.out.println(ODLDriver.Get(domainJue).getEntity(DomainList.class));
+        Mappable domainJue = new MappableMsg(new DomainInfo("hao.jiang"), "auth/v1/domains", adminAuth);
+//        ToODL.VTN().Post(domainJue);
+        System.out.println(ToODL.VTN().Get(domainJue).getEntity(DomainList.class));
 
 
         //Create a Role
-        IMappable rolePartner = new MappableMsg(new RoleInfo("Partner", "Partner role"), "auth/v1/roles", adminAuth);
-//        ODLDriver.Post(rolePartner);
-        System.out.println(ODLDriver.Get(rolePartner).getEntity(RoleList.class));
+        Mappable rolePartner = new MappableMsg(new RoleInfo("Partner", "Partner role"), "auth/v1/roles", adminAuth);
+//        ToODL.VTN().Post(rolePartner);
+        System.out.println(ToODL.VTN().Get(rolePartner).getEntity(RoleList.class));
 
-        IMappable servRestConf = new MappableMsg(new PolicyInfo("admin", "*", "RestConfService"),
+        Mappable servRestConf = new MappableMsg(new PolicyInfo("admin", "*", "RestConfService"),
                                                "/restconf/config/authorization-schema:simple-authorization/policies/RestConfService",
                                                adminAuth);
-//        ODLDriver.Put(servRestConf);
-        System.out.println(ODLDriver.Get(servRestConf).getEntity(PolicyList.class));
+//        ToODL.VTN().Put(servRestConf);
+        System.out.println(ToODL.VTN().Get(servRestConf).getEntity(PolicyList.class));
 
 
 
