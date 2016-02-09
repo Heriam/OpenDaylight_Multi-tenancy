@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fbbee5b-3841-445e-bb59-12d9ff238b40" name="Default" comment="by Hao">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/shiro/shiro-dbRealm.ini" afterPath="$PROJECT_DIR$/shiro/dbRealm-admin.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/ShiroTest.java" afterPath="$PROJECT_DIR$/src/test/ShiroTest.java" />
     </list>
     <ignored path="multi-tenancy.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shiro-dbRealm.ini" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/shiro/shiro-dbRealm.ini">
+      <file leaf-file-name="dbRealm-admin.ini" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/shiro/dbRealm-admin.ini">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.18703242">
-              <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+              <caret line="10" column="88" selection-start-line="10" selection-start-column="88" selection-end-line="10" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -72,7 +74,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/driver/Requester.java" />
         <option value="$PROJECT_DIR$/src/driver/ISendtoODL.java" />
         <option value="$PROJECT_DIR$/src/service/IAuthorizable.java" />
         <option value="$PROJECT_DIR$/src/service/AAAProxy.java" />
@@ -123,6 +124,7 @@
         <option value="$PROJECT_DIR$/src/test/ShiroTest.java" />
         <option value="$PROJECT_DIR$/shiro/shiro.ini" />
         <option value="$PROJECT_DIR$/shiro/shiro-dbRealm.ini" />
+        <option value="$PROJECT_DIR$/shiro/dbRealm-admin.ini" />
       </list>
     </option>
   </component>
@@ -735,7 +737,7 @@
       <workItem from="1454706805905" duration="94303000" />
       <workItem from="1454954105548" duration="9437000" />
       <workItem from="1454979294152" duration="13776000" />
-      <workItem from="1455056104182" duration="2111000" />
+      <workItem from="1455056104182" duration="2480000" />
     </task>
     <task id="LOCAL-00001" summary="edit workspace">
       <created>1454707089766</created>
@@ -765,7 +767,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119627000" />
+    <option name="totallyTimeSpent" value="119996000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1207,10 +1209,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shiro/shiro-dbRealm.ini">
+    <entry file="file://$PROJECT_DIR$/shiro/dbRealm-admin.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18703242">
-          <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+          <caret line="10" column="88" selection-start-line="10" selection-start-column="88" selection-end-line="10" selection-end-column="88" />
           <folding />
         </state>
       </provider>

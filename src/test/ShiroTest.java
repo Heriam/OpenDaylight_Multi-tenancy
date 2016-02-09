@@ -20,7 +20,7 @@ public class ShiroTest {
     public static void main(String[] args) {
 
         //1.获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-        Factory<SecurityManager> factory = new IniSecurityManagerFactory("file:/Users/Hao/IdeaProjects/multi-tenancy/shiro/shiro-dbRealm.ini");
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory("file:/Users/Hao/IdeaProjects/multi-tenancy/shiro/dbRealm-admin.ini");
 
         //2.得到SecurityManager实例 并绑定给SecurityUtils
         SecurityManager securityManager = factory.getInstance();
