@@ -2,9 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3fbbee5b-3841-445e-bb59-12d9ff238b40" name="Default" comment="by Hao">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/shiro/shiro-dbRealm.ini" afterPath="$PROJECT_DIR$/shiro/dbRealm-admin.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/commons_logging_1_2_javadoc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/org_apache_shiro_shiro_web_1_2_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/aaa/IShiro.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/aaa/Shiro.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/aaa/realms/MySQLRealm.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/aaa/realms/VTNAuthNToken.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tenant/manager/TenantMgr.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dbrealm/admin.sql" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/shiro/dbRealm-admin.ini" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aaa/AAA.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aaa/IAAA.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aaa/authn/AuthN.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aaa/authz/AuthZ.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aaa/authz/RsrcMgr.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/aaa/authz/ServMgr.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/AAARequests.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/ShiroTest.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/iniRealm/iniRealm.ini" afterPath="$PROJECT_DIR$/shiro/shiro.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/ShiroTest.java" afterPath="$PROJECT_DIR$/src/test/ShiroTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/multi-tenancy.iml" afterPath="$PROJECT_DIR$/multi-tenancy.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/driver/Mappable.java" afterPath="$PROJECT_DIR$/src/driver/Mappable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/driver/MappableMsg.java" afterPath="$PROJECT_DIR$/src/driver/MappableMsg.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/driver/ODLDriver.java" afterPath="$PROJECT_DIR$/src/driver/ODLDriver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/VTNRequests.java" afterPath="$PROJECT_DIR$/src/test/VTNRequests.java" />
     </list>
     <ignored path="multi-tenancy.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -18,6 +39,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/multi-tenancy$VTN.coverage" NAME="VTN Coverage Results" MODIFIED="1455325797585" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -27,22 +51,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ShiroTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/ShiroTest.java">
+      <file leaf-file-name="VTNRequests.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/VTNRequests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="123" selection-start-line="22" selection-start-column="123" selection-end-line="22" selection-end-column="123" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dbRealm-admin.ini" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/shiro/dbRealm-admin.ini">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.18703242">
-              <caret line="10" column="88" selection-start-line="10" selection-start-column="88" selection-end-line="10" selection-end-column="88" />
-              <folding />
+            <state vertical-scroll-proportion="-2.0442805">
+              <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4390#4391#0" expanded="true" />
+                <element signature="e#4423#4424#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -52,9 +70,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
-        <option value="Class" />
         <option value="SQL" />
+        <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -74,35 +92,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/driver/ISendtoODL.java" />
-        <option value="$PROJECT_DIR$/src/service/IAuthorizable.java" />
-        <option value="$PROJECT_DIR$/src/service/AAAProxy.java" />
-        <option value="$PROJECT_DIR$/src/aaa/AuthCreate.java" />
-        <option value="$PROJECT_DIR$/src/aaa/AuthService.java" />
-        <option value="$PROJECT_DIR$/src/aaa/Static.java" />
-        <option value="$PROJECT_DIR$/src/aaa/rolemodel/Admin.java" />
-        <option value="$PROJECT_DIR$/src/aaa/RoleMgr.java" />
-        <option value="$PROJECT_DIR$/src/aaa/MthdMgr.java" />
-        <option value="$PROJECT_DIR$/src/aaa/Rsrc.java" />
-        <option value="$PROJECT_DIR$/src/driver/aaadatamodel/Inqirable.java" />
-        <option value="$PROJECT_DIR$/src/driver/aaadatamodel/INamable.java" />
-        <option value="$PROJECT_DIR$/src/driver/aaadatamodel/InqirableList.java" />
-        <option value="$PROJECT_DIR$/src/driver/aaadatamodel/DomainInfo.java" />
-        <option value="$PROJECT_DIR$/src/driver/aaadatamodel/PolicyInfo.java" />
-        <option value="$PROJECT_DIR$/src/driver/aaadatamodel/UserInfo.java" />
-        <option value="$PROJECT_DIR$/src/driver/aaadatamodel/RoleInfo.java" />
-        <option value="$PROJECT_DIR$/src/driver/aaadatamodel/DomainList.java" />
-        <option value="$PROJECT_DIR$/src/driver/aaadatamodel/PolicyList.java" />
-        <option value="$PROJECT_DIR$/src/driver/aaadatamodel/RoleList.java" />
-        <option value="$PROJECT_DIR$/src/driver/aaadatamodel/UserList.java" />
-        <option value="$PROJECT_DIR$/src/driver/aaadatamodel/DomainPolicies.java" />
-        <option value="$PROJECT_DIR$/src/driver/aaadatamodel/DomainPolicyList.java" />
-        <option value="$PROJECT_DIR$/src/driver/IMappable.java" />
-        <option value="$PROJECT_DIR$/src/aaa/IAuthorizable.java" />
-        <option value="$PROJECT_DIR$/src/aaa/Authorizer.java" />
-        <option value="$PROJECT_DIR$/src/driver/ISendToODL.java" />
-        <option value="$PROJECT_DIR$/src/test/AAARequests.java" />
-        <option value="$PROJECT_DIR$/src/aaa/IAAAServ.java" />
         <option value="$PROJECT_DIR$/src/aaa/AuthZ.java" />
         <option value="$PROJECT_DIR$/src/aaa/ServMgr.java" />
         <option value="$PROJECT_DIR$/src/aaa/AAAProxy.java" />
@@ -112,19 +101,48 @@
         <option value="$PROJECT_DIR$/src/aaa/serv/ServMgr.java" />
         <option value="$PROJECT_DIR$/src/aaa/authz/AuthZ.java" />
         <option value="$PROJECT_DIR$/src/aaa/IAAA.java" />
-        <option value="$PROJECT_DIR$/src/driver/Mappable.java" />
-        <option value="$PROJECT_DIR$/src/driver/ODLDriver.java" />
-        <option value="$PROJECT_DIR$/src/aaa/AAA.java" />
-        <option value="$PROJECT_DIR$/src/aaa/authz/RsrcMgr.java" />
-        <option value="$PROJECT_DIR$/src/driver/ToODL.java" />
-        <option value="$PROJECT_DIR$/src/test/VTNRequests.java" />
-        <option value="$PROJECT_DIR$/src/aaa/authn/AuthN.java" />
-        <option value="$PROJECT_DIR$/src/driver/MappableMsg.java" />
         <option value="$PROJECT_DIR$/aaa/shiro.ini" />
-        <option value="$PROJECT_DIR$/src/test/ShiroTest.java" />
-        <option value="$PROJECT_DIR$/shiro/shiro.ini" />
         <option value="$PROJECT_DIR$/shiro/shiro-dbRealm.ini" />
         <option value="$PROJECT_DIR$/shiro/dbRealm-admin.ini" />
+        <option value="$PROJECT_DIR$/shiro/dbAdmin.ini" />
+        <option value="$PROJECT_DIR$/shiro/adminconf.ini" />
+        <option value="$PROJECT_DIR$/shiro/iniRealm/0.ini" />
+        <option value="$PROJECT_DIR$/shiro/iniRealm/1.ini" />
+        <option value="$PROJECT_DIR$/shiro/1.ini" />
+        <option value="$PROJECT_DIR$/src/aaa/authn/AuthN.java" />
+        <option value="$PROJECT_DIR$/src/aaa/authn/Authenticator.java" />
+        <option value="$PROJECT_DIR$/src/aaa/ISecurMgr.java" />
+        <option value="$PROJECT_DIR$/src/aaa/SecurMgr.java" />
+        <option value="$PROJECT_DIR$/src/aaa/authn/UnknownTenantException.java" />
+        <option value="$PROJECT_DIR$/src/aaa/VTNAuthNToken.java" />
+        <option value="$PROJECT_DIR$/src/aaa/authn/VTNIniRealm.java" />
+        <option value="$PROJECT_DIR$/src/aaa/realms/TenantRealm.java" />
+        <option value="$PROJECT_DIR$/src/aaa/authz/perms/BasicVTN.java" />
+        <option value="$PROJECT_DIR$/src/aaa/realms/adminRealm.java" />
+        <option value="$PROJECT_DIR$/src/aaa/authz/roles/IRole.java" />
+        <option value="$PROJECT_DIR$/src/aaa/VTNAuthN.java" />
+        <option value="$PROJECT_DIR$/src/aaa/authz/roles/adminRole.java" />
+        <option value="$PROJECT_DIR$/src/aaa/realms/Realm.java" />
+        <option value="$PROJECT_DIR$/src/aaa/authn/Account.java" />
+        <option value="$PROJECT_DIR$/shiro/0.ini" />
+        <option value="$PROJECT_DIR$/shiro/admin.ini" />
+        <option value="$PROJECT_DIR$/src/aaa/realms/admin.java" />
+        <option value="$PROJECT_DIR$/src/aaa/authz/RsrcMgr.java" />
+        <option value="$PROJECT_DIR$/src/aaa/AAA.java" />
+        <option value="$PROJECT_DIR$/src/aaa/authz/roles/Role.java" />
+        <option value="$PROJECT_DIR$/src/driver/ToODL.java" />
+        <option value="$PROJECT_DIR$/src/aaa/authn/MySQLAuthN.java" />
+        <option value="$PROJECT_DIR$/src/aaa/realms/IRealm.java" />
+        <option value="$PROJECT_DIR$/src/driver/Mappable.java" />
+        <option value="$PROJECT_DIR$/shiro/shiro.ini" />
+        <option value="$PROJECT_DIR$/src/aaa/realms/MySQLRealm.java" />
+        <option value="$PROJECT_DIR$/src/driver/MappableMsg.java" />
+        <option value="$PROJECT_DIR$/src/aaa/realms/VTNAuthNToken.java" />
+        <option value="$PROJECT_DIR$/src/test/ShiroTest.java" />
+        <option value="$PROJECT_DIR$/src/driver/ODLDriver.java" />
+        <option value="$PROJECT_DIR$/src/aaa/IShiro.java" />
+        <option value="$PROJECT_DIR$/src/aaa/Shiro.java" />
+        <option value="$PROJECT_DIR$/src/test/VTNRequests.java" />
       </list>
     </option>
   </component>
@@ -151,10 +169,13 @@
           <State>
             <id />
           </State>
+          <State>
+            <id>JPA issues</id>
+          </State>
         </expanded-state>
         <selected-state>
           <State>
-            <id>Android</id>
+            <id>JpaQueryApiInspection</id>
           </State>
         </selected-state>
       </profile-state>
@@ -185,7 +206,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -214,6 +234,96 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multi-tenancy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multi-tenancy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multi-tenancy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multi-tenancy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="driver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multi-tenancy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multi-tenancy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="aaa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multi-tenancy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multi-tenancy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="aaa" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="realms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multi-tenancy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="multi-tenancy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="shiro" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -228,14 +338,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="iniRealm" />
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -250,19 +361,37 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/druid-1.0.16.jar!/" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/commons-logging-1.2 2/commons-logging-1.2.jar!/" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="136" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="146" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="150" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="936" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="136" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="146" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="150" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="936" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FullScreen" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="aaa.realms" />
       <recent name="aaa.authz" />
       <recent name="aaa.serv" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/shiro" />
       <recent name="$PROJECT_DIR$/iniRealm" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Shiro">
+  <component name="RunManager" selected="Application.VTN">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -673,21 +802,6 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <configuration default="false" name="AAA" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="test.AAARequests" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="multi-tenancy" />
-      <envs />
-      <method />
-    </configuration>
     <configuration default="false" name="VTN" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="test.VTNRequests" />
@@ -703,25 +817,8 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="Shiro" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="test.ShiroTest" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="multi-tenancy" />
-      <envs />
-      <method />
-    </configuration>
-    <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="Application.AAA" />
-      <item index="1" class="java.lang.String" itemvalue="Application.VTN" />
-      <item index="2" class="java.lang.String" itemvalue="Application.Shiro" />
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Application.VTN" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -737,7 +834,8 @@
       <workItem from="1454706805905" duration="94303000" />
       <workItem from="1454954105548" duration="9437000" />
       <workItem from="1454979294152" duration="13776000" />
-      <workItem from="1455056104182" duration="2480000" />
+      <workItem from="1455056104182" duration="33740000" />
+      <workItem from="1455143682435" duration="29777000" />
     </task>
     <task id="LOCAL-00001" summary="edit workspace">
       <created>1454707089766</created>
@@ -767,7 +865,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119996000" />
+    <option name="totallyTimeSpent" value="181033000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -790,24 +888,52 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5028612" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2807229" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30722892" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5028612" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30722892" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.49713877" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.49713877" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2807229" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-    </layout>
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2807229" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891566" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -828,7 +954,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="39" />
+      <option name="time" value="45" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -837,383 +963,441 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/ShiroTest.java">
+    <entry file="jar://$PROJECT_DIR$/lib/shiro-core-1.2.4-sources.jar!/org/apache/shiro/subject/support/DelegatingSubject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="255" column="0" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/aaa/AAA.java">
+    <entry file="jar://$PROJECT_DIR$/lib/shiro-core-1.2.4-sources.jar!/org/apache/shiro/mgt/DefaultSecurityManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="42" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+          <caret line="269" column="0" selection-start-line="269" selection-start-column="0" selection-end-line="269" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/VTNRequests.java">
+    <entry file="jar://$PROJECT_DIR$/lib/shiro-core-1.2.4-sources.jar!/org/apache/shiro/mgt/AuthenticatingSecurityManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/shiro-core-1.2.4-sources.jar!/org/apache/shiro/authc/AbstractAuthenticator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="197" column="0" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/shiro-core-1.2.4-sources.jar!/org/apache/shiro/util/CollectionUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1857#1858#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+    <entry file="jar://$PROJECT_DIR$/lib/shiro-core-1.2.4-sources.jar!/org/apache/shiro/realm/AuthenticatingRealm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="567" column="0" selection-start-line="567" selection-start-column="0" selection-end-line="567" selection-end-column="0" />
+          <folding>
+            <element signature="e#11618#11619#0" expanded="false" />
+            <element signature="e#11665#11666#0" expanded="false" />
+            <element signature="e#13744#13745#0" expanded="false" />
+            <element signature="e#13791#13792#0" expanded="false" />
+            <element signature="e#16131#16132#0" expanded="false" />
+            <element signature="e#16209#16210#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/vtndatamodel/ODLBundle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.028119508">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tenant/Tenant.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Library/jaxrs-ri/genson-1.3.jar!/com/owlike/genson/ext/jaxrs/GensonJaxRSFeature.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.185185">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Library/jaxrs-ri/genson-1.3.jar!/com/owlike/genson/EncodingAwareReaderFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.4444447">
-          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Library/jaxrs-ri/genson-1.3.jar!/com/owlike/genson/stream/JsonReader.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36568847">
-          <caret line="997" column="0" selection-start-line="997" selection-start-column="0" selection-end-line="997" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Library/jaxrs-ri/genson-1.3.jar!/com/owlike/genson/Genson.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7923251">
-          <caret line="393" column="0" selection-start-line="393" selection-start-column="0" selection-end-line="393" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/Library/jaxrs-ri/genson-1.3.jar!/com/owlike/genson/ext/jaxrs/GensonJsonConverter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36568847">
-          <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/rt.jar!/java/util/ArrayList.class">
+    <entry file="jar://$PROJECT_DIR$/lib/shiro-core-1.2.4-sources.jar!/org/apache/shiro/authc/UsernamePasswordToken.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="222" column="0" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
+          <folding>
+            <element signature="e#10726#10727#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/vtndatamodel/BridgeInfo.java">
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/proxy/DruidDriver.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.740741">
+          <caret line="93" column="22" selection-start-line="93" selection-start-column="22" selection-end-line="93" selection-end-column="22" />
+          <folding>
+            <element signature="e#3588#3589#0" expanded="true" />
+            <element signature="e#3645#3646#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/mysql-connector-java-5.1.38-sources.jar!/com/mysql/jdbc/NonRegisteringDriver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <caret line="241" column="0" selection-start-line="241" selection-start-column="0" selection-end-line="241" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/Library/jaxrs-ri/lib/jersey-common.jar!/org/glassfish/jersey/uri/UriComponent.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30451614">
-          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/aaadatamodel/DomainList.java">
+    <entry file="jar://$PROJECT_DIR$/lib/mysql-connector-java-5.1.38-sources.jar!/com/mysql/jdbc/Driver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/aaadatamodel/UserInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21089631">
-          <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/vtndatamodel/InterfaceInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.30052724">
-          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/vtndatamodel/InterfaceList.java">
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/util/JdbcUtils.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28998244">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/aaadatamodel/PolicyList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42179263">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/aaadatamodel/UserList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44815466">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/vtndatamodel/BridgeList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21089631">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/vtndatamodel/MacInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.685413">
-          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="44" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/vtndatamodel/MacListInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21089631">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/vtndatamodel/VlanMapList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23725834">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/vtndatamodel/VlanMapInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6572935">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="69" selection-end-column="20" />
+        <state vertical-scroll-proportion="-6.4074073">
+          <caret line="407" column="0" selection-start-line="407" selection-start-column="0" selection-end-line="407" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/Library/jaxrs-ri/lib/jersey-common.jar!/org/glassfish/jersey/uri/internal/JerseyUriBuilder.class">
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/pool/vendor/MySqlExceptionSorter.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5480769">
-          <caret line="44" column="11" selection-start-line="44" selection-start-column="11" selection-end-line="44" selection-end-column="11" />
+        <state vertical-scroll-proportion="-3.8888888">
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/aaadatamodel/RoleInfo.java">
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/pool/ValidConnectionCheckerAdapter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.8888888">
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/util/Utils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.518518">
+          <caret line="215" column="0" selection-start-line="215" selection-start-column="0" selection-end-line="215" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/pool/vendor/MySqlValidConnectionChecker.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.8518519">
+          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/slf4j-jdk14-1.7.12-sources.jar!/org/slf4j/impl/StaticLoggerBinder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding>
+            <element signature="e#2840#2841#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/aaadatamodel/PolicyInfo.java">
+    <entry file="jar://$PROJECT_DIR$/lib/slf4j-api-1.6.4.jar!/org/slf4j/helpers/NamedLoggerBase.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.111111">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/slf4j-api-1.6.4.jar!/org/slf4j/helpers/MarkerIgnoringBase.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.5555556">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/slf4j-jdk14-1.7.12-sources.jar!/org/slf4j/impl/JDK14LoggerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/aaadatamodel/DomainPolicyList.java">
+    <entry file="jar://$PROJECT_DIR$/lib/slf4j-jdk14-1.7.12-sources.jar!/org/slf4j/impl/JDK14LoggerFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/aaadatamodel/DomainPolicies.java">
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/pool/DruidDataSource.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.3326923">
+          <caret line="679" column="0" selection-start-line="679" selection-start-column="0" selection-end-line="679" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/Library/jaxrs-ri/lib/jersey-common.jar!/org/glassfish/jersey/internal/AbstractRuntimeDelegate.class">
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/stat/JdbcDataSourceStat.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.814815">
+        <state vertical-scroll-proportion="0.36153847">
           <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding>
+            <element signature="e#2601#2602#0" expanded="true" />
+            <element signature="e#2831#2832#0" expanded="true" />
+            <element signature="e#2888#2889#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/aaadatamodel/RoleList.java">
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/pool/DruidAbstractDataSource.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.35">
+          <caret line="896" column="0" selection-start-line="896" selection-start-column="0" selection-end-line="896" selection-end-column="0" />
+          <folding>
+            <element signature="e#26693#26694#0" expanded="true" />
+            <element signature="e#26734#26735#0" expanded="true" />
+            <element signature="e#30983#30984#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/aaa/AAA.java">
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/stat/JdbcStatementStat.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5553603">
-          <caret line="69" column="5" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.63461536">
+          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/aaa/IAAA.java">
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/stat/JdbcResultSetStat.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26362038">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.6057692">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/stat/JdbcConnectionStat.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8942308">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/util/Histogram.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.375">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/support/logging/LogFactory.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.028846154">
+          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding>
+            <element signature="e#1458#1459#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/druid-1.0.16.jar!/com/alibaba/druid/support/logging/SLF4JImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4076923">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <element signature="e#787#788#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/slf4j-api-1.6.4.jar!/org/slf4j/LoggerFactory.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37884617">
+          <caret line="175" column="0" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/rt.jar!/java/sql/Connection.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib/rt.jar!/javax/sql/DataSource.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11070111">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/shiro-core-1.2.4-sources.jar!/org/apache/shiro/realm/jdbc/JdbcRealm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.84182775">
+          <caret line="427" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="427" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#16565#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <marker date="1455050622000" expanded="true" signature="2804:2849" placeholder="select passw... users" />
+            <marker date="1455050622000" expanded="true" signature="3049:3109" placeholder="select passw... users" />
+            <marker date="1455050622000" expanded="true" signature="3265:3316" placeholder="select role_... user_roles" />
+            <marker date="1455050622000" expanded="true" signature="3486:3546" placeholder="select permi... roles_permissions" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/driver/ToODL.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36862004">
+          <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+          <folding>
+            <element signature="e#153#154#0" expanded="false" />
+            <element signature="e#197#198#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/src.zip!/java/io/Serializable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7891037">
+          <caret line="168" column="17" selection-start-line="168" selection-start-column="17" selection-end-line="168" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/shiro-core-1.2.4-sources.jar!/org/apache/shiro/authc/AuthenticationInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7627416">
+          <caret line="79" column="28" selection-start-line="79" selection-start-column="28" selection-end-line="79" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/shiro-core-1.2.4-sources.jar!/org/apache/shiro/authc/pam/ModularRealmAuthenticator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.5817223">
+          <caret line="179" column="0" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/aaa/authz/AuthZ.java">
+    <entry file="file://$PROJECT_DIR$/shiro/shiro.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28998244">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.86994725">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/AAARequests.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/src.zip!/javax/sql/DataSource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+        <state vertical-scroll-proportion="0.4463972">
+          <caret line="76" column="17" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/driver/MappableMsg.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42179263">
+          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/aaa/authn/AuthN.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18453427">
-          <caret line="7" column="3" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/driver/Mappable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.84358525">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.28998244">
+          <caret line="11" column="23" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
           <folding>
-            <element signature="e#630#631#0" expanded="true" />
-            <element signature="e#706#707#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/aaadatamodel/DomainInfo.java">
+    <entry file="file://$PROJECT_DIR$/src/aaa/realms/VTNAuthNToken.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.65905094">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.23725834">
+          <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/driver/ODLDriver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02636204">
-          <caret line="10" column="61" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="61" />
+        <state vertical-scroll-proportion="1.8717047">
+          <caret line="75" column="49" selection-start-line="75" selection-start-column="49" selection-end-line="75" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/aaa/authz/ServMgr.java">
+    <entry file="file://$PROJECT_DIR$/src/aaa/IShiro.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/aaa/authz/RsrcMgr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="21" selection-start-line="36" selection-start-column="21" selection-end-line="36" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/ToODL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52724075">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.23725834">
+          <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
           <folding>
-            <element signature="e#223#224#0" expanded="true" />
-            <element signature="e#267#268#0" expanded="true" />
+            <element signature="e#268#269#0" expanded="true" />
+            <element signature="e#302#303#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/VTNRequests.java">
+    <entry file="file://$PROJECT_DIR$/src/aaa/Shiro.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="35" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.07908612">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/driver/MappableMsg.java">
+    <entry file="file://$PROJECT_DIR$/src/aaa/realms/MySQLRealm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18453427">
-          <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
-          <folding />
+        <state vertical-scroll-proportion="0.26362038">
+          <caret line="85" column="4" selection-start-line="85" selection-start-column="4" selection-end-line="85" selection-end-column="80" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#14635#14643#0" expanded="true" />
+            <element signature="e#15704#15712#0" expanded="true" />
+            <element signature="e#16692#16700#0" expanded="true" />
+            <marker date="1455321480000" expanded="true" signature="2769:2814" placeholder="select passw... users" />
+            <marker date="1455321480000" expanded="true" signature="3010:3070" placeholder="select passw... users" />
+            <marker date="1455321480000" expanded="true" signature="3226:3277" placeholder="select role_... user_roles" />
+            <marker date="1455321480000" expanded="true" signature="3447:3507" placeholder="select permi... roles_permissions" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/iniRealm/iniRealm.ini">
+    <entry file="file://$PROJECT_DIR$/src/test/VTNRequests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dbRealm/admin.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/ShiroTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="123" selection-start-line="22" selection-start-column="123" selection-end-line="22" selection-end-column="123" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shiro/dbRealm-admin.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.18703242">
-          <caret line="10" column="88" selection-start-line="10" selection-start-column="88" selection-end-line="10" selection-end-column="88" />
-          <folding />
+        <state vertical-scroll-proportion="-2.0442805">
+          <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4390#4391#0" expanded="true" />
+            <element signature="e#4423#4424#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1281,7 +1465,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>druid-1.0.16</last-edited>
+          <last-edited>commons-logging-1.2-javadoc</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

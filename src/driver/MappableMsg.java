@@ -1,5 +1,6 @@
 package driver;
 
+import aaa.realms.VTNAuthNToken;
 import org.json.JSONObject;
 
 /**
@@ -9,37 +10,17 @@ public class MappableMsg implements Mappable {
 
     private JSONObject body;
     private String URL;
-    private String Auth;
+    private VTNAuthNToken Auth;
     private String msgType;
     private String servID;
     private boolean option = false;
     private int priority;
-    private String userID;
 
     public MappableMsg(){}
-    public MappableMsg(JSONObject body, String URL, String Auth){
+    public MappableMsg(JSONObject body, String URL, VTNAuthNToken Auth){
         this.setBody(body);
         this.setURL(URL);
-        this.setAuth(Auth);
-    }
-
-    @Override
-    public String getUserID() {
-        return userID;
-    }
-
-    @Override
-    public boolean setUserID(String userID) {
-        try {
-        String[] userDomainPair = userID.split(":");
-        if(userDomainPair.length>2) {
-            throw new RuntimeException("Failed : Userid field not match");
-        }} catch (Exception e) {
-            e.printStackTrace();
-            return false;
-    }
-        this.userID = userID;
-        return true;
+        this.setToken(Auth);
     }
 
     @Override
@@ -102,11 +83,12 @@ public class MappableMsg implements Mappable {
     }
 
     @Override
-    public String getAuth() {
+    public VTNAuthNToken getToken() {
         return Auth;
     }
+
     @Override
-    public void setAuth(String auth) {
+    public void setToken(VTNAuthNToken auth) {
         Auth = auth;
     }
 

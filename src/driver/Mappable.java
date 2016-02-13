@@ -1,5 +1,6 @@
 package driver;
 
+import aaa.realms.VTNAuthNToken;
 import org.json.JSONObject;
 
 /**
@@ -10,14 +11,11 @@ public interface Mappable {
     void setOption(boolean option);
     boolean isOption();
 
-    boolean setUserID(String userID);
-    String getUserID();
-
     JSONObject getBody();
     void setBody(JSONObject body);
 
-    String getAuth();
-    void setAuth(String auth);
+    VTNAuthNToken getToken();
+    void setToken(VTNAuthNToken token);
 
     String getURL();
     void setURL(String URL);
@@ -30,14 +28,4 @@ public interface Mappable {
 
     int getPriority();
     void setPriority(int priority);
-
-    static int getDomainID(Mappable message){
-        return Integer.getInteger(message.getUserID().split(":")[1]);
-    }
-
-    static int getUserID(Mappable message){
-        return Integer.getInteger(message.getUserID().split(":")[0]);
-    }
-
-
 }

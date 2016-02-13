@@ -8,11 +8,12 @@ import com.sun.jersey.api.client.WebResource;
  * Created by Hao on 2/5/16.
  */
 public class ODLDriver implements ToODL {
-    private static final String ODLIP = "http://192.168.0.101:";
+    private static final String ODLIP = "http://192.168.0.5:";
     private static final String JSON = "application/json";
     private static Client client =  Client.create();
     private static WebResource webResource;
     private static ClientResponse response;
+    private static String auth = "Basic YWRtaW46YWRtaW4=";
 
     public ODLDriver(){}
     public ODLDriver(int port){
@@ -23,7 +24,7 @@ public class ODLDriver implements ToODL {
         try {
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
-                    .header("Authorization", message.getAuth())
+                    .header("Authorization", auth)
                     .post(ClientResponse.class, message.getBody());
 
             if (!(response.getStatus() == 201 || response.getStatus() == 200)) {
@@ -40,7 +41,7 @@ public class ODLDriver implements ToODL {
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
                     .header("Accept", JSON)
-                    .header("Authorization", message.getAuth())
+                    .header("Authorization", auth)
                     .get(ClientResponse.class);
 
             if (!(response.getStatus() == 201 || response.getStatus() == 200)) {
@@ -57,7 +58,7 @@ public class ODLDriver implements ToODL {
         try{
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
-                    .header("Authorization", message.getAuth())
+                    .header("Authorization", auth)
                     .put(ClientResponse.class, message.getBody());
 
             if (!(response.getStatus() == 201 || response.getStatus() == 200)) {
@@ -72,7 +73,7 @@ public class ODLDriver implements ToODL {
         try{
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
-                    .header("Authorization", message.getAuth())
+                    .header("Authorization", auth)
                     .delete(ClientResponse.class);
             if (!(response.getStatus() == 201 || response.getStatus() == 200)) {
                 throw new RuntimeException("Failed : HTTP error " + response.getStatus() + ": "+response.getEntity(String.class));
