@@ -1,4 +1,4 @@
-package aaa.realms;
+package aaa.authn;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
 
@@ -30,4 +30,11 @@ public class VTNAuthNToken extends UsernamePasswordToken {
     }
 
 
+    @Override
+    public String toString() {
+        return "VTNAuthNToken{" +
+                "domainId=" + domainId +
+                ", username=" + getUsername() +
+                '}';
+    }
 }

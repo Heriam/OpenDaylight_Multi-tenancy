@@ -2,7 +2,7 @@ package test;
 
 
 import aaa.IShiro;
-import aaa.realms.VTNAuthNToken;
+import aaa.authn.VTNAuthNToken;
 import driver.Mappable;
 import driver.MappableMsg;
 
@@ -11,67 +11,96 @@ import java.util.List;
 
 public class VTNRequests {
 
-    public static void main(String[] args) {
-          String admin = "admin";
-          String t1 = "tenant1";
-          String t2 = "tenant2";
-          String g1 = "guest1";
-          String g2 = "guest2";
-
-          String s1 = "vtn:topo:create";
-          String s2 = "vtn:topo:read";
-          String s3 = "vtn:topo:update";
-          String s4 = "vtn:topo:delete";
-
-          String s5 = "sys:vtn:create";
-          String s6 = "sys:vtn:read";
-          String s7 = "sys:vtn:update";
-          String s8 = "sys:vtn:delete";
-
-          String s9 = "serv:firewall:create";
-          String sa = "serv:firewall:read";
-          String sb = "serv:firewall:update";
-          String sc = "serv:firewall:delete";
 
 
-          VTNAuthNToken adminAuth = new VTNAuthNToken(admin, admin, 1);
-          VTNAuthNToken t1Auth = new VTNAuthNToken(t1, t1, 1);
-          VTNAuthNToken g1Auth = new VTNAuthNToken(g1, g1, 1);
-          VTNAuthNToken t2Auth = new VTNAuthNToken(t2, t2, 1);
-          VTNAuthNToken g2Auth = new VTNAuthNToken(g2, g2, 1);
-
-          List<VTNAuthNToken> userTokenList = new ArrayList<>();
-          userTokenList.add(adminAuth);
-          userTokenList.add(t1Auth);
-          userTokenList.add(g1Auth);
-          userTokenList.add(t2Auth);
-          userTokenList.add(g2Auth);
-
-          List<String> servList = new ArrayList<>();
-          servList.add(s1);
-          servList.add(s2);
-          servList.add(s3);
-          servList.add(s4);
-          servList.add(s5);
-          servList.add(s6);
-          servList.add(s7);
-          servList.add(s8);
-          servList.add(s9);
-          servList.add(sa);
-          servList.add(sb);
-          servList.add(sc);
+      public static void main(String[] args) {
 
 
-          for (VTNAuthNToken token: userTokenList) {
-                System.out.println("---------I AM "+token.getUsername()+", IN DOMAIN "+token.getDomainId()+"----------");
-                Mappable adminMsg = new MappableMsg(null,null,token);
-                for (String service: servList){
-                      adminMsg.setServID(service);
-                      if(IShiro.getInstance().isAuthorized(adminMsg)){
-                            System.out.println("I HAVE SERVICE: "+service);
-                      }
-                }
-          }
+
+
+            String admin = "admin";
+            String t1 = "tenant1";
+            String t2 = "tenant2";
+            String g1 = "guest1";
+            String g2 = "guest2";
+            String boss = "boss";
+
+            String s1 = "vtn:topo:create";
+            String s2 = "vtn:topo:read";
+            String s3 = "vtn:topo:update";
+            String s4 = "vtn:topo:delete";
+
+            String s5 = "system:vtn:create";
+            String s6 = "system:vtn:read";
+            String s7 = "system:vtn:update";
+            String s8 = "system:vtn:delete";
+
+            String s9 = "serv:firewall:create";
+            String sa = "serv:firewall:read";
+            String sb = "serv:firewall:update";
+            String sc = "serv:firewall:delete";
+
+
+            VTNAuthNToken adminAuth = new VTNAuthNToken(admin, admin, 1);
+            VTNAuthNToken t1Auth = new VTNAuthNToken(t1, t1, 2);
+            VTNAuthNToken g1Auth = new VTNAuthNToken(g1, g1, 2);
+            VTNAuthNToken t2Auth = new VTNAuthNToken(t2, t2, 3);
+            VTNAuthNToken g2Auth = new VTNAuthNToken(g2, g2, 3);
+            VTNAuthNToken bossAuth = new VTNAuthNToken(boss, boss, 1);
+
+            List<VTNAuthNToken> userTokenList = new ArrayList<>();
+            userTokenList.add(adminAuth);
+            userTokenList.add(bossAuth);
+            userTokenList.add(t1Auth);
+            userTokenList.add(g1Auth);
+            userTokenList.add(t2Auth);
+            userTokenList.add(g2Auth);
+
+
+            List<String> servList = new ArrayList<>();
+            servList.add(s1);
+            servList.add(s2);
+            servList.add(s3);
+            servList.add(s4);
+            servList.add(s5);
+            servList.add(s6);
+            servList.add(s7);
+            servList.add(s8);
+            servList.add(s9);
+            servList.add(sa);
+            servList.add(sb);
+            servList.add(sc);
+            List<String> authNResult = new ArrayList<>();
+            List<String> authZResult = new ArrayList<>();
+
+            for (VTNAuthNToken token: userTokenList) {
+                  Mappable userRequest = new MappableMsg(null,null,token);
+                  String entryAuthN = "Domain "+token.getDomainId()+": "+token.getUsername()+": "+IShiro.New().isAuthenticated(userRequest);
+                  authNResult.add(entryAuthN);
+            }
+
+            for (VTNAuthNToken token: userTokenList) {
+                  for (String service: servList){
+                        Mappable userRequest = new MappableMsg(null,null,token);
+                        userRequest.setServID(service);
+                        if(IShiro.New().isAuthorized(userRequest)){
+                              String entryAuthZ = "Domain "+token.getDomainId()+": "+token.getUsername()+": "+ service;
+                              authZResult.add(entryAuthZ);
+                        }
+                  }
+            }
+
+            for (String entry: authNResult){
+                  System.out.println(entry);
+            }
+
+            for (String entry: authZResult){
+                  System.out.println(entry);
+            }
+
+
+
+
 
 
 

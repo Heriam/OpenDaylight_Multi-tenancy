@@ -10,7 +10,7 @@ public interface IShiro {
     boolean isAuthorized(Mappable request);
     String generateKey(Mappable request);
 
-    static IShiro getInstance(){
+    static IShiro New(){
         return new Shiro();
     }
 

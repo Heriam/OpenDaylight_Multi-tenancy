@@ -10,20 +10,18 @@ import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
  * Created by Hao on 2/12/16.
  */
 public class Shiro implements IShiro{
-    private static Logger log = LoggerFactory.getLogger(Shiro.class);
-    private Factory<SecurityManager> factory;
-    private SecurityManager securityManager;
+
     Subject subject;
 
     public Shiro(){
+        Factory<SecurityManager> factory;
+        SecurityManager securityManager;
         factory = new IniSecurityManagerFactory("file:/Users/Hao/IdeaProjects/multi-tenancy/shiro/shiro.ini");
         securityManager = factory.getInstance();
         SecurityUtils.setSecurityManager(securityManager);
@@ -65,7 +63,19 @@ public class Shiro implements IShiro{
         char[] password = request.getToken().getPassword();
         int domainID = request.getToken().getDomainId();
         String join = username+password+domainID;
-        return Base64.encodeToString(join.getBytes());
+        String joinkey;
+        try {
+            subject.login(request.getToken());
+            if (subject.isAuthenticated()) {
+                joinkey = Base64.encodeToString(join.getBytes());
+            } else {
+                joinkey = null;
+            }
+            subject.logout();
+            return joinkey;
+        } catch (AuthenticationException e) {
+            return null;
+        }
     }
 }
 

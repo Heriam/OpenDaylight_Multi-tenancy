@@ -19,6 +19,7 @@ package aaa.realms;
  * under the License.
  */
 
+import aaa.authn.VTNAuthNToken;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -208,9 +209,9 @@ public class MySQLRealm extends AuthorizingRealm {
 
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 
-        UsernamePasswordToken upToken = (UsernamePasswordToken) token;
+        VTNAuthNToken upToken = (VTNAuthNToken) token;
         String username = upToken.getUsername();
-
+        String domainID = Integer.toString(upToken.getDomainId());
         // Null username is invalid
         if (username == null) {
             throw new AccountException("Null usernames are not allowed by this realm.");
@@ -220,6 +221,10 @@ public class MySQLRealm extends AuthorizingRealm {
         SimpleAuthenticationInfo info = null;
         try {
             conn = dataSource.getConnection();
+            Set<String> domains = getUserDomain(conn, username);
+            if(!(domains.contains(domainID))){
+                throw new AuthenticationException("Domain not found");
+            }
 
             String password = null;
             String salt = null;
@@ -431,12 +436,11 @@ public class MySQLRealm extends AuthorizingRealm {
     }
 
 
-    public Set<String> getUserDomain(String username){
+    public Set<String> getUserDomain(Connection conn, String username){
 
         PreparedStatement ps = null;
-        Set<String> domains = new LinkedHashSet<String>();
+        Set<String> domains = new LinkedHashSet<>();
         try {
-            Connection conn = dataSource.getConnection();
             ps = conn.prepareStatement(userDomainQuery);
             ps.setString(1, username);
             ResultSet rs = null;
@@ -458,7 +462,8 @@ public class MySQLRealm extends AuthorizingRealm {
             JdbcUtils.closeStatement(ps);
         }
         return domains;
-        }
+
+    }
 
 
 

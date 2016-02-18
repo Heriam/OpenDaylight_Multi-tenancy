@@ -1,6 +1,6 @@
 package driver;
 
-import aaa.realms.VTNAuthNToken;
+import aaa.authn.VTNAuthNToken;
 import org.json.JSONObject;
 
 /**

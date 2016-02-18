@@ -1,6 +1,6 @@
 package driver;
 
-import aaa.realms.VTNAuthNToken;
+import aaa.authn.VTNAuthNToken;
 import org.json.JSONObject;
 
 /**
@@ -92,4 +92,16 @@ public class MappableMsg implements Mappable {
         Auth = auth;
     }
 
+    @Override
+    public String toString() {
+        return "MappableMsg{" +
+                "body=" + body +
+                ", URL='" + URL + '\'' +
+                ", Auth=" + Auth +
+                ", msgType='" + msgType + '\'' +
+                ", servID='" + servID + '\'' +
+                ", option=" + option +
+                ", priority=" + priority +
+                '}';
+    }
 }
