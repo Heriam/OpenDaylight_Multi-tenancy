@@ -46,13 +46,14 @@ public class Shiro implements IShiro{
     @Override
     public boolean isAuthorized(Mappable request) {
         UsernamePasswordToken token = request.getToken();
-        String ServID = request.getServID();
+        String Serv = request.getServID()+":"+request.getMsgType();
+
         try {
             subject.login(token);
         } catch (AuthenticationException e) {
             return false;
         }
-        boolean authz = subject.isPermitted(ServID);
+        boolean authz = subject.isPermitted(Serv);
         subject.logout();
         return authz;
     }
@@ -62,7 +63,7 @@ public class Shiro implements IShiro{
         String username = request.getToken().getUsername();
         char[] password = request.getToken().getPassword();
         int domainID = request.getToken().getDomainId();
-        String join = username+password+domainID;
+        String join = username+" : "+password+" : "+domainID;
         String joinkey;
         try {
             subject.login(request.getToken());
