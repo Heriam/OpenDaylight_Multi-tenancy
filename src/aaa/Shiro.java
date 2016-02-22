@@ -1,6 +1,7 @@
 package aaa;
 
 
+import aaa.authn.VTNAuthNToken;
 import driver.Mappable;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -17,7 +18,7 @@ import org.apache.shiro.util.Factory;
  */
 public class Shiro implements IShiro{
 
-    Subject subject;
+    static Subject subject;
 
     public Shiro(){
         Factory<SecurityManager> factory;
@@ -28,10 +29,19 @@ public class Shiro implements IShiro{
         subject = SecurityUtils.getSubject();
     }
 
-
-
     @Override
-    public boolean isAuthenticated(Mappable request) {
+    public Subject userLogin(VTNAuthNToken token){
+        Subject userSubject = SecurityUtils.getSubject();
+        try {
+            userSubject.login(token);
+        } catch (AuthenticationException e) {
+            return null;
+        }
+        return userSubject;
+    }
+
+
+    public static boolean isAuthenticated(Mappable request) {
         UsernamePasswordToken token = request.getToken();
         try {
             subject.login(token);
@@ -43,8 +53,8 @@ public class Shiro implements IShiro{
         return authc;
     }
 
-    @Override
-    public boolean isAuthorized(Mappable request) {
+
+    public static boolean isAuthorized(Mappable request) {
         UsernamePasswordToken token = request.getToken();
         String Serv = request.getServID()+":"+request.getMsgType();
 
@@ -58,8 +68,8 @@ public class Shiro implements IShiro{
         return authz;
     }
 
-    @Override
-    public String generateKey(Mappable request){
+
+    public static String generateKey(Mappable request){
         String username = request.getToken().getUsername();
         char[] password = request.getToken().getPassword();
         int domainID = request.getToken().getDomainId();

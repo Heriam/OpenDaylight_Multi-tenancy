@@ -27,7 +27,7 @@ import java.util.Collection;
  * But if two or more realms are configured, PAM behavior is implemented by iterating over the collection of realms
  * and interacting with each over the course of the authentication attempt.  As this is more complicated, this
  * authenticator allows customized behavior for interpreting what happens when interacting with multiple realms - for
- * example, you might require all realms to be successful during the attempt, or perhaps only at least one must be
+ * rest, you might require all realms to be successful during the attempt, or perhaps only at least one must be
  * successful, or some other interpretation.  This customized behavior can be performed via the use of a
  * {@link #setAuthenticationStrategy(AuthenticationStrategy) AuthenticationStrategy}, which
  * you can inject as a property of this class.

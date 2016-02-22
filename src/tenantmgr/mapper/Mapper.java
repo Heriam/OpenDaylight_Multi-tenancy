@@ -1,5 +1,6 @@
 package tenantmgr.mapper;
 
+import aaa.authn.VTNAuthNToken;
 import driver.Mappable;
 
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.Map;
 /**
  * Created by Hao on 2/19/16.
  */
-public class Mapper{
+public class Mapper implements IMap{
 
     protected String urlSYSRT = "controller/nb/v2/";
     protected String urlVTN = "controller/nb/v2/vtn/default/vtns/";
@@ -35,22 +36,37 @@ public class Mapper{
     protected String firewallResource = "firewall";
     protected String topoResource = "topo";
 
-    protected String adminDOM = "admin";
-    protected String tent1DOM = "tenant1";
-    protected String tent2DOM = "tenant2";
+    protected int adminDOM = 0;
+    protected int tent1DOM = 1;
+    protected int tent2DOM = 2;
+    protected String adminUsr = "admin";
+    protected String tent1Usr = "tenant1";
+    protected String bossUsr = "boss";
+    protected String gust1Usr = "guest1";
+    protected String tent2Usr = "tenant2";
+    protected String gust2Usr = "guest2";
 
 
     protected Map<String, String> typeMap;
     protected Map<String, String> rsrcMap;
     protected List<String> mthdList;
+    protected Map<String, Integer> domainMap;
 
 
-    public void mapRequest(Mappable message){
-        patchURL(message);
-
+    public Mapper(){
+        iniServTypeMap();
+        iniDomainMap();
     }
 
 
+    public VTNAuthNToken addDomainID(VTNAuthNToken token){
+        String username = token.getUsername();
+        char[] password = token.getPassword();
+        int domainID = domainMap.get(username);
+        return new VTNAuthNToken(username, password, domainID);
+    }
+
+    // URL = servType Root + DomainID
     public void patchURL(Mappable message){
         String servType = message.getServID().split(":")[0];
         int domainID = message.getToken().getDomainId();
@@ -64,6 +80,16 @@ public class Mapper{
         typeMap.put(sysType, urlVTN);
         typeMap.put(vtnType, urlVTN);
         typeMap.put(servType, urlVTN);
+    }
+
+    public void iniDomainMap(){
+        domainMap = new HashMap<>();
+        domainMap.put(adminUsr, adminDOM);
+        domainMap.put(bossUsr, adminDOM);
+        domainMap.put(tent1Usr, tent1DOM);
+        domainMap.put(gust1Usr, tent1DOM);
+        domainMap.put(tent2Usr, tent2DOM);
+        domainMap.put(gust2Usr, tent2DOM);
     }
 
 

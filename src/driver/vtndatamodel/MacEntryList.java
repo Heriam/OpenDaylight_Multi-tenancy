@@ -30,7 +30,7 @@ import java.util.ArrayList;
  VLAN ID can be overwritten according to the setting of Port mapping and VLAN mapping.
  Only destination MAC address is used as the search key while searching inside MAC address table. Thus, it is necessary to configure vBridge in such a manner that Ethernet frames that have the same MAC address as the source address and different VLAN IDs configured do not flow to the same vBridge.
 
- For example, let us assume that the following vBridge and network devices are configured.
+ For rest, let us assume that the following vBridge and network devices are configured.
 
  Create a vBridge with the name bridge-1 and map VLAN ID 1 and 2 by using VLAN mapping.
  Configure A:1 and A:2 alias for network interface of host having the MAC address A, and allocate VLAN ID 1 and 2 to each of the aliases.

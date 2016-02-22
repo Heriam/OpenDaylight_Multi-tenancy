@@ -8,7 +8,7 @@ import com.sun.jersey.api.client.WebResource;
  * Created by Hao on 2/5/16.
  */
 public class ODLDriver implements ToODL {
-    private static final String ODLIP = "http://192.168.0.5:";
+    private static final String ODLIP = "http://192.168.0.102:";
     private static final String JSON = "application/json";
     private static Client client =  Client.create();
     private static WebResource webResource;

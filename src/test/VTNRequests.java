@@ -1,10 +1,7 @@
 package test;
 
 
-import aaa.IShiro;
 import aaa.authn.VTNAuthNToken;
-import driver.Mappable;
-import driver.MappableMsg;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,22 +70,22 @@ public class VTNRequests {
             List<String> authNResult = new ArrayList<>();
             List<String> authZResult = new ArrayList<>();
 
-            for (VTNAuthNToken token: userTokenList) {
-                  Mappable userRequest = new MappableMsg(null,null,token);
-                  String entryAuthN = "Domain "+token.getDomainId()+": "+token.getUsername()+": "+IShiro.New().isAuthenticated(userRequest);
-                  authNResult.add(entryAuthN);
-            }
+//            for (VTNAuthNToken token: userTokenList) {
+//                  Mappable userRequest = new MappableMsg(null,null,token);
+//                  String entryAuthN = "Domain "+token.getDomainId()+": "+token.getUsername()+": "+IShiro.New().isAuthenticated(userRequest);
+//                  authNResult.add(entryAuthN);
+//            }
 
-            for (VTNAuthNToken token: userTokenList) {
-                  for (String service: servList){
-                        Mappable userRequest = new MappableMsg(null,null,token);
-                        userRequest.setServID(service);
-                        if(IShiro.New().isAuthorized(userRequest)){
-                              String entryAuthZ = "Domain "+token.getDomainId()+": "+token.getUsername()+": "+ service;
-                              authZResult.add(entryAuthZ);
-                        }
-                  }
-            }
+//            for (VTNAuthNToken token: userTokenList) {
+//                  for (String service: servList){
+//                        Mappable userRequest = new MappableMsg(null,null,token);
+//                        userRequest.setServID(service);
+//                        if(IShiro.New().isAuthorized(userRequest)){
+//                              String entryAuthZ = "Domain "+token.getDomainId()+": "+token.getUsername()+": "+ service;
+//                              authZResult.add(entryAuthZ);
+//                        }
+//                  }
+//            }
 
             for (String entry: authNResult){
                   System.out.println(entry);
