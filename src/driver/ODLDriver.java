@@ -20,7 +20,7 @@ public class ODLDriver implements ToODL {
         webResource = client.resource(ODLIP+port);
     }
     @Override
-    public void Post(Mappable message) throws RuntimeException{
+    public ClientResponse Post(Mappable message) throws RuntimeException{
         try {
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
@@ -33,7 +33,9 @@ public class ODLDriver implements ToODL {
 
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
+        return response;
     }
     @Override
     public ClientResponse Get( Mappable message){
@@ -54,7 +56,7 @@ public class ODLDriver implements ToODL {
         return response;
     }
     @Override
-    public void Put(Mappable message) throws RuntimeException{
+    public ClientResponse Put(Mappable message) throws RuntimeException{
         try{
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
@@ -66,10 +68,12 @@ public class ODLDriver implements ToODL {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
+        return response;
     }
     @Override
-    public void Delete(Mappable message) throws RuntimeException{
+    public ClientResponse Delete(Mappable message) throws RuntimeException{
         try{
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
@@ -80,6 +84,8 @@ public class ODLDriver implements ToODL {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
+        return response;
     }
 }

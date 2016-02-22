@@ -1,7 +1,6 @@
 package tenantmgr.mapper;
 
 import aaa.authn.VTNAuthNToken;
-import driver.Mappable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,79 +9,81 @@ import java.util.Map;
 /**
  * Created by Hao on 2/19/16.
  */
-public class Mapper implements IMap{
+public abstract class Mapper{
 
-    protected String urlSYSRT = "controller/nb/v2/";
-    protected String urlVTN = "controller/nb/v2/vtn/default/vtns/";
-    protected String urlAUTHRT = "auth/v1/";                             // with subdir domains, users, roles
-    protected String RESTCONFROOT = "restconf/config/";                 //with subdir authorization-schema:simple-authorization or domain-authorization
-    protected String IFDIR = "/interfaces/";
-    protected String BRIDGEDIR = "/vbridges/";
-    protected String PORTMAP = "/portmap";
-    protected String MACMAPDIR = "/macmap/";
-    protected String VLANMAP = "/vlanmaps";
-    protected String dirVTN = "vtn/default/vtns/";
+    protected static final String urlSYSRT = "controller/nb/v2/";
+    protected static final String urlVTN = "controller/nb/v2/vtn/default/vtns/";
+    protected static final String urlAUTHRT = "auth/v1/";                             // with subdir domains, users, roles
+    protected static final String RESTCONFROOT = "restconf/config/";                 //with subdir authorization-schema:simple-authorization or domain-authorization
+    protected static final String IFDIR = "/interfaces/";
+    protected static final String BRIDGEDIR = "/vbridges/";
+    protected static final String PORTMAP = "/portmap";
+    protected static final String MACMAPDIR = "/macmap/";
+    protected static final String VLANMAP = "/vlanmaps";
+    protected static final String dirVTN = "vtn/default/vtns/";
 
-    protected String POST = "create";
-    protected String PUT = "update";
-    protected String GET = "read";
-    protected String DELETE = "delete";
+    protected static final String POST = "create";
+    protected static final String PUT = "update";
+    protected static final String GET = "read";
+    protected static final String DELETE = "delete";
 
-    protected String sysType = "system";
-    protected String servType = "serv";
-    protected String vtnType = "vtn";
+    protected static final String sysType = "system";
+    protected static final String servType = "serv";
+    protected static final String vtnType = "vtn";
 
-    protected String vtnResource = "vtn";
-    protected String firewallResource = "firewall";
-    protected String topoResource = "topo";
+    protected static final String vtnResource = "vtn";
+    protected static final String firewallResource = "firewall";
+    protected static final String topoResource = "topo";
 
-    protected int adminDOM = 0;
-    protected int tent1DOM = 1;
-    protected int tent2DOM = 2;
-    protected String adminUsr = "admin";
-    protected String tent1Usr = "tenant1";
-    protected String bossUsr = "boss";
-    protected String gust1Usr = "guest1";
-    protected String tent2Usr = "tenant2";
-    protected String gust2Usr = "guest2";
-
-
-    protected Map<String, String> typeMap;
-    protected Map<String, String> rsrcMap;
-    protected List<String> mthdList;
-    protected Map<String, Integer> domainMap;
+    protected static final int adminDOM = 0;
+    protected static final int tent1DOM = 1;
+    protected static final int tent2DOM = 2;
+    protected static final String adminUsr = "admin";
+    protected static final String tent1Usr = "tenant1";
+    protected static final String bossUsr = "boss";
+    protected static final String gust1Usr = "guest1";
+    protected static final String tent2Usr = "tenant2";
+    protected static final String gust2Usr = "guest2";
 
 
-    public Mapper(){
-        iniServTypeMap();
-        iniDomainMap();
+    protected static Map<String, String> typeMap;
+    protected static Map<String, String> rsrcMap;
+    protected static List<String> mthdList;
+    protected static Map<String, Integer> domainMap;
+
+
+    public static VTNAuthNToken getToken(String username, String password){
+        if(username!=null&&domainMap.containsKey(username)) {
+            int domainID = domainMap.get(username);
+            return new VTNAuthNToken(username, password, domainID);
+        } else {
+            return null;
+        }
     }
 
-
-    public VTNAuthNToken addDomainID(VTNAuthNToken token){
-        String username = token.getUsername();
-        char[] password = token.getPassword();
-        int domainID = domainMap.get(username);
-        return new VTNAuthNToken(username, password, domainID);
+    public Mapper(){
+        iniDomainMap();
+        iniServTypeMap();
     }
 
     // URL = servType Root + DomainID
-    public void patchURL(Mappable message){
-        String servType = message.getServID().split(":")[0];
-        int domainID = message.getToken().getDomainId();
+
+    public static String mapURL(String servID, VTNAuthNToken token){
+        String servType = servID.split(":")[0];
+        int domainID = domainMap.get(token.getUsername());
         String rootUrl = typeMap.get(servType)+domainID+"/";
-        message.setURL(rootUrl);
+        return rootUrl;
     }
 
 
-    public void iniServTypeMap(){
+    public static void iniServTypeMap(){
         typeMap = new HashMap<>();
         typeMap.put(sysType, urlVTN);
         typeMap.put(vtnType, urlVTN);
         typeMap.put(servType, urlVTN);
     }
 
-    public void iniDomainMap(){
+    public static void iniDomainMap(){
         domainMap = new HashMap<>();
         domainMap.put(adminUsr, adminDOM);
         domainMap.put(bossUsr, adminDOM);

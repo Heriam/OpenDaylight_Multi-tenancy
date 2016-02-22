@@ -1,6 +1,8 @@
 package rest;
 
 
+import aaa.authn.VTNAuthNToken;
+import org.apache.shiro.authc.AuthenticationException;
 import tenantmgr.VTNServ;
 
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -20,6 +24,12 @@ import java.io.*;
 @Path("/virnet")
 public class TentProxy {
 
+    static Map<String, VTNAuthNToken> LoginedToken;
+
+    public TentProxy(){
+        LoginedToken = new HashMap<>();
+    }
+
     @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -28,20 +38,22 @@ public class TentProxy {
             @FormParam("password") String password,
             @Context HttpServletResponse response){
 
-        boolean login = VTNServ.getTentMgr().loginReq(username, password);
         try {
-            if(login) {
-                String filePath = "/Users/Hao/IdeaProjects/multi-tenancy/web/"+username;
-                File fp = new File(filePath);
-                // 创建目录
-                if (!fp.exists()) {
-                    fp.mkdirs();// 目录不存在的情况下，创建目录。
-                }
-                homePage(username);
-                response.sendRedirect("/"+username+"/home.html");
+            VTNAuthNToken loginToken = VTNServ.getTentMgr().loginReq(username, password);
+            LoginedToken.put(username, loginToken);
+            String filePath = "/Users/Hao/IdeaProjects/multi-tenancy/web/" + username;
+            File fp = new File(filePath);
+            // 创建目录
+            if (!fp.exists()) {
+                fp.mkdirs();// 目录不存在的情况下，创建目录。
             }
-            else{
-                response.sendError(529, "Login Failure");
+            homePage(username);
+            response.sendRedirect("/" + username + "/home.html");
+        }catch (AuthenticationException e){
+            try {
+                response.sendRedirect("/index.html");
+            } catch (IOException e1) {
+                e1.printStackTrace();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,22 +65,16 @@ public class TentProxy {
     public void logout(
             @FormParam("username") String username,
             @Context HttpServletResponse response){
-        System.out.println(username);
         try {
             if(username==null){
-                throw new RuntimeException("No user");
-            } else {
-                response.sendRedirect("/index.html");
-            }
-        } catch (IOException e) {
-            try {
                 response.sendError(404, "No login User");
-            } catch (IOException e1) {
+            } else {
+                VTNServ.getTentMgr().logoutReq(LoginedToken.get(username));
+                LoginedToken.remove(username);
+            }
+        } catch (IOException e1) {
                 e1.printStackTrace();
             }
-            e.printStackTrace();
-        }
-
     }
 
 
@@ -94,9 +100,12 @@ public class TentProxy {
             sb.append(
                     "<div align=\"right\">" +
                             "<form id=\"form\" action=\"../odl/virnet/logout\" enctype=\"application/x-www-form-urlencoded\" method=\"post\">" +
-                            "<button type=\"submit\" form=\"form\" name=\"username\" value=\""+username+ "\">Logout</button></form>"+
-                            "</div>"
-            );
+                            "<button type=\"submit\" form=\"form\" name=\"username\" value=\""+username+ "\" onclick=\"jump()\">Logout</button></form>"+
+                            "</div>");
+            sb.append("<script>\n" +
+                    "function jump(){"+
+                    "top.location.href='../index.html';" +
+                    "} </script>");
             sb.append("</body></html>");
             printStream.println(sb.toString());
         } catch (FileNotFoundException e) {
@@ -126,9 +135,9 @@ public class TentProxy {
 
                     "  <fieldset>\n" +
                     "    <legend>Operation:</legend>\n<br>" +
-                    "<input type=\"radio\" name=\"method\" value=\"post\" />&nbsp;&nbsp;&nbsp;&nbsp;Create&nbsp;&nbsp;&nbsp;&nbsp;   " +
-                    "<input type=\"radio\" name=\"method\" value=\"put\" />&nbsp;&nbsp;&nbsp;&nbsp;Update&nbsp;&nbsp;&nbsp;&nbsp;   " +
-                    "<input type=\"radio\" name=\"method\" value=\"get\" />&nbsp;&nbsp;&nbsp;&nbsp;Read&nbsp;&nbsp;&nbsp;&nbsp;   " +
+                    "<input type=\"radio\" name=\"method\" value=\"create\" />&nbsp;&nbsp;&nbsp;&nbsp;Create&nbsp;&nbsp;&nbsp;&nbsp;   " +
+                    "<input type=\"radio\" name=\"method\" value=\"update\" />&nbsp;&nbsp;&nbsp;&nbsp;Update&nbsp;&nbsp;&nbsp;&nbsp;   " +
+                    "<input type=\"radio\" name=\"method\" value=\"read\" />&nbsp;&nbsp;&nbsp;&nbsp;Read&nbsp;&nbsp;&nbsp;&nbsp;   " +
                     "<input type=\"radio\" name=\"method\" value=\"delete\" />&nbsp;&nbsp;&nbsp;&nbsp;Delete&nbsp;&nbsp;&nbsp;&nbsp;   " +
                     " <br><br> </fieldset>\n<br><br>" +
 
@@ -145,6 +154,7 @@ public class TentProxy {
                     "  <legend>Resource:</legend>\n<br>" +
                     "<input type=\"checkbox\" name=\"resource\" value=\"network\" />&nbsp;&nbsp;&nbsp;&nbsp; Network &nbsp;&nbsp;&nbsp;&nbsp;  " +
                     "<select name=\"network\">\n" +
+                    "<option value=\"default\">Default</option>\n" +
                     "<option value=\"net1\">Network1</option>\n" +
                     "<option value=\"net2\">Network2</option>\n" +
                     "<option value=\"net3\">Network3</option>\n" +
@@ -177,17 +187,25 @@ public class TentProxy {
                     "<option value=\"r3\">Router3</option>\n" +
                     "<option value=\"r4\">Router4</option>\n" +
                     "<option value=\"r5\">Router5</option>\n" +
-                    "</select>&nbsp;&nbsp;&nbsp;&nbsp;"+
+                    "</select>&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
 
-                    " <br><br> </fieldset>\n<br><br>" +
+                    "<input type=\"checkbox\" name=\"resource\" value=\"mapping\" />&nbsp;&nbsp;&nbsp;&nbsp; Mapping  &nbsp;&nbsp;&nbsp;&nbsp;   " +
+                    "<select name=\"mapping\">\n" +
+                    "<option value=\"portmap\">PortMap</option>\n" +
+                    "<option value=\"macmap\">MacMap</option>\n" +
+                    "<option value=\"vlanmaps\">VlanMap</option>\n" +
+                    "</select>&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
+
+                    " <br> </fieldset>\n<br><br>" +
 
                     "  <fieldset>\n" +
                     "  <legend>Command:</legend>\n<br>" +
                     "URL: &nbsp;&nbsp;&nbsp;&nbsp;virtual_network/<input type=\"url\" name=\"url\" style=\"width:200px;\" /><br><br>" +
-                    "JSON:&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"text\" name=\"json\" style=\"width:600px; height:200px;\" />" +
+                    "JSON:&nbsp;&nbsp;&nbsp;&nbsp;<textarea rows=\"20\" cols=\"100\" form=\"form\" name=\"json\" ></textarea>" +
                     " <br><br> </fieldset>\n<br>" +
                     "<div align=\"center\">" +
-                    "<button type=\"submit\" form=\"form\" name=\"username\" value=\""+username+ "\">Commit</button>"+
+                    "<button type=\"submit\" form=\"form\" name=\"username\" value=\""+username+"\" onclick=\"setTimeout(\"window.parent.frames.output.location.reload();\",3000)\" >Commit</button>   &nbsp;&nbsp;&nbsp;&nbsp;   "+
+                    "<button type=\"reset\" form=\"form\" >Reset</button>"+
                     "</div>"+
                     "</form>");
             sb.append("<div>");
@@ -234,7 +252,9 @@ public class TentProxy {
         StringBuilder sb = new StringBuilder();
         try {
             PrintStream printStream = new PrintStream(new FileOutputStream("/Users/Hao/IdeaProjects/multi-tenancy/web/"+username+"/home.html"));
-            sb.append("<html>");
+            sb.append("<html><head><title>\n" +
+                    "VirNet Homepage" +
+                    "  </title></head>");
             sb.append("<frameset rows=\"20%,80%\">");
             sb.append("<frame src=\"/"+username+"/frameTop.html\">");
             sb.append("<frameset cols=\"50%,50%\">");

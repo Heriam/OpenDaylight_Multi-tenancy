@@ -40,9 +40,8 @@ public class Shiro implements IShiro{
         return userSubject;
     }
 
-
-    public static boolean isAuthenticated(Mappable request) {
-        UsernamePasswordToken token = request.getToken();
+    @Override
+    public boolean isAuthenticated(VTNAuthNToken token) {
         try {
             subject.login(token);
         } catch (AuthenticationException e) {
@@ -53,8 +52,8 @@ public class Shiro implements IShiro{
         return authc;
     }
 
-
-    public static boolean isAuthorized(Mappable request) {
+    @Override
+    public boolean isAuthorized(Mappable request) {
         UsernamePasswordToken token = request.getToken();
         String Serv = request.getServID()+":"+request.getMsgType();
 
@@ -68,15 +67,15 @@ public class Shiro implements IShiro{
         return authz;
     }
 
-
-    public static String generateKey(Mappable request){
-        String username = request.getToken().getUsername();
-        char[] password = request.getToken().getPassword();
-        int domainID = request.getToken().getDomainId();
+    @Override
+    public String generateKey(VTNAuthNToken token){
+        String username = token.getUsername();
+        char[] password = token.getPassword();
+        int domainID = token.getDomainId();
         String join = username+" : "+password+" : "+domainID;
         String joinkey;
         try {
-            subject.login(request.getToken());
+            subject.login(token);
             if (subject.isAuthenticated()) {
                 joinkey = Base64.encodeToString(join.getBytes());
             } else {

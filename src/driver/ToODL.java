@@ -11,12 +11,22 @@ public interface ToODL {
          return new ODLDriver(8181);
      }
 
-     static ToODL VTN(){
-         return new ODLDriver(8282);
+     static ClientResponse Send(Mappable message){
+         switch (message.getMsgType()) {
+             case "create":
+                 return new ODLDriver(8282).Post(message);
+             case "update":
+                 return new ODLDriver(8282).Put(message);
+             case "delete":
+                 return new ODLDriver(8282).Delete(message);
+             case "read":
+                 return new ODLDriver(8282).Get(message);
+             default: return null;
+         }
      }
 
-     void Post(Mappable message);
+     ClientResponse Post(Mappable message);
      ClientResponse Get(Mappable message);
-     void Put(Mappable message);
-     void Delete(Mappable message);
+     ClientResponse Put(Mappable message);
+     ClientResponse Delete(Mappable message);
 }
