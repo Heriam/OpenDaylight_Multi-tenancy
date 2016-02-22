@@ -1,16 +1,27 @@
 package test;
 
 
+import aaa.IShiro;
 import aaa.authn.VTNAuthNToken;
+import com.sun.jersey.api.client.ClientResponse;
+import driver.Mappable;
+import driver.MappableMsg;
+import driver.ToODL;
+import driver.vtndatamodel.BridgeInfo;
+import org.apache.http.HttpEntity;
+import org.apache.http.util.EntityUtils;
 
+import javax.ws.rs.core.Response;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class VTNRequests {
 
 
 
-      public static void main(String[] args) {
+      public static void main(String[] args) throws IOException {
 
 
 
@@ -38,12 +49,12 @@ public class VTNRequests {
             String sc = "serv:firewall:delete";
 
 
-            VTNAuthNToken adminAuth = new VTNAuthNToken(admin, admin, 1);
-            VTNAuthNToken t1Auth = new VTNAuthNToken(t1, t1, 2);
-            VTNAuthNToken g1Auth = new VTNAuthNToken(g1, g1, 2);
-            VTNAuthNToken t2Auth = new VTNAuthNToken(t2, t2, 3);
-            VTNAuthNToken g2Auth = new VTNAuthNToken(g2, g2, 3);
-            VTNAuthNToken bossAuth = new VTNAuthNToken(boss, boss, 1);
+            VTNAuthNToken adminAuth = new VTNAuthNToken(admin, admin, 0);
+            VTNAuthNToken t1Auth = new VTNAuthNToken(t1, t1, 1);
+            VTNAuthNToken g1Auth = new VTNAuthNToken(g1, g1, 1);
+            VTNAuthNToken t2Auth = new VTNAuthNToken(t2, t2, 2);
+            VTNAuthNToken g2Auth = new VTNAuthNToken(g2, g2, 2);
+            VTNAuthNToken bossAuth = new VTNAuthNToken(boss, boss, 0);
 
             List<VTNAuthNToken> userTokenList = new ArrayList<>();
             userTokenList.add(adminAuth);
@@ -70,22 +81,25 @@ public class VTNRequests {
             List<String> authNResult = new ArrayList<>();
             List<String> authZResult = new ArrayList<>();
 
-//            for (VTNAuthNToken token: userTokenList) {
-//                  Mappable userRequest = new MappableMsg(null,null,token);
-//                  String entryAuthN = "Domain "+token.getDomainId()+": "+token.getUsername()+": "+IShiro.New().isAuthenticated(userRequest);
-//                  authNResult.add(entryAuthN);
-//            }
+            for (VTNAuthNToken token: userTokenList) {
+                  Mappable userRequest = new MappableMsg(null,null,token);
+                  String entryAuthN = "Domain "+token.getDomainId()+": "+token.getUsername()+": "+ IShiro.New().isAuthenticated(userRequest.getToken());
+                  authNResult.add(entryAuthN);
+            }
 
-//            for (VTNAuthNToken token: userTokenList) {
-//                  for (String service: servList){
-//                        Mappable userRequest = new MappableMsg(null,null,token);
-//                        userRequest.setServID(service);
-//                        if(IShiro.New().isAuthorized(userRequest)){
-//                              String entryAuthZ = "Domain "+token.getDomainId()+": "+token.getUsername()+": "+ service;
-//                              authZResult.add(entryAuthZ);
-//                        }
-//                  }
-//            }
+            for (VTNAuthNToken token: userTokenList) {
+                  for (String service: servList){
+                        Mappable userRequest = new MappableMsg(null,null,token);
+                        userRequest.setServID(service);
+                        if(IShiro.New().isAuthorized(userRequest)){
+                              String entryAuthZ = "Domain "+token.getDomainId()+": "+token.getUsername()+": "+ service;
+                              authZResult.add(entryAuthZ);
+                        }
+                  }
+            }
+
+
+
 
             for (String entry: authNResult){
                   System.out.println(entry);
@@ -101,12 +115,23 @@ public class VTNRequests {
 
 
 
+//      Define a Bridge Data
+          Mappable br1Hao = new MappableMsg(new BridgeInfo("bridge1", "600"), "controller/nb/v2/vtn/default/vtns/Tenant_Hao", adminAuth);
+//          ToODL.Post(br1Hao);
+            br1Hao.setMsgType("read");
 
-////      Define a Bridge Data
-//          Mappable br1Hao = new MappableMsg(new BridgeInfo("bridge1", "600"), "controller/nb/v2/vtn/default/vtns/Tenant_Hao/vbridges/bridge3", adminAuth);
-////          ToODL.Post(br1Hao);
-//          System.out.println(ToODL.VTN().Get(br1Hao).getEntity(BridgeInfo.class));
-//
+            ClientResponse response = ToODL.Send(br1Hao);
+
+            Response resp = clientResponseToResponse(response);
+
+            HttpEntity entity = resp.getEntity();
+            String json_string = EntityUtils.toString(entity);
+            System.out.println(json_string);
+
+
+
+
+
 //
 ////      Define a Interface Data
 //          Mappable int1Br1 = new MappableMsg(new InterfaceInfo("int1", true), "controller/nb/v2/vtn/default/vtns/Tenant_Hao/vbridges/bridge3/interfaces/int1", adminAuth);
@@ -137,7 +162,19 @@ public class VTNRequests {
 
 
     }
-      public static List<String> getNull() {
-            return null;
+
+      public static Response clientResponseToResponse(ClientResponse r) {
+            // copy the status code
+            Response.ResponseBuilder rb = Response.status(r.getStatus());
+            // copy all the headers
+            for (Map.Entry<String, List<String>> entry : r.getHeaders().entrySet()) {
+                  for (String value : entry.getValue()) {
+                        rb.header(entry.getKey(), value);
+                  }
+            }
+            // copy the entity
+            rb.entity(r.getEntityInputStream());
+            // return the response
+            return rb.build();
       }
 }

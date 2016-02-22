@@ -8,7 +8,7 @@ import driver.ToODL;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.subject.Subject;
-import tenantmgr.mapper.Mapper;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class TentMgr extends Mapper implements VTNServ{
     Subject userSubject;
     @Override
     public VTNAuthNToken loginReq(String username, String password){
-        VTNAuthNToken token = getToken(username,password);
+        VTNAuthNToken token = Mapper.getToken(username,password);
         if (token==null){
             throw new AuthenticationException("Authentication Failure: User is not Regiestered");
         }
@@ -51,20 +51,13 @@ public class TentMgr extends Mapper implements VTNServ{
     @Override
     public ClientResponse getResponse(Mappable request){
         if(IShiro.New().isAuthorized(request)) {
-            Mappable mappedReq = mapReq(request);
+            Mappable mappedReq = Mapper.mapReq(request);
             return ToODL.Send(mappedReq);
         } else{
             throw new AuthorizationException("Authorization Failure : Requested Service is Not Permitted");
         }
     }
 
-    private Mappable mapReq(Mappable request){
-        //URL Mapping
-        String userUrl = request.getURL();
-        String rootUrl = mapURL(request.getServID(), request.getToken());
-        String mappedUrl = rootUrl + userUrl;
-        request.setURL(mappedUrl);
-        return request;
-    }
+
 
 }

@@ -2,7 +2,12 @@ package rest;
 
 
 import aaa.authn.VTNAuthNToken;
+import com.sun.jersey.api.client.ClientResponse;
+import driver.Mappable;
+import driver.MappableMsg;
 import org.apache.shiro.authc.AuthenticationException;
+import org.json.JSONException;
+import org.json.JSONObject;
 import tenantmgr.VTNServ;
 
 import javax.servlet.http.HttpServletResponse;
@@ -79,6 +84,40 @@ public class TentProxy {
 
 
 
+
+    @POST
+    @Path("/operation")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public void getCommand(@FormParam("method") String method,
+                           @FormParam("service") String service,
+                           @FormParam("resource") String resource,
+                           @FormParam("network") String network,
+                           @FormParam("bridge") String bridge,
+                           @FormParam("interface") String intface,
+                           @FormParam("router") String router,
+                           @FormParam("mapping") String mapping,
+                           @FormParam("url") String url,
+                           @FormParam("json") String json,
+                           @FormParam("username") String username) {
+
+        VTNAuthNToken userToken = TentProxy.LoginedToken.get(username);
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            Mappable request = new MappableMsg(jsonObject, url, userToken);
+            if (method != null) request.setMsgType(method);
+            if (service != null) request.setServID(service);
+            ClientResponse response = VTNServ.getTentMgr().getResponse(request);
+
+           // String json_string = EntityUtils.toString(response.getEntity());
+          //  JSONObject temp1 = new JSONObject(json_string);
+
+        } catch (RuntimeException e){
+            throw new JSONException("JSON READER FAILURE : Cannot Parse JSONObject");
+        }
+    }
+
+
+
     public void frameTopPage(String username){
         StringBuilder sb = new StringBuilder();
         String filePath = "/Users/Hao/IdeaProjects/multi-tenancy/web/"+username+"/frameTop.html";
@@ -131,7 +170,7 @@ public class TentProxy {
             sb.append("</style></head>");
             sb.append("<body>");
             sb.append("<h3>Control Panel</h3><hr><br>");
-            sb.append("<form id=\"form\" enctype=\"application/x-www-form-urlencoded\" action=\"../odl/operation\" method=\"post\">\n" +
+            sb.append("<form id=\"form\" enctype=\"application/x-www-form-urlencoded\" action=\"../odl/virnet/operation\" method=\"post\">\n" +
 
                     "  <fieldset>\n" +
                     "    <legend>Operation:</legend>\n<br>" +

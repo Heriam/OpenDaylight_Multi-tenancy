@@ -12,6 +12,7 @@ public interface ToODL {
      }
 
      static ClientResponse Send(Mappable message){
+         if(message.getMsgType()==null) throw new RuntimeException("Invalid Message : Method is not specified");
          switch (message.getMsgType()) {
              case "create":
                  return new ODLDriver(8282).Post(message);

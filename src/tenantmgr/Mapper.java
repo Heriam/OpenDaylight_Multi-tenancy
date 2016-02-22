@@ -1,6 +1,8 @@
-package tenantmgr.mapper;
+package tenantmgr;
 
 import aaa.authn.VTNAuthNToken;
+import driver.Mappable;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.Map;
 /**
  * Created by Hao on 2/19/16.
  */
-public abstract class Mapper{
+public abstract class Mapper {
 
     protected static final String urlSYSRT = "controller/nb/v2/";
     protected static final String urlVTN = "controller/nb/v2/vtn/default/vtns/";
@@ -51,39 +53,12 @@ public abstract class Mapper{
     protected static List<String> mthdList;
     protected static Map<String, Integer> domainMap;
 
-
-    public static VTNAuthNToken getToken(String username, String password){
-        if(username!=null&&domainMap.containsKey(username)) {
-            int domainID = domainMap.get(username);
-            return new VTNAuthNToken(username, password, domainID);
-        } else {
-            return null;
-        }
-    }
-
     public Mapper(){
-        iniDomainMap();
-        iniServTypeMap();
-    }
-
-    // URL = servType Root + DomainID
-
-    public static String mapURL(String servID, VTNAuthNToken token){
-        String servType = servID.split(":")[0];
-        int domainID = domainMap.get(token.getUsername());
-        String rootUrl = typeMap.get(servType)+domainID+"/";
-        return rootUrl;
-    }
-
-
-    public static void iniServTypeMap(){
         typeMap = new HashMap<>();
         typeMap.put(sysType, urlVTN);
         typeMap.put(vtnType, urlVTN);
         typeMap.put(servType, urlVTN);
-    }
 
-    public static void iniDomainMap(){
         domainMap = new HashMap<>();
         domainMap.put(adminUsr, adminDOM);
         domainMap.put(bossUsr, adminDOM);
@@ -93,11 +68,28 @@ public abstract class Mapper{
         domainMap.put(gust2Usr, tent2DOM);
     }
 
+    //Map Token
+    public static VTNAuthNToken getToken(String username, String password){
+        if(username!=null&&domainMap.containsKey(username)) {
+            int domainID = domainMap.get(username);
+            return new VTNAuthNToken(username, password, domainID);
+        } else {
+            return null;
+        }
+    }
 
-
-
-
-
-
-
+    //Map Url
+    public static Mappable mapReq(Mappable request){
+        if(request.getServID()!=null) {
+            String servType = request.getServID().split(":")[0];
+            int domainID = request.getToken().getDomainId();
+            String userUrl = request.getURL();
+            if(typeMap.containsKey(servType)) {
+                String rootUrl = typeMap.get(servType) + domainID + "/";
+                request.setURL(rootUrl + userUrl);
+                return request;
+            }
+        }
+        return null;
+    }
 }
