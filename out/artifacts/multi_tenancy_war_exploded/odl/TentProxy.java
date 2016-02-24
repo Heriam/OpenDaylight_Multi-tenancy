@@ -2,6 +2,8 @@ package rest;
 
 
 import aaa.authn.VTNAuthNToken;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.tools.internal.ws.processor.util.DirectoryUtil;
 import driver.ODLDriver;
 import driver.ResponseMsgPOJO;
@@ -10,17 +12,18 @@ import driver.Mappable;
 import driver.MappableMsg;
 import driver.vtndatamodel.*;
 import org.apache.shiro.authc.AuthenticationException;
-import org.json.JSONException;
+
+import java.util.*;
+import java.util.Map.Entry;
 import org.json.JSONObject;
 import tenantmgr.VTNServ;
 
+import javax.servlet.SingleThreadModel;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**
@@ -28,9 +31,10 @@ import java.util.Map;
  */
 
 @Path("/virnet")
-public class TentProxy {
+public class TentProxy implements SingleThreadModel{
 
-    static private VTNAuthNToken token;
+    private VTNAuthNToken token;
+    static private Map<String, VTNAuthNToken> tokenMap = new HashMap<>();
 
 
     @Path("/login")
@@ -44,7 +48,7 @@ public class TentProxy {
 
         try {
             token = VTNServ.getTentMgr().loginReq(username, password);
-
+            if(token!=null) tokenMap.put(username, token);
             updateFile(username);
 
 
@@ -65,16 +69,20 @@ public class TentProxy {
     @Path("/logout")
     @POST
     public void logout(
+            @FormParam("username") String username,
             @Context HttpServletResponse response){
-                VTNServ.getTentMgr().logoutReq(token);
+        VTNServ.getTentMgr().logoutReq(token);
+        tokenMap.remove(username);
     }
 
     @Path("/cleanlogout")
     @POST
     public void cleanlogout(
+            @FormParam("username") String username,
             @Context HttpServletResponse response){
         VTNServ.getTentMgr().logoutReq(token);
-        String filePath = "/Users/Hao/IdeaProjects/multi-tenancy/web/"+token.getUsername();
+        tokenMap.remove(username);
+        String filePath = "/Users/Hao/IdeaProjects/multi-tenancy/web/"+username;
         File fp = new File(filePath);
         if (fp.exists()) {
             deleteFile(fp);
@@ -86,28 +94,71 @@ public class TentProxy {
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String getOutput(@FormParam("method") String method,
-                           @FormParam("service") String service,
-                           @FormParam("resource") String resource,
-                           @FormParam("network") String network,
-                           @FormParam("bridge") String bridge,
-                           @FormParam("interface") String intface,
-                           @FormParam("router") String router,
-                           @FormParam("mapping") String mapping,
-                           @FormParam("url") String url,
-                           @FormParam("json") String json,
-                           @Context HttpServletResponse webresponse) {
+                            @FormParam("service") String service,
+                            @FormParam("resource") String resource,
+                            @FormParam("network") String network,
+                            @FormParam("bridge") String bridge,
+                            @FormParam("interface") String intface,
+                            @FormParam("router") String router,
+                            @FormParam("mapping") String mapping,
+                            @FormParam("username") String username,
+                            @FormParam("url") String url,
+                            @FormParam("json") String json,
+                            @Context HttpServletResponse webresponse) {
         String outputString;
         String requestString=null;
-
         try {
-            JSONObject jsonObject = (json==null || json.isEmpty()) ? null : new JSONObject(json);
-            Mappable request = new MappableMsg(jsonObject, url, token);
-            request.setServID(service);
-            request.setMsgType(method);
-            requestString = request.toString();
-            Serializable reqresponse = VTNServ.getTentMgr().getResponse(request);
-            outputString = reqresponse.toString();
 
+                JSONObject jsonObject = (json == null || json.isEmpty()) ? null : new JSONObject(json);
+                Mappable request = new MappableMsg(jsonObject, url, tokenMap.get(username));
+                request.setServID(service);
+                request.setMsgType(method);
+                requestString = request.toString();
+                Serializable reqresponse = VTNServ.getTentMgr().getResponse(request);
+                ObjectMapper mapper = new ObjectMapper();
+                try {
+                    outputString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(reqresponse);
+                } catch (JsonProcessingException e) {
+                    outputString = reqresponse.toString();
+                }
+            } catch (RuntimeException e) {
+                outputString = e.getMessage();
+            }
+
+        return "<html><head><title>Output</title>" +
+                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />" +
+                "<style type=\"text/css\"></style></head><body>" +
+                "<h3>Output</h3><hr><br>" +
+                "<div>" +
+                "<b>REQUEST:</b>"+
+                "<textarea rows=\"5\" cols=\"110\" name=\"textarea\" >"+requestString+"</textarea><br><br><br><br>" +
+                "<b>OUTPUT:</b>"+
+                "<textarea rows=\"15\" cols=\"110\" name=\"textarea\" >"+outputString+"</textarea></div>" +
+                "</body></html>";
+    }
+
+
+    @Path("/session")
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public String getOutput(
+            @FormParam("username") String username,
+            @Context HttpServletResponse response){
+        String outputString =null;
+        List<String> list = new ArrayList<>();
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            Iterator iter = tokenMap.entrySet().iterator();
+            try {
+            while (iter.hasNext()) {
+                Entry entry = (Entry) iter.next();
+                String entryString = entry.getValue().toString();
+                Object json = mapper.readValue(entryString, Object.class);
+                list.add(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json)+"\n");
+            }  outputString = list.toString();
+            }catch (IOException e) {
+                outputString = tokenMap.toString();
+        }
         } catch (RuntimeException e) {
             outputString = e.getMessage();
         }
@@ -118,12 +169,11 @@ public class TentProxy {
                 "<h3>Output</h3><hr><br>" +
                 "<div>" +
                 "<b>REQUEST:</b>"+
-                "<textarea rows=\"5\" cols=\"110\" name=\"textarea\" >"+requestString+"</textarea><br><br>" +
+                "<textarea rows=\"5\" cols=\"110\" name=\"textarea\" >Operated by: "+username+"</textarea><br><br><br><br>" +
                 "<b>OUTPUT:</b>"+
                 "<textarea rows=\"15\" cols=\"110\" name=\"textarea\" >"+outputString+"</textarea></div>" +
                 "</body></html>";
     }
-
 
 
     public void frameTopPage(String username){
@@ -143,10 +193,12 @@ public class TentProxy {
             sb.append("</style></head>");
             sb.append("<body>");
             sb.append("<div style=\"display: inline;\" align=\"center\">");
-            sb.append("<br><h1>Welcome User :  " + token.getUsername() + " !</h1></div>");
+            sb.append("<br><h1>Welcome User :  " + username + " !</h1></div>");
             sb.append(
                     "<div align=\"right\">" +
-                            (token.getDomainId()==0?
+                            (username.equals("admin")?
+                                    "<form target=\"frameOutput\" style=\"display: inline;\" id=\"form2\" action=\"../odl/virnet/session\" enctype=\"application/x-www-form-urlencoded\" method=\"post\">" +
+                                    "<button style=\"display: inline;\" type=\"submit\" form=\"form2\" name=\"username\" value=\""+username+"\">Sessions</button></form>&nbsp;&nbsp;"+
                                     "<button style=\"display: inline;\" onclick= \"window.parent.frames.frameOutput.location.href=\'http://"+ ODLDriver.ODLIP+"8181/index.html\';\">ODL DLUX</button>&nbsp;&nbsp;"+
                                     "<button style=\"display: inline;\" onclick= \"window.parent.frames.frameOutput.location.href=\'http://"+ ODLDriver.ODLIP+"8181/apidoc/explorer/index.html\';\">ODL APIs</button>&nbsp;&nbsp;"+
                                     "<button style=\"display: inline;\" onclick= \"window.parent.frames.frameOutput.location.href=\'../SFC.html\';\">SFC</button>&nbsp;&nbsp;" :"")+
@@ -208,7 +260,7 @@ public class TentProxy {
                     "  <fieldset>\n" +
                     "  <legend>Service:</legend>\n<br>" +
                     "<input type=\"radio\" name=\"service\" value=\"vtn:topo\" checked=\"checked\"/>&nbsp;&nbsp;&nbsp;&nbsp;Basic VTN &nbsp;&nbsp;&nbsp;&nbsp;   " +
-                    "<input type=\"radio\" name=\"service\" value=\"aaa:acl\" />&nbsp;&nbsp;&nbsp;&nbsp; ACL &nbsp;&nbsp;&nbsp;&nbsp;   " +
+                    "<input type=\"radio\" name=\"service\" value=\"aaa:acl\" />&nbsp;&nbsp;&nbsp;&nbsp; DOM ACL &nbsp;&nbsp;&nbsp;&nbsp;   " +
                     "<input type=\"radio\" name=\"service\" value=\"serv:firewall\" />&nbsp;&nbsp;&nbsp;&nbsp;Firewall &nbsp;&nbsp;&nbsp;&nbsp;   " +
                     "<input type=\"radio\" name=\"service\" value=\"serv:content\" />&nbsp;&nbsp;&nbsp;&nbsp; Content Filtering &nbsp;&nbsp;&nbsp;&nbsp;   " +
                     "<input type=\"radio\" name=\"service\" value=\"rest:conf\" />&nbsp;&nbsp;&nbsp;&nbsp; BYOC &nbsp;&nbsp;&nbsp;&nbsp;   " +
@@ -309,7 +361,7 @@ public class TentProxy {
             sb.append("<h3>Output</h3><hr><br>");
             sb.append("<div>");
             sb.append("<b>REQUEST:</b>");
-            sb.append("<textarea rows=\"5\" cols=\"110\" name=\"textarea\" ></textarea><br><br>");
+            sb.append("<textarea rows=\"5\" cols=\"110\" name=\"textarea\" ></textarea><br><br><br><br>");
             sb.append("<b>OUTPUT:</b><br><textarea rows=\"15\" cols=\"110\" name=\"textarea\" ></textarea></div>");
             sb.append("</body></html>");
             printStream.println(sb.toString());

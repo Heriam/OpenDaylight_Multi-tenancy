@@ -32,7 +32,7 @@ public abstract class Mapper {
     protected static final String sysType = "system";
     protected static final String servType = "serv";
     protected static final String vtnType = "vtn";
-    protected static final String aaaType = "aaa";
+    protected static final String aaodlType = "aaa";
     protected static final String restconfType = "rest";
 
     protected static final String vtnResource = "vtn";
@@ -53,15 +53,10 @@ public abstract class Mapper {
     protected static Map<String, String> typeMap;
     protected static Map<String, String> rsrcMap;
     protected static List<String> mthdList;
-    protected static Map<String, Integer> domainMap;
+    public static Map<String, Integer> domainMap;
 
-    public Mapper(){
-        typeMap = new HashMap<>();
-        typeMap.put(sysType, urlVTN);
-        typeMap.put(vtnType, urlVTN);
-        typeMap.put(servType, urlServAuth);
-        typeMap.put(aaaType, urlAUTHRT);
-
+    //Map Token
+    public static VTNAuthNToken getToken(String username, String password){
         domainMap = new HashMap<>();
         domainMap.put(adminUsr, adminDOM);
         domainMap.put(bossUsr, adminDOM);
@@ -69,10 +64,6 @@ public abstract class Mapper {
         domainMap.put(gust1Usr, tent1DOM);
         domainMap.put(tent2Usr, tent2DOM);
         domainMap.put(gust2Usr, tent2DOM);
-    }
-
-    //Map Token
-    public static VTNAuthNToken getToken(String username, String password){
         if(username!=null&&domainMap.containsKey(username)) {
             int domainID = domainMap.get(username);
             return new VTNAuthNToken(username, password, domainID);
@@ -83,6 +74,11 @@ public abstract class Mapper {
 
     //Map Url
     public static Mappable mapReq(Mappable request){
+        typeMap = new HashMap<>();
+        typeMap.put(sysType, urlVTN);
+        typeMap.put(vtnType, urlVTN);
+        typeMap.put(servType, urlServAuth);
+        typeMap.put(aaodlType, urlAUTHRT);
         if(request.getServID()!=null) {
             String servType = request.getServID().split(":")[0];
             int domainID = request.getToken().getDomainId();

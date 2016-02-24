@@ -8,11 +8,11 @@ import org.json.JSONObject;
  */
 public class PolicyInfo extends JSONObject implements Serializable{
 
-    private enum authorization{}
+    private String authorization;
     private String role;
     private String resource;
     private String service;
-    private enum action{}
+    private String action;
 
     public PolicyInfo(){}
 
@@ -46,12 +46,30 @@ public class PolicyInfo extends JSONObject implements Serializable{
         this.service = service;
     }
 
+    public String getAuthorization() {
+        return authorization;
+    }
+
+    public void setAuthorization(String authorization) {
+        this.authorization = authorization;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
     @Override
     public String toString() {
             return "{" +
                     "\"role\":\"" + role + '\"' +
                     ", \"resource\":\"" + resource + '\"' +
                     ", \"service\":\"" + service + '\"' +
+                    ", \"authorization\":\"" + authorization + '\"' +
+                    ", \"action\":\"" + action + '\"' +
                     '}';
     }
 

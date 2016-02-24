@@ -1,6 +1,7 @@
 package test;
 
 
+
 import aaa.IShiro;
 import aaa.authn.VTNAuthNToken;
 import com.sun.deploy.net.HttpResponse;
@@ -110,9 +111,9 @@ public class VTNRequests {
             VTNAuthNToken token = VTNServ.getTentMgr().loginReq("admin", "admin");
             String json = null;
             JSONObject jsonObject = (json == null || json.isEmpty()) ? null : new JSONObject(json);
-            Mappable request = new MappableMsg(jsonObject, "1", token);
-            request.setMsgType("delete");
-            request.setServID("vtn:topo");
+            Mappable request = new MappableMsg(jsonObject, "tenant1", token);
+            request.setMsgType("read");
+            request.setServID("serv:firewall");
 
             TentProxy tentProxy = new TentProxy();
             Serializable response = VTNServ.getTentMgr().getResponse(request);

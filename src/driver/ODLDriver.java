@@ -5,6 +5,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import driver.aaadatamodel.*;
 import driver.vtndatamodel.*;
+import org.json.JSONObject;
 
 import javax.el.ELContext;
 import javax.ws.rs.core.MultivaluedHashMap;
@@ -145,7 +146,7 @@ public class ODLDriver implements ToODL {
             return Get(message).getEntity(MacMapInfo.class);
         } else if (ServTypeID.contains("vlanmaps")) {
             return Get(message).getEntity(VlanMapList.class);
-        } else if (ServTypeID.contains("domains")) {
+        } else if (message.getURL().startsWith("auth")&&ServTypeID.contains("domains")) {
             if (rsrcID.equals("domains")) {
                 return Get(message).getEntity(DomainList.class);
             } else {
@@ -163,10 +164,12 @@ public class ODLDriver implements ToODL {
             } else {
                 return Get(message).getEntity(RoleInfo.class);
             }
-        } else{
+        } else if (message.getURL().startsWith("restconf")&&ServTypeID.contains("domains")) {
+            return Get(message).getEntity(DomainPolicies.class);
+        } else if (ServTypeID.contains("policies")) {
+            return Get(message).getEntity(PolicyList.class);
+        } else
             throw new RuntimeException("Request Failure : No POJO Matched ");
-        }
-
     }
 
 

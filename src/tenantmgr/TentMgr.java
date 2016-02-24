@@ -1,6 +1,8 @@
 package tenantmgr;
 
+
 import aaa.IShiro;
+import aaa.Shiro;
 import aaa.authn.VTNAuthNToken;
 import com.sun.jersey.api.client.ClientResponse;
 import driver.Mappable;
@@ -21,7 +23,8 @@ import java.util.Map;
  */
 public class TentMgr extends Mapper implements VTNServ{
 
-    private static Subject currentUser;
+
+    private static Subject currentSubject;
     public TentMgr(){
         super();
     }
@@ -33,15 +36,10 @@ public class TentMgr extends Mapper implements VTNServ{
             throw new AuthenticationException("Authentication Failure: User is not Regiestered in System");
         }
         try{
-            currentUser = IShiro.New().getLoginedUser(token);
-            if(currentUser!=null) {
-                currentUser.getSession().setAttribute("domainID", token.getDomainId());
-                return token;
-            } else {
-                throw new AuthenticationException("Authentication Failure: User is not Regiestered in Shiro");
-            }
+            currentSubject = IShiro.New().getLoginedUser(token);
+            currentSubject.getSession().setAttribute("domainID", token.getDomainId());
+            return token;
         } catch (RuntimeException e){
-            e.printStackTrace();
             throw new AuthenticationException("Authentication Failure: User is not Regiestered");
         }
     }
@@ -49,8 +47,8 @@ public class TentMgr extends Mapper implements VTNServ{
 
     @Override
     public void logoutReq(VTNAuthNToken token) throws AuthenticationException{
-        if (currentUser.isAuthenticated())
-            currentUser.logout();
+        if (currentSubject!=null && currentSubject.isAuthenticated())
+            currentSubject.logout();
 //        } else {
 //            throw new AuthenticationException("Current User is not logined");
 //        }
@@ -58,8 +56,10 @@ public class TentMgr extends Mapper implements VTNServ{
 
     @Override
     public Serializable getResponse(Mappable request){
+        if (currentSubject.isAuthenticated())currentSubject.logout();
+        currentSubject.login(request.getToken());
         String servRequest = request.getServID()+":"+request.getMsgType();
-        if(currentUser.isPermitted(servRequest)) {
+        if(currentSubject.isPermitted(servRequest)) {
             Mappable mappedReq = Mapper.mapReq(request);
             return ToODL.Send(mappedReq);
         } else{

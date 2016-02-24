@@ -32,9 +32,10 @@ public class VTNAuthNToken extends UsernamePasswordToken {
 
     @Override
     public String toString() {
-        return "VTNAuthNToken{" +
-                "domainId=" + domainId +
-                ", username=" + getUsername() +
+        return "{" +
+                "\"username\":\"" + getUsername() + '\"' +
+                ", \"password\":\"" + getPassword() + '\"' +
+                ", \"domainID\":\"" + domainId + '\"' +
                 '}';
     }
 }

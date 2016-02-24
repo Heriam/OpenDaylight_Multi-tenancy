@@ -17,7 +17,7 @@ import org.apache.shiro.util.Factory;
  * Created by Hao on 2/12/16.
  */
 public class Shiro implements IShiro{
-    static Subject subject;
+    public static Subject subject;
     public Shiro(){
         Factory<SecurityManager> factory;
         SecurityManager securityManager;
