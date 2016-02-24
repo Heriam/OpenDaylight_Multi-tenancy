@@ -1,0 +1,4109 @@
+<!DOCTYPE html>
+<!-- saved from url=(0096)https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi -->
+<html lang="en" dir="ltr" class="client-js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script async="" src="./vtnjson_files/load.php"></script>
+<meta charset="UTF-8">
+<title>OpenDaylight Virtual Tenant Network (VTN):VTN Manager:RestApi - OpenDaylight Project</title>
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<meta name="generator" content="MediaWiki 1.23.11">
+<meta name="robots" content="noindex,follow">
+<link rel="shortcut icon" href="https://wiki.opendaylight.org/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="https://wiki.opendaylight.org/opensearch_desc.php" title="OpenDaylight Project (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.opendaylight.org/api.php?action=rsd">
+<link rel="alternate" type="application/atom+xml" title="OpenDaylight Project Atom feed" href="https://wiki.opendaylight.org/index.php?title=Special:RecentChanges&amp;feed=atom">
+<link rel="stylesheet" href="./vtnjson_files/load(1).php">
+<link rel="stylesheet" href="./vtnjson_files/bootstrap.css" media="screen">
+<link rel="stylesheet" href="./vtnjson_files/font-awesome.css" media="screen">
+<link rel="stylesheet" href="./vtnjson_files/screen.css" media="screen">
+<link rel="stylesheet" href="./vtnjson_files/theme.css" media="screen"><style>
+.mw-collapsible-toggle{float:right;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none} caption .mw-collapsible-toggle{float:none} li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+/* cache key: daylight_mwiki:resourceloader:filter:minify-css:7:6c1d24e90626cec584f0869483f983e7 */
+.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:none;z-index:1099;padding:0;margin:-1px -1px 0 0} html > body .suggestions{margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:white;cursor:pointer;border:solid 1px #aaaaaa;padding:0;margin:0}.suggestions-result{color:black;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left; overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}.suggestions-result-current{background-color:#4C59A6;color:white}.suggestions-special .special-label{color:gray;text-align:left}.suggestions-special .special-query{color:black;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:silver}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:white}.highlight{font-weight:bold}
+/* cache key: daylight_mwiki:resourceloader:filter:minify-css:7:9f9511aa4ef920d34591113e825e6a1e */
+.postedit-container{margin:0 auto;position:fixed;top:0;height:0;left:50%;z-index:1000;font-size:13px}.postedit-container:hover{cursor:pointer}.postedit{position:relative;top:0.6em;left:-50%;padding:.6em 3.6em .6em 1.1em;line-height:1.5625em;color:#626465;background-color:#f4f4f4;border:1px solid #dcd9d9;text-shadow:0 0.0625em 0 rgba(255,255,255,0.5);border-radius:5px;-webkit-box-shadow:0 2px 5px 0 #ccc;box-shadow:0 2px 5px 0 #ccc;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-ms-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out}.skin-monobook .postedit{top:6em !important}.postedit-faded{opacity:0}.postedit-icon{padding-left:41px;  line-height:25px;background-repeat:no-repeat;background-position:8px 50%}.postedit-icon-checkmark{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAABblBMVEUAAAD///////9PfTf///80aRdTgjn///9Feij///////////9Rfzf///////////9PfjZRgDh1o1xOfTb///////+bwYqLtnj///////9PfTa82K////9WhT6YxIL///9QgDdTgzr////////j7uDl7eLq8efi693k7OH///////9UhjuBr2rp9uRUhjr///9YljVKgir///9WiTlYjT3////9/v57vFlbkT5PjC9dlD/5/fhuq09stUTs9uhxuElctCpfnT1huDFloEZloUZmpENmvDZpvDxpvTxqvjxrvT5rvT9rwTxsqktswD5uwkBvuUdxw0NztFBztU9ztVBzwkp0tlJ1xkd2t1R3uVR4w1F4xk54x014yE15uVZ5v1R5xVB6v1R7yFJ8wVh9xVl9yFR9yVd9ylN+xVh+yFd/x1l/yFeAylmEx1+Ny2uY0Hqe04Wj1Ymv3Ze33qLD47TJ5L3O6cPU7Mrq9eb2+/Q4j37OAAAAQHRSTlMAAQIEBAUFBQwPFB4fJCUoKiosQEhJS01RUlZZXmdydXaChYuSlJSWmJmoq6uur8LExcvM19fg5ejt8fX2+Pr7SljgewAAAKpJREFUGBkFwQNCAwAAAMDLtl3LtrG4rWXbtvX77gAgZ6grFwC0bhwNVgKgdPZx8b0dgLi+s7Wn0VoAqpfOI9+BNADZI7fLrz2pSEwGHZuH+78lSK8ZLkLezF3ooyUG3VPXq2USei9WngeyoG195yBYWDF3E/2pAhl1e9Gr8bGT+bfOFCC2fnvh4X7rcqIAQNNu+HT6sxkAjceTL/2ZAIhv+PorBwBJxfkA//dFHSCBy/UTAAAAAElFTkSuQmCC);background-image:url(/resources/src/mediawiki.action/images/green-checkmark.png?2014-06-20T03:06:40Z)!ie;background-position:left}.postedit-close{position:absolute;padding:0 .8em;right:0;top:0;font-size:1.25em;font-weight:bold;line-height:2.3em;color:black;text-shadow:0 0.0625em 0 white;text-decoration:none;opacity:0.2;filter:alpha(opacity=20)}.postedit-close:hover{color:black;text-decoration:none;opacity:0.4;filter:alpha(opacity=40)}
+/* cache key: daylight_mwiki:resourceloader:filter:minify-css:7:c3071faf4737eb5eb3f19649dbc75b32 */</style><style>
+.suggestions a.mw-searchSuggest-link,.suggestions a.mw-searchSuggest-link:hover,.suggestions a.mw-searchSuggest-link:active,.suggestions a.mw-searchSuggest-link:focus{color:black;text-decoration:none}.suggestions-result-current a.mw-searchSuggest-link,.suggestions-result-current a.mw-searchSuggest-link:hover,.suggestions-result-current a.mw-searchSuggest-link:active,.suggestions-result-current a.mw-searchSuggest-link:focus{color:white}.suggestions a.mw-searchSuggest-link .special-query{ overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}
+/* cache key: daylight_mwiki:resourceloader:filter:minify-css:7:ae3fa4570b5ac0c6cf7b3776c8ae4d6f */</style><meta name="ResourceLoaderDynamicStyles" content="">
+<link rel="stylesheet" href="./vtnjson_files/load(2).php">
+<style>a:lang(ar),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}
+/* cache key: daylight_mwiki:resourceloader:filter:minify-css:7:ac68803e489cb69f3d4f35f145091fa4 */</style>
+<script src="./vtnjson_files/load(3).php"></script><style type="text/css"></style><script src="./vtnjson_files/load(4).php"></script>
+<script>if(window.mw){
+mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi","wgTitle":"OpenDaylight Virtual Tenant Network (VTN):VTN Manager:RestApi","wgCurRevisionId":2898,"wgRevisionId":2898,"wgArticleId":256,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["OpenDaylight Virtual Tenant Network"],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi","wgIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgWikiEditorEnabledModules":{"toolbar":true,"dialogs":true,"hidesig":true,"preview":true,"previewDialog":false,"publish":true}});
+}</script><script>if(window.mw){
+mw.loader.implement("user.options",function($,jQuery){mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"editfont":"default","editondblclick":0,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":1,"extendwatchlist":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"imagesize":2,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nickname":"","norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"rcdays":7,"rclimit":50,"rows":25,"showhiddencats":0,"shownumberswatching":1,"showtoolbar":1,"skin":"strapping","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":1,"watchdefault":1,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,
+"useeditwarning":1,"prefershttps":1,"usebetatoolbar":1,"usebetatoolbar-cgd":1,"wikieditor-preview":1,"wikieditor-publish":1,"language":"en","variant-gan":"gan","variant-iu":"iu","variant-kk":"kk","variant-ku":"ku","variant-shi":"shi","variant-sr":"sr","variant-tg":"tg","variant-uz":"uz","variant-zh":"zh","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false,"searchNs180":false,"searchNs181":false,"searchNs274":false,"searchNs275":false,"variant":"en"});},{},{});mw.loader.implement("user.tokens",function($,jQuery){mw.user.tokens.set({"editToken":"+\\","patrolToken":false,"watchToken":false});},{},{});
+/* cache key: daylight_mwiki:resourceloader:filter:minify-js:7:3effddefe011671b34b541d0eba8aa98 */
+}</script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.page.startup","mediawiki.legacy.wikibits","mediawiki.legacy.ajax"]);
+}</script><script src="./vtnjson_files/load(5).php"></script>
+<!--[if lt IE 7]><style type="text/css">body{behavior:url("/skins/strapping/csshover.min.htc")}</style><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body class="mediawiki ltr sitedir-ltr ns-0 ns-subject page-OpenDaylight_Virtual_Tenant_Network_VTN_VTN_Manager_RestApi skin-strapping action-view">
+
+<div id="userbar" class="navbar navbar-static">
+  <div class="navbar-inner">
+    <div style="width: auto;" class="container">
+
+      <div class="pull-left">
+                          <ul class="nav logo-container" role="navigation"><li id="p-logo"><a href="https://wiki.opendaylight.org/view/Main_Page" title="Visit the main page"><img src="./vtnjson_files/logo1-30px.png" alt="OpenDaylight Project"></a></li><li></li></ul>
+
+<!-- 0 -->
+          <ul class="nav" role="navigation">
+            <li class="dropdown" id="p-namespaces">
+                            <a data-toggle="dropdown" class="dropdown-toggle brand" role="menu">Page <b class="caret"></b></a>
+                                                                                                      <ul aria-labelledby="Namespaces" role="menu" class="dropdown-menu">
+
+                <li id="ca-nstab-main" class="selected"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi" title="View the content page [ctrl-option-c]" accesskey="c" tabindex="-1">Page</a></li><li id="ca-talk" class="new"><a href="https://wiki.opendaylight.org/index.php?title=Talk:OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi&amp;action=edit&amp;redlink=1" title="Discussion about the content page [ctrl-option-t]" accesskey="t" tabindex="-1">Discussion</a></li><li id="ca-viewsource"><a href="https://wiki.opendaylight.org/index.php?title=OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi&amp;action=edit" title="This page is protected.
+You can view its source [ctrl-option-e]" accesskey="e" tabindex="-1">View source</a></li><li id="ca-history" class="collapsible"><a href="https://wiki.opendaylight.org/index.php?title=OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi&amp;action=history" title="Past revisions of this page [ctrl-option-h]" accesskey="h" tabindex="-1">History</a></li></ul></li></ul>
+<!-- /0 -->
+
+<!-- 0 -->
+
+<!-- /0 -->
+
+<!-- 0 -->
+
+<!-- /0 -->
+
+<!-- 0 -->
+         
+         
+<!-- /LANGUAGES -->
+
+<!-- 0 -->
+
+          <ul class="nav" role="navigation">
+
+            <li class="dropdown" id="p-toolbox">
+
+              <a data-toggle="dropdown" class="dropdown-toggle" role="button">Tools <b class="caret"></b></a>
+
+              <ul aria-labelledby="Tools" role="menu" class="dropdown-menu">
+
+                <li id="t-info"><a href="https://wiki.opendaylight.org/index.php?title=OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi&amp;action=info">Page information</a></li><li id="t-permalink"><a href="https://wiki.opendaylight.org/index.php?title=OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi&amp;oldid=2898" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-print"><a href="https://wiki.opendaylight.org/index.php?title=OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi&amp;printable=yes" rel="alternate" title="Printable version of this page [ctrl-option-p]" accesskey="p">Printable version</a></li><li class="divider"></li><li id="t-specialpages"><a href="https://wiki.opendaylight.org/view/Special:SpecialPages" title="A list of all special pages [ctrl-option-q]" accesskey="q">Special pages</a></li><li id="t-recentchangeslinked"><a href="https://wiki.opendaylight.org/view/Special:RecentChangesLinked/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi" title="Recent changes in pages linked from this page [ctrl-option-k]" accesskey="k">Related changes</a></li><li class="divider"></li><li id="t-whatlinkshere"><a href="https://wiki.opendaylight.org/view/Special:WhatLinksHere/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi" title="A list of all wiki pages that link here [ctrl-option-j]" accesskey="j">What links here</a></li>              </ul>
+
+            </li>
+
+          </ul>
+          
+<!-- /0 -->
+      </div>
+
+      <div class="pull-right">
+        
+<!-- 0 -->
+            <form class="navbar-search" action="https://wiki.opendaylight.org/index.php" id="searchform">
+              <input id="searchInput" class="search-query" type="search" accesskey="f" title="Special:Search" placeholder="Search" name="search" value="" autocomplete="off">
+              <input type="submit" name="fulltext" value="Search" title="Search the pages for this text" id="mw-searchButton" class="searchButton btn hidden">            </form>
+
+          
+<!-- /0 -->
+
+<!-- 0 -->
+          <ul class="nav pull-right" role="navigation">
+            <li class="dropdown" id="p-notifications">
+                        </li>
+                        <li class="dropdown" id="p-createaccount">
+                          </li>
+            <li class="dropdown" id="p-login">
+            </li><li id="pt-login"><a href="https://wiki.opendaylight.org/index.php?title=Special:UserLogin&amp;returnto=OpenDaylight+Virtual+Tenant+Network+%28VTN%29%3AVTN+Manager%3ARestApi" title="You are encouraged to log in; however, it is not mandatory [ctrl-option-o]" accesskey="o">Log in</a></li>            
+                                  </ul>
+          
+<!-- /0 -->
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    <div id="mw-page-base" class="noprint"></div>
+    <div id="mw-head-base" class="noprint"></div>
+
+    <!-- Header -->
+    <div id="page-header" class="container signed-out">
+      <section class="span12">
+
+      
+      <ul class="navigation nav nav-pills pull-right searchform-disabled">
+
+      
+<!-- 0 -->
+
+                <li class=""><a href="https://www.opendaylight.org/" id="n-OpenDaylight.org" rel="nofollow">OpenDaylight.org</a></li>
+                <li class=""><a href="https://www.opendaylight.org/downloads" id="n-Get-Software" rel="nofollow">Get Software</a></li>
+                <li class=""><a href="https://wiki.opendaylight.org/view/Docucentral" id="n-Documentation">Documentation</a></li>
+                <li class=""><a href="https://wiki.opendaylight.org/view/User-stories" id="n-User-Stories">User Stories</a></li>
+                <li class=""><a href="https://wiki.opendaylight.org/view/Community" id="n-Community">Community</a></li>
+                <li class=""><a href="https://www.opendaylight.org/news/blogs" id="n-Blog" rel="nofollow">Blog</a></li>
+                <li class=""><a href="https://ask.opendaylight.org/" id="n-Q.26A-Form" rel="nofollow">Q&amp;A Form</a></li>
+                <li class=""><a href="https://wiki.opendaylight.org/view/Main_Page" id="n-Wiki">Wiki</a></li>
+<!-- /LANGUAGES -->
+
+      </ul>
+
+    </section>
+    </div>
+
+    
+    
+    <!-- content -->
+    <section id="content" class="mw-body container 0">
+      <div id="top"></div>
+      <div id="mw-js-message" style="display:none;"></div>
+            <!-- bodyContent -->
+      <div id="bodyContent">
+                        <!-- jumpto -->
+        <div id="jump-to-nav" class="mw-jump">
+          Jump to: <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#mw-head">navigation</a>,
+          <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#p-search">search</a>
+        </div>
+        <!-- /jumpto -->
+        
+
+        <!-- innerbodycontent -->
+                  <div id="innerbodycontent" class="row nolayout"><div class="offset1 span10">
+            <h1 id="firstHeading" class="firstHeading page-header">
+              <span dir="auto">OpenDaylight Virtual Tenant Network (VTN):VTN Manager:RestApi</span>
+            </h1>
+            <!-- subtitle -->
+            <div id="contentSub"></div>
+            <!-- /subtitle -->
+                        <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr"><p>This page describes the REST APIs provided by VTN Manager.
+</p>
+<div id="toc" class="toc tochidden"><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#" class="internal" id="togglelink">show</a>]&nbsp;</span></div>
+<ul style="display: none;">
+<li class="toclevel-1 tocsection-1"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Data_Format"><span class="tocnumber">1</span> <span class="toctext">Data Format</span></a></li>
+<li class="toclevel-1 tocsection-2"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Data_Model"><span class="tocnumber">2</span> <span class="toctext">Data Model</span></a>
+<ul>
+<li class="toclevel-2 tocsection-3"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#VTN_Data"><span class="tocnumber">2.1</span> <span class="toctext">VTN Data</span></a>
+<ul>
+<li class="toclevel-3 tocsection-4"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf"><span class="tocnumber">2.1.1</span> <span class="toctext">vtnconf</span></a></li>
+<li class="toclevel-3 tocsection-5"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtn"><span class="tocnumber">2.1.2</span> <span class="toctext">vtn</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtns"><span class="tocnumber">2.1.3</span> <span class="toctext">vtns</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-7"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vBridge_data"><span class="tocnumber">2.2</span> <span class="toctext">vBridge data</span></a>
+<ul>
+<li class="toclevel-3 tocsection-8"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridgeconf"><span class="tocnumber">2.2.1</span> <span class="toctext">vbridgeconf</span></a></li>
+<li class="toclevel-3 tocsection-9"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridge"><span class="tocnumber">2.2.2</span> <span class="toctext">vbridge</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridges"><span class="tocnumber">2.2.3</span> <span class="toctext">vbridges</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-11"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Interface_data"><span class="tocnumber">2.3</span> <span class="toctext">Interface data</span></a>
+<ul>
+<li class="toclevel-3 tocsection-12"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interfaceconf"><span class="tocnumber">2.3.1</span> <span class="toctext">interfaceconf</span></a></li>
+<li class="toclevel-3 tocsection-13"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interface"><span class="tocnumber">2.3.2</span> <span class="toctext">interface</span></a></li>
+<li class="toclevel-3 tocsection-14"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interfaces"><span class="tocnumber">2.3.3</span> <span class="toctext">interfaces</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-15"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Port_mapping_data"><span class="tocnumber">2.4</span> <span class="toctext">Port mapping data</span></a>
+<ul>
+<li class="toclevel-3 tocsection-16"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf"><span class="tocnumber">2.4.1</span> <span class="toctext">portmapconf</span></a></li>
+<li class="toclevel-3 tocsection-17"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmap"><span class="tocnumber">2.4.2</span> <span class="toctext">portmap</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-18"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#VLAN_mapping_data"><span class="tocnumber">2.5</span> <span class="toctext">VLAN mapping data</span></a>
+<ul>
+<li class="toclevel-3 tocsection-19"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmapconf"><span class="tocnumber">2.5.1</span> <span class="toctext">vlanmapconf</span></a></li>
+<li class="toclevel-3 tocsection-20"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmap"><span class="tocnumber">2.5.2</span> <span class="toctext">vlanmap</span></a></li>
+<li class="toclevel-3 tocsection-21"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmaps"><span class="tocnumber">2.5.3</span> <span class="toctext">vlanmaps</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-22"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#MAC_address_table_data"><span class="tocnumber">2.6</span> <span class="toctext">MAC address table data</span></a>
+<ul>
+<li class="toclevel-3 tocsection-23"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#macentry"><span class="tocnumber">2.6.1</span> <span class="toctext">macentry</span></a></li>
+<li class="toclevel-3 tocsection-24"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#macentries"><span class="tocnumber">2.6.2</span> <span class="toctext">macentries</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-25"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Other_data"><span class="tocnumber">2.7</span> <span class="toctext">Other data</span></a>
+<ul>
+<li class="toclevel-3 tocsection-26"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#version"><span class="tocnumber">2.7.1</span> <span class="toctext">version</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-27"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#REST_API"><span class="tocnumber">3</span> <span class="toctext">REST API</span></a>
+<ul>
+<li class="toclevel-2 tocsection-28"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#VTN_related_API"><span class="tocnumber">3.1</span> <span class="toctext">VTN related API</span></a>
+<ul>
+<li class="toclevel-3 tocsection-29"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Get_VTN_information_list"><span class="tocnumber">3.1.1</span> <span class="toctext">Get VTN information list</span></a>
+<ul>
+<li class="toclevel-4 tocsection-30"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request"><span class="tocnumber">3.1.1.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-31"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response"><span class="tocnumber">3.1.1.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-32"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Create_VTN"><span class="tocnumber">3.1.2</span> <span class="toctext">Create VTN</span></a>
+<ul>
+<li class="toclevel-4 tocsection-33"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_2"><span class="tocnumber">3.1.2.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-34"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_2"><span class="tocnumber">3.1.2.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-35"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Get_VTN_information"><span class="tocnumber">3.1.3</span> <span class="toctext">Get VTN information</span></a>
+<ul>
+<li class="toclevel-4 tocsection-36"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_3"><span class="tocnumber">3.1.3.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-37"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_3"><span class="tocnumber">3.1.3.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-38"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Modify_VTN_information"><span class="tocnumber">3.1.4</span> <span class="toctext">Modify VTN information</span></a>
+<ul>
+<li class="toclevel-4 tocsection-39"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_4"><span class="tocnumber">3.1.4.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-40"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_4"><span class="tocnumber">3.1.4.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-41"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Delete_VTN"><span class="tocnumber">3.1.5</span> <span class="toctext">Delete VTN</span></a>
+<ul>
+<li class="toclevel-4 tocsection-42"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_5"><span class="tocnumber">3.1.5.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-43"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_5"><span class="tocnumber">3.1.5.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-44"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vBridge_related_API"><span class="tocnumber">3.2</span> <span class="toctext">vBridge related API</span></a>
+<ul>
+<li class="toclevel-3 tocsection-45"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Get_vBridge_information_list"><span class="tocnumber">3.2.1</span> <span class="toctext">Get vBridge information list</span></a>
+<ul>
+<li class="toclevel-4 tocsection-46"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_6"><span class="tocnumber">3.2.1.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-47"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_6"><span class="tocnumber">3.2.1.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-48"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Create_vBridge"><span class="tocnumber">3.2.2</span> <span class="toctext">Create vBridge</span></a>
+<ul>
+<li class="toclevel-4 tocsection-49"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_7"><span class="tocnumber">3.2.2.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-50"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_7"><span class="tocnumber">3.2.2.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-51"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Get_vBridge_information"><span class="tocnumber">3.2.3</span> <span class="toctext">Get vBridge information</span></a>
+<ul>
+<li class="toclevel-4 tocsection-52"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_8"><span class="tocnumber">3.2.3.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-53"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_8"><span class="tocnumber">3.2.3.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-54"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Modify_vBridge_information"><span class="tocnumber">3.2.4</span> <span class="toctext">Modify vBridge information</span></a>
+<ul>
+<li class="toclevel-4 tocsection-55"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_9"><span class="tocnumber">3.2.4.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-56"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_9"><span class="tocnumber">3.2.4.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-57"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Delete_vBridge"><span class="tocnumber">3.2.5</span> <span class="toctext">Delete vBridge</span></a>
+<ul>
+<li class="toclevel-4 tocsection-58"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_10"><span class="tocnumber">3.2.5.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-59"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_10"><span class="tocnumber">3.2.5.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-60"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vBridge_interface_related_API"><span class="tocnumber">3.3</span> <span class="toctext">vBridge interface related API</span></a>
+<ul>
+<li class="toclevel-3 tocsection-61"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Get_vBridge_interface_information_list"><span class="tocnumber">3.3.1</span> <span class="toctext">Get vBridge interface information list</span></a>
+<ul>
+<li class="toclevel-4 tocsection-62"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_11"><span class="tocnumber">3.3.1.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-63"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_11"><span class="tocnumber">3.3.1.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-64"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Create_vBridge_interface"><span class="tocnumber">3.3.2</span> <span class="toctext">Create vBridge interface</span></a>
+<ul>
+<li class="toclevel-4 tocsection-65"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_12"><span class="tocnumber">3.3.2.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-66"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_12"><span class="tocnumber">3.3.2.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-67"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Get_vBridge_interface_information"><span class="tocnumber">3.3.3</span> <span class="toctext">Get vBridge interface information</span></a>
+<ul>
+<li class="toclevel-4 tocsection-68"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_13"><span class="tocnumber">3.3.3.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-69"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_13"><span class="tocnumber">3.3.3.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-70"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Modify_vBridge_interface_information"><span class="tocnumber">3.3.4</span> <span class="toctext">Modify vBridge interface information</span></a>
+<ul>
+<li class="toclevel-4 tocsection-71"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_14"><span class="tocnumber">3.3.4.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-72"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_14"><span class="tocnumber">3.3.4.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-73"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Delete_vBridge_interface"><span class="tocnumber">3.3.5</span> <span class="toctext">Delete vBridge interface</span></a>
+<ul>
+<li class="toclevel-4 tocsection-74"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_15"><span class="tocnumber">3.3.5.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-75"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_15"><span class="tocnumber">3.3.5.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-76"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Port_mapping_related_API"><span class="tocnumber">3.4</span> <span class="toctext">Port mapping related API</span></a>
+<ul>
+<li class="toclevel-3 tocsection-77"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Configure_Port_mapping"><span class="tocnumber">3.4.1</span> <span class="toctext">Configure Port mapping</span></a>
+<ul>
+<li class="toclevel-4 tocsection-78"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_16"><span class="tocnumber">3.4.1.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-79"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_16"><span class="tocnumber">3.4.1.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-80"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Get_Port_mapping_information"><span class="tocnumber">3.4.2</span> <span class="toctext">Get Port mapping information</span></a>
+<ul>
+<li class="toclevel-4 tocsection-81"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_17"><span class="tocnumber">3.4.2.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-82"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_17"><span class="tocnumber">3.4.2.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-83"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Delete_Port_mapping"><span class="tocnumber">3.4.3</span> <span class="toctext">Delete Port mapping</span></a>
+<ul>
+<li class="toclevel-4 tocsection-84"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_18"><span class="tocnumber">3.4.3.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-85"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_18"><span class="tocnumber">3.4.3.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-86"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#VLAN_mapping_related_API"><span class="tocnumber">3.5</span> <span class="toctext">VLAN mapping related API</span></a>
+<ul>
+<li class="toclevel-3 tocsection-87"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Get_VLAN_mapping_information_list"><span class="tocnumber">3.5.1</span> <span class="toctext">Get VLAN mapping information list</span></a>
+<ul>
+<li class="toclevel-4 tocsection-88"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_19"><span class="tocnumber">3.5.1.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-89"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_19"><span class="tocnumber">3.5.1.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-90"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Configure_VLAN_mapping"><span class="tocnumber">3.5.2</span> <span class="toctext">Configure VLAN mapping</span></a>
+<ul>
+<li class="toclevel-4 tocsection-91"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_20"><span class="tocnumber">3.5.2.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-92"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_20"><span class="tocnumber">3.5.2.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-93"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Get_VLAN_mapping_information"><span class="tocnumber">3.5.3</span> <span class="toctext">Get VLAN mapping information</span></a>
+<ul>
+<li class="toclevel-4 tocsection-94"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_21"><span class="tocnumber">3.5.3.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-95"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_21"><span class="tocnumber">3.5.3.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-96"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Search_VLAN_Mapping_information_based_on_config_information"><span class="tocnumber">3.5.4</span> <span class="toctext">Search VLAN Mapping information based on config information</span></a>
+<ul>
+<li class="toclevel-4 tocsection-97"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_22"><span class="tocnumber">3.5.4.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-98"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_22"><span class="tocnumber">3.5.4.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-99"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Delete_VLAN_mapping"><span class="tocnumber">3.5.5</span> <span class="toctext">Delete VLAN mapping</span></a>
+<ul>
+<li class="toclevel-4 tocsection-100"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_23"><span class="tocnumber">3.5.5.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-101"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_23"><span class="tocnumber">3.5.5.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-102"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#MAC_address_table_related_API"><span class="tocnumber">3.6</span> <span class="toctext">MAC address table related API</span></a>
+<ul>
+<li class="toclevel-3 tocsection-103"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Get_MAC_address_information_list"><span class="tocnumber">3.6.1</span> <span class="toctext">Get MAC address information list</span></a>
+<ul>
+<li class="toclevel-4 tocsection-104"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_24"><span class="tocnumber">3.6.1.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-105"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_24"><span class="tocnumber">3.6.1.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-106"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Flush_MAC_address_table"><span class="tocnumber">3.6.2</span> <span class="toctext">Flush MAC address table</span></a>
+<ul>
+<li class="toclevel-4 tocsection-107"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_25"><span class="tocnumber">3.6.2.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-108"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_25"><span class="tocnumber">3.6.2.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-109"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Get_MAC_address_information"><span class="tocnumber">3.6.3</span> <span class="toctext">Get MAC address information</span></a>
+<ul>
+<li class="toclevel-4 tocsection-110"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_26"><span class="tocnumber">3.6.3.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-111"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_26"><span class="tocnumber">3.6.3.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-112"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Delete_MAC_address_information"><span class="tocnumber">3.6.4</span> <span class="toctext">Delete MAC address information</span></a>
+<ul>
+<li class="toclevel-4 tocsection-113"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_27"><span class="tocnumber">3.6.4.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-114"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_27"><span class="tocnumber">3.6.4.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-115"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Container_independent_API"><span class="tocnumber">3.7</span> <span class="toctext">Container independent API</span></a>
+<ul>
+<li class="toclevel-3 tocsection-116"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Retrieval_of_version_information"><span class="tocnumber">3.7.1</span> <span class="toctext">Retrieval of version information</span></a>
+<ul>
+<li class="toclevel-4 tocsection-117"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Request_28"><span class="tocnumber">3.7.1.1</span> <span class="toctext">Request</span></a></li>
+<li class="toclevel-4 tocsection-118"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#Response_28"><span class="tocnumber">3.7.1.2</span> <span class="toctext">Response</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h1><span class="mw-headline" id="Data_Format">Data Format</span></h1>
+<p>REST API of VTN Manager uses <a href="https://wiki.opendaylight.org/index.php?title=Wikipedia:JSON&amp;action=edit&amp;redlink=1" class="new" title="Wikipedia:JSON (page does not exist)">JSON</a> or <a href="https://wiki.opendaylight.org/index.php?title=Wikipedia:XML&amp;action=edit&amp;redlink=1" class="new" title="Wikipedia:XML (page does not exist)">XML</a> while exchanging Struct data with REST client.
+</p>
+<ul>
+<li>REST client uses JSON or XML format data as request body while sending Struct data.
+<ul>
+<li>Specify format of the data sent in the <b>Content-Type</b> header of HTTP.
+<ul>
+<li>Specify <b>Application/Json</b> for JSON.
+</li>
+<li>Specify <b>Application/Xml</b> for XML.
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>OpenDaylight controller uses JSON or XML format data as response body while sending data to REST client.
+<ul>
+<li>Format of the data received is decided on the basis of HTTP <b>Accept</b> header that was sent by REST client.
+<ul>
+<li>Specify <b>Application/Json</b> for receiving data in JSON format.
+</li>
+<li>Specify <b>Application/Xml</b> for receiving data in XML format.
+</li>
+<li>JSON format is used if the REST client does not specify <b>Accept</b> header.
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1><span class="mw-headline" id="Data_Model">Data Model</span></h1>
+<p>This section describes the Struct data used in REST API of VTN Manager.
+</p>
+<h2><span class="mw-headline" id="VTN_Data">VTN Data</span></h2>
+<p>This section describes the data showing <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VTN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VTN</a> information.
+</p>
+<h3><span class="mw-headline" id="vtnconf">vtnconf</span></h3>
+<p><b>vtnconf</b> shows the configuration information for <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VTN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VTN</a>.
+This is used for sending VTN information to controller during creation or modification of VTN by REST client.
+</p>
+<ul>
+<li>XML format
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;vtnconf description="Description about VTN 1" idleTimeout="300" 
+         hardTimeout="0"/&gt;</pre>
+<ul>
+<li>JSON format
+</li>
+</ul>
+<pre>{  
+  "description": "Description about VTN 1",  
+  "idleTimeout": "300",  
+  "hardTimeout": "0"  
+}  
+</pre>
+<p>Meaning of each attribute is given below.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="vtnconf.description">description</div>
+</dt>
+<dd>Specify the string that shows the description of VTN.
+<ul>
+<li>There are no restrictions on the permissible characters or length of the string.
+</li>
+<li>Can be omitted.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="vtnconf.idleTimeout">idleTimeout</div>
+</dt>
+<dd>Specify in seconds the timeout value you want to set in idle_timeout of flow entries configured by VTN. Flow entries configured by VTN in switch will get deleted if it is not referred for the specified seconds.
+<ul>
+<li>Can be omitted.
+</li>
+<li>Allowed range for value is between <b>0</b> or more and <b>65535</b> or less.
+</li>
+<li><b>0</b> shows infinite time.
+</li>
+<li>If a negative value is specified, then the specified value is ignored and it will be treated as if it is omitted.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="vtnconf.hardTimeout">hardTimeout</div>
+</dt>
+<dd>Specify in seconds the timeout value you want to set in hard_timeout of flow entries configured by VTN. Flow entries configured by VTN in switch will get deleted after the specified time period.
+<ul>
+<li>Can be omitted.
+</li>
+<li>Allowed range for value is between <b>0</b> or more and <b>65535</b> or less.
+</li>
+<li><b>0</b> shows infinite time.
+</li>
+<li>If a negative value is specified, then the specified value is ignored and it will be treated as if it is omitted.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Further, if a value greater than 0 is configured in both <b>idleTimeout</b> and <b>hardTimeout</b>, then the value specified in <b>hardTimeout</b> must be greater than the value in <b>idleTimeout</b>.
+</p>
+<h3><span class="mw-headline" id="vtn">vtn</span></h3>
+<p><b>vtn</b> shows <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VTN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VTN</a> information.
+This is used for returning VTN information to REST client.
+</p>
+<ul>
+<li>XML format
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;vtn name="vtn_1" description="Description about VTN 1" idleTimeout="300"
+     hardTimeout="0"/&gt;
+</pre>
+<ul>
+<li>JSON format
+</li>
+</ul>
+<pre>{
+  "name": "vtn_1",
+  "description": "Description about VTN 1",
+  "idleTimeout": "300",
+  "hardTimeout": "0"
+}
+</pre>
+<p>Meaning of each attribute is given below.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="vtn.name">name</div>
+</dt>
+<dd>VTN name gets configured.
+</dd>
+<dt><div id="vtn.description">description</div>
+</dt>
+<dd>String showing VTN description gets configured.
+<ul>
+<li>It is omitted if the description is not set.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="vtn.idleTimeout">idleTimeout</div>
+</dt>
+<dd>Seconds configured in idle_timeout of flow entry configured by VTN will get configured.
+<ul>
+<li> <b>0</b> shows infinite time.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="vtn.hardTimeout">hardTimeout</div>
+</dt>
+<dd>Seconds configured in hard_timeout of flow entry configured by VTN will get configured.
+<ul>
+<li> <b>0</b> shows infinite time.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="vtns">vtns</span></h3>
+<p><b>vtns</b> shows a list of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VTN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VTN</a> information.
+This is used for returning VTN information list to REST client.
+</p>
+<ul>
+<li>When child elements are included
+<ul>
+<li>XML format
+</li>
+</ul>
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;vtns&gt;
+  &lt;vtn name="vtn_1" description="Description about VTN 1"
+       idleTimeout="300" hardTimeout="0"/&gt;
+  &lt;vtn name="vtn_2" idleTimeout="600" hardTimeout="1000"/&gt;
+&lt;/vtns&gt;
+</pre>
+<dl>
+<dd><ul>
+<li>JSON format
+</li>
+</ul>
+</dd>
+</dl>
+<pre>{
+  "vtn": [
+    {
+      "name": "vtn_1",
+      "description": "Description about VTN 1",
+      "idleTimeout": "300",
+      "hardTimeout": "0"
+    },
+    {
+      "name": "vtn_2",
+      "idleTimeout": "600",
+      "hardTimeout": "1000"
+    }
+  ]
+}
+</pre>
+<ul>
+<li>When child elements are not included
+<ul>
+<li>XML format
+</li>
+</ul>
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;vtns/&gt;
+</pre>
+<dl>
+<dd><ul>
+<li>JSON format
+</li>
+</ul>
+</dd>
+</dl>
+<pre>{"vtn":[]}
+</pre>
+<p><b>vtns</b> includes 0 or more <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtn">vtn</a> as child elements.
+</p>
+<h2><span class="mw-headline" id="vBridge_data">vBridge data</span></h2>
+<p>This section describes the data showing <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a> information.
+</p>
+<h3><span class="mw-headline" id="vbridgeconf">vbridgeconf</span></h3>
+<p><b>vbridgeconf</b> shows the configuration information for <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+This is used for sending vBridge information to controller during creation or modification of vBridge by REST client.
+</p>
+<ul>
+<li>XML format
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;vbridgeconf description="Description about vBridge 1" ageInterval="600"/&gt;
+</pre>
+<ul>
+<li>JSON format
+</li>
+</ul>
+<pre>{"description": "Description about vBridge 1", "ageInterval": "600"}
+</pre>
+<p>Meaning of each attribute is given below.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="vbridgeconf.description">description</div>
+</dt>
+<dd>Specify the string that describes vBridge.
+<ul>
+<li>There are no restrictions on the permissible characters or length of the string.
+</li>
+<li>Can be omitted.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="vbridgeconf.ageInterval">ageInterval</div>
+</dt>
+<dd>Specify in seconds the interval of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.macTable.aging" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">aging</a> for <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.macTable" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">MAC address table</a> in vBridge.
+<ul>
+<li> Can be omitted.
+</li>
+<li> Allowed range for value is between <b>10</b> or more and <b>1000000</b> or less.
+</li>
+<li> If a negative value is specified, then the specified value is ignored and it will be treated as if it is omitted.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="vbridge">vbridge</span></h3>
+<p><b>vbridge</b> shows <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a> information.
+This is used to return vBridge information to REST client.
+</p>
+<ul>
+<li>XML format
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;vbridge name="vbridge_1" description="Description about vBridge 1"
+         ageInterval="600" faults="0" state="-1"/&gt;
+</pre>
+<ul>
+<li>JSON format
+</li>
+</ul>
+<pre>{
+  "name": "vbridge_1",
+  "description": "Description about vBridge 1",
+  "ageInterval": "600",
+  "faults": "0",
+  "state": "-1"
+}
+</pre>
+<p>Meaning of each attribute is given below.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="vbridge.name">name</div>
+</dt>
+<dd>vBridge name gets configured.
+</dd>
+<dt><div id="vbridge.description">description</div>
+</dt>
+<dd>String showing vBridge description gets configured.
+<ul>
+<li>It is omitted if the description is not set.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="vbridge.ageInterval">ageInterval</div>
+</dt>
+<dd>Seconds that shows the interval of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.macTable.aging" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">aging</a> for <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.macTable" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">MAC address table</a> in vBridge will get configured.
+</dd>
+<dt><div id="vbridge.faults">faults</div>
+</dt>
+<dd>Count of path faults detected inside vBridge gets configured. This shows the number of paths between the switches, constituting a vBridge, that could not be configured by VTN Manager because the paths were broken.
+<ul>
+<li> <b>0</b> gets configured when no path fault has been detected.
+</li>
+<li> Count of path fault is counted for each direction of path. E.g., if switch <b>A</b> and switch <b>B</b> are separated, then the path from switch <b>A</b> to switch <b>B</b> and path from switch <b>B</b> to switch <b>A</b> are treated as different and both are counted.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="vbridge.state">state</div>
+</dt>
+<dd>Value showing vBridge state gets configured.
+<ul>
+<li> <b>1</b> gets configured when vBridge is in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.state.UP" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">UP</a> state.
+</li>
+<li> <b>0</b> gets configured when vBridge is in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.state.DOWN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">DOWN</a> state.
+</li>
+<li> <b>-1</b> gets configured when vBridge is in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.state.UNKNOWN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">UNKNOWN</a> state.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="vbridges">vbridges</span></h3>
+<p><b>vbridges</b> shows the list of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a> information.
+This is used for returning vBridge information list to REST client.
+</p>
+<ul>
+<li>When child elements are included
+<ul>
+<li>XML format
+</li>
+</ul>
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;vbridges&gt;
+  &lt;vbridge name="vbridge_1" description="Description about vBridge 1"
+           ageInterval="600" faults="0" state="-1" /&gt;
+  &lt;vbridge name="vbridge_2" ageInterval="1000" faults="2" state="0"/&gt;
+&lt;/vbridges&gt;
+</pre>
+<dl>
+<dd><ul>
+<li>JSON format
+</li>
+</ul>
+</dd>
+</dl>
+<pre>{
+  "vbridge": [
+    {
+      "name": "vbridge_1",
+      "description": "Description about vBridge 1",
+      "ageInterval": "600",
+      "faults": "0",
+      "state": "-1"
+    },
+    {
+      "name": "vbridge_2",
+      "ageInterval": "1000",
+      "faults": "2",
+      "state": "0"
+    }
+  ]
+}
+</pre>
+<ul>
+<li>When child elements are not included
+<ul>
+<li>XML format
+</li>
+</ul>
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;vbridges/&gt;
+</pre>
+<dl>
+<dd><ul>
+<li>JSON format
+</li>
+</ul>
+</dd>
+</dl>
+<pre>{"vbridge":[]}
+</pre>
+<p><b>vbridges</b> includes 0 or more <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridge">vbridge</a> as child elements.
+</p>
+<h2><span class="mw-headline" id="Interface_data">Interface data</span></h2>
+<p>This section describes the data showing <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge interface</a> information.
+</p>
+<h3><span class="mw-headline" id="interfaceconf">interfaceconf</span></h3>
+<p><b>interfaceconf</b> shows the configuration information for <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge interface</a>.
+This is used for sending interface information to controller during creation or modification of vBridge interface by REST client.
+</p>
+<ul>
+<li>XML format
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;interfaceconf description="Description about IF-1" enabled="true"/&gt;
+</pre>
+<ul>
+<li>JSON format
+</li>
+</ul>
+<pre>{"description": "Description about IF-1", "enabled": true}
+</pre>
+<p>Meaning of each attribute is given below.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="interfaceconf.description">description</div>
+</dt>
+<dd>Specify the string showing interface description.
+<ul>
+<li>There are no restrictions on the permissible characters or length of the string.
+</li>
+<li>Can be omitted.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="interfaceconf.enabled">enabled</div>
+</dt>
+<dd>Specify whether interface is to be enabled or not.
+<ul>
+<li>Specify <b>true</b> for enabling it and <b>false</b> for disabling it.
+</li>
+<li>Can be omitted.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="interface">interface</span></h3>
+<p><b>interface</b> shows <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge interface</a> information.
+This is used for returning vBridge interface information to REST client.
+</p>
+<ul>
+<li>XML format
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;interface name="if_1" state="-1" entityState="-1"
+           description="Description about IF-1" enabled="true"/&gt;
+</pre>
+<ul>
+<li>JSON format
+</li>
+</ul>
+<pre>{
+  "name": "if_1",
+  "state": "-1",
+  "entityState": "-1",
+  "description": "Description about IF-1",
+  "enabled": "true"
+}
+</pre>
+<p>Meaning of each attribute is given below.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="interface.name">name</div>
+</dt>
+<dd>Interface name gets configured.
+</dd>
+<dt><div id="interface.description">description</div>
+</dt>
+<dd>String showing the interface description gets configured.
+<ul>
+<li>It is omitted if the description is not set.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="interface.enabled">enabled</div>
+</dt>
+<dd>Boolean value showing whether interface is enabled gets configured.
+<ul>
+<li><b>true</b> is configured if it is enabled and <b>false</b> is configured if it is disabled.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="interface.state">state</div>
+</dt>
+<dd>Value showing the interface state gets configured.
+<ul>
+<li> <b>1</b> gets configured when interface is in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface.state.UP" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">UP</a> state.
+</li>
+<li> <b>0</b> gets configured when interface is in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface.state.DOWN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">DOWN</a> state.
+</li>
+<li> <b>-1</b> gets configured when interface is in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface.state.UNKNOWN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">UNKNOWN</a> state.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="interface.entityState">entityState</div>
+</dt>
+<dd>Status of the network elements mapped to interface gets configured. If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#port-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">Port mapping</a> is configured on the interface, then the status of the physical port of the mapped switch gets configured.
+<ul>
+<li> If the mapped network elements are operating, then <b>1</b> gets configured.
+</li>
+<li> If the mapped network elements are not operating, then <b>0</b> gets configured.
+</li>
+<li> If network elements are not mapped to interface, then <b>-1</b> gets configured.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Further, the status of network elements are configured irrespective of whether interface is enabled or not. 
+E.g., even if the interface is disabled, <b>1</b> will be configured in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interface.entityState">entityState</a> if the mapped network elements are operating.
+</p>
+<h3><span class="mw-headline" id="interfaces">interfaces</span></h3>
+<p><b>interfaces</b> shows the list of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge interface</a> information.
+This is used for returning vBridge interface information list to REST client.
+</p>
+<ul>
+<li>When child elements are included
+<ul>
+<li>XML format
+</li>
+</ul>
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;interfaces&gt;
+  &lt;interface name="if_1" state="-1" entityState="-1"
+             description="Description about IF-1" enabled="true"/&gt;
+  &lt;interface name="if_2" state="0" entityState="1" enabled="false"/&gt;
+&lt;/interfaces&gt;
+</pre>
+<dl>
+<dd><ul>
+<li>JSON format
+</li>
+</ul>
+</dd>
+</dl>
+<pre>{
+  "interface":[
+    {
+      "name": "if_1",
+      "state": "-1",
+      "entityState": "-1",
+      "description": "Description about IF-1",
+      "enabled": "true"
+    },
+    {
+      "name": "if_2",
+      "state": "0",
+      "entityState": "1",
+      "enabled": "false"
+    }
+  ]
+}
+</pre>
+<ul>
+<li>When child elements are not included
+<ul>
+<li>XML format
+</li>
+</ul>
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;interfaces/&gt;
+</pre>
+<dl>
+<dd><ul>
+<li>JSON format
+</li>
+</ul>
+</dd>
+</dl>
+<pre>{"interface":[]}
+</pre>
+<p><b>interfaces</b> includes 0 or more <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interface">interface</a> as child elements.
+</p>
+<h2><span class="mw-headline" id="Port_mapping_data">Port mapping data</span></h2>
+<p>This section describes the data showing <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#port-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">Port mapping</a> information.
+</p>
+<h3><span class="mw-headline" id="portmapconf">portmapconf</span></h3>
+<p><b>portmapconf</b> shows the <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#port-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">Port mapping</a> configuration information for <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge interface</a>.
+This is used to send configuration information to controller during configuration of Port mapping by REST client.
+</p>
+<ul>
+<li>XML format
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;portmapconf vlan="100"&gt;
+  &lt;node&gt;
+    &lt;type&gt;OF&lt;/type&gt;
+    &lt;id&gt;00:00:00:00:00:00:00:03&lt;/id&gt;
+  &lt;/node&gt;
+  &lt;port name="port-1" type="OF" id="1"/&gt;
+&lt;/portmapconf&gt;
+</pre>
+<ul>
+<li>JSON format
+</li>
+</ul>
+<pre>{
+  "vlan": 100,
+  "node": {
+    "type": "OF",
+    "id": "00:00:00:00:00:00:00:03"
+  },
+  "port": {
+    "name": "port-1",
+    "type": "OF",
+    "id": "1"
+  }
+}
+</pre>
+<p>Meaning of each attribute is given below.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="portmapconf.vlan">vlan</div>
+</dt>
+<dd>Specify the VLAN ID to be mapped by using numerical value.
+<ul>
+<li>Allowed range for value is between <b>0</b> or more and <b>4095</b> or less.
+</li>
+<li><b>0</b> implies untagged ethernet frame.
+</li>
+<li>If omitted, it will be treated as if <b>0</b> is specified.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><span id="portmapconf.node"><b>node</b> element</span> shows the <tt>Node</tt> information corresponding to the switch that is mapped to interface. It is necessary to include one <b>node</b> element in <b>portmapconf</b>.
+</p><p>Meaning of elements inside <b>node</b> is given below. 
+</p>
+<dl>
+<dd><dl>
+<dt><div id="portmapconf.node.type">type</div>
+</dt>
+<dd>Specify the string showing <tt>Node</tt> type.
+<ul>
+<li>Specify <b>OF</b> for OpenFlow switch.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="portmapconf.node.id">id</div>
+</dt>
+<dd>Specify the string showing the identifier of <tt>Node</tt>.
+<ul>
+<li>Specify the string representation of DPID while specifying OpenFlow switch.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><span id="portmapconf.port"><b>port</b> element</span> shows the condition for identifying physical ports of the switch specified in the element <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.node">node</a>.
+It is necessary to include one <b>node</b> element in <b>portmapconf</b>.
+</p><p>Meaning of <b>port</b> attributes is given below.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="portmapconf.port.name">name</div>
+</dt>
+<dd>Show port name of switch.
+<ul>
+<li>It is necessary to specify a character string with 1 or more characters.
+</li>
+<li>If  the attribute <b>name</b> is omitted, then it is necessary to specify both <b>type</b> and <b>id</b> attributes.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="portmapconf.port.type">type</div>
+</dt>
+<dd>Specify the string that shows the type of <tt>NodeConnector</tt>.
+<ul>
+<li>Specify <b>OF</b> for physical port of OpenFlow switch.
+</li>
+<li>It should be specified along with the attribute <b>id</b>.
+</li>
+<li>If the attribute <b>type</b> is omitted, then it is necessary to specify the attribute <b>name</b>.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="portmapconf.port.id">id</div>
+</dt>
+<dd>Specify the string representing identifier of <tt>NodeConnector</tt>.
+<ul>
+<li>Specify the string representation of port number for physical port of OpenFlow switch.
+</li>
+<li>It should be specified along with the attribute <b>type</b>.
+</li>
+<li>If the attribute <b>id</b> is omitted, then it is necessary to specify the attribute <b>name</b>.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><br>
+Actual physical port of switch that gets mapped to vBridge interface is decided as follows.
+</p>
+<ul>
+<li>If the attribute <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.port.name">name</a> is configured in the element <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.port">port</a>, then out of the physical ports in the switch specified in the element <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.node">node</a>,the physical port that has the specified port name will get mapped.
+</li>
+<li>If the attributes <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.port.type">type</a> and <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.port.id">id</a> are configured in the element <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.port">port</a>, then out of the physical ports in the switch specified in the element <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.node">node</a>, the physical port corresponding to the specified <tt>NodeConnector</tt> will get mapped.
+</li>
+<li>If all the attributes are configured in the element <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.port">port</a>, then out of the physical ports in the switch specified in the element <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.node">node</a>, the physical port that meets all the condition will get mapped.
+</li>
+</ul>
+<dl>
+<dd>I.e., Port mapping will be enabled only if the specified port name is configured for the specified <tt>NodeConnector</tt>.
+</dd>
+</dl>
+<h3><span class="mw-headline" id="portmap">portmap</span></h3>
+<p><b>portmap</b> shows the <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#port-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">Port mapping</a> information corresponding to <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge interface</a>.
+It is used for returning Port mapping information to REST client.
+</p>
+<ul>
+<li>XML format
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;portmap vlan="100"&gt;
+  &lt;node&gt;
+    &lt;type&gt;OF&lt;/type&gt;  
+    &lt;id&gt;00:00:00:00:00:00:00:03&lt;/id&gt;
+  &lt;/node&gt;
+  &lt;port name="port-1" type="OF" id="1"/&gt;
+  &lt;mapped type="OF" id="1" /&gt;
+&lt;/portmap&gt;
+</pre>
+<ul>
+<li>JSON format
+</li>
+</ul>
+<pre>{
+  "vlan": "100",
+  "node": {
+    "type": "OF",
+    "id": "00:00:00:00:00:00:00:03"
+  },
+  "port": {
+    "name": "port-1",
+    "type": "OF",
+    "id": "1"
+  },
+  "mapped": {
+    "type": "OF",
+    "id": "1"
+  }
+}
+</pre>
+<p>Meaning of each attribute is given below.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="portmap.vlan">vlan</div>
+</dt>
+<dd>Mapped VLAN ID gets configured.
+<ul>
+<li><b>0</b> implies that untagged ethernet frame is mapped.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Details given in the elements <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.node">node</a> and <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.port">port</a> of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf">portmapconf</a>, which was specified during port mapping configuration, will get configured in <span id="portmap.node"><b>node</b> element</span> and <span id="portmap.port"><b>port</b> element</span> respectively.
+</p><p><span id="portmap.mapped"><b>mapped</b> element</span> shows the <tt>NodeConnector</tt> information corresponding to physical port of the switch which is actually mapped.
+If there are no physical ports that meet the condition mentioned in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf">portmapconf</a>, then the element <b>mapped</b> is omitted.
+</p><p>Meaning of attributes of the element <b>mapped</b> is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="portmap.connector.type">type</div>
+</dt>
+<dd>String showing the type of <tt>NodeConnector</tt> gets configured.
+<ul>
+<li><b>OF</b> is configured in case of OpenFlow switch.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="portmap.connector.id">id</div>
+</dt>
+<dd>String showing the identifier of <tt>NodeConnector</tt> gets configured.
+<ul>
+<li>String representation of port number is configured for OpenFlow switch.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<h2><span class="mw-headline" id="VLAN_mapping_data">VLAN mapping data</span></h2>
+<p>This section describes the data showing <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VLAN-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VLAN mapping</a> information.
+</p>
+<h3><span class="mw-headline" id="vlanmapconf">vlanmapconf</span></h3>
+<p><b>vlanmapconf</b> shows <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VLAN-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VLAN mapping</a> configuration information for <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+This is used to send configuration information to controller during configuration of VLAN mapping by REST client.
+</p>
+<ul>
+<li>XML format
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;vlanmapconf vlan="100"&gt;
+  &lt;node&gt;
+    &lt;type&gt;OF&lt;/type&gt;
+    &lt;id&gt;00:00:00:00:00:00:00:03&lt;/id&gt;
+  &lt;/node&gt;
+&lt;/vlanmapconf&gt;
+</pre>
+<ul>
+<li>JSON format
+</li>
+</ul>
+<pre>{
+  "vlan": "100",
+  "node":  {
+    "type": "OF",
+    "id": "00:00:00:00:00:00:00:03"
+  }
+}
+</pre>
+<p>Meaning of each attribute is given below.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="vlanmapconf.vlan">vlan</div>
+</dt>
+<dd>Specify the VLAN ID to be mapped by using numerical value.
+<ul>
+<li>Allowed range for value is between <b>0</b> or more and <b>4095</b> or less.
+</li>
+<li><b>0</b> implies untagged ethernet frame.
+</li>
+<li>If omitted, it will be treated as if <b>0</b> is specified.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><b>vlanmapconf</b> can include one <b><span id="vlanmapconf.node">node</span></b> element in child elements.
+The element <b>node</b> shows the <tt>Node</tt> information corresponding to the switch that is to be mapped.
+If the element <b>node</b> is omitted, then all the switches are mapped.
+</p><p>Meaning of elements inside <b>node</b> is given below.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="vlanmapconf.node.type">type</div>
+</dt>
+<dd>Specify the string showing the type of <tt>Node</tt>.
+<ul>
+<li>Specify <b>OF</b> for OpenFlow switch.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="vlanmapconf.node.id">id</div>
+</dt>
+<dd>Specify the string showing the identifier of <tt>Node</tt>.
+<ul>
+<li>Specify the string representation of DPID for OpenFlow switch.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="vlanmap">vlanmap</span></h3>
+<p><b>vlanmap</b> shows <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VLAN-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VLAN mapping</a> information.
+This is used for returning VLAN mapping information to REST client.
+</p>
+<ul>
+<li>XML format
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;vlanmap id="OF-00:00:00:00:00:00:00:03.0" vlan="0"&gt;
+  &lt;node&gt;
+    &lt;type&gt;OF&lt;/type&gt;
+    &lt;id&gt;00:00:00:00:00:00:00:03&lt;/id&gt;
+  &lt;/node&gt;
+&lt;/vlanmap&gt;
+</pre>
+<ul>
+<li>JSON format
+</li>
+</ul>
+<pre>{
+  "id": "OF-00:00:00:00:00:00:00:03.0",
+  "vlan": "0",
+  "node": {
+    "type": "OF",
+    "id": "00:00:00:00:00:00:00:03"
+  }
+}
+</pre>
+<p>Meaning of each attribute is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="vlanmap.id">id</div>
+</dt>
+<dd>Identifier allocated in VLAN mapping information gets configured.
+</dd>
+<dt><div id="vlanmap.vlan">vlan</div>
+</dt>
+<dd>VLAN ID which is mapped gets configured.
+<ul>
+<li><b>0</b> implies that untagged ethernet frame is mapped.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Contents of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmapconf.node">node</a> element of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmapconf">vlanmapconf</a> specified during VLAN Mapping configuration gets set in <b><span id="vlanmap.node">node</span></b>. 
+The element <b>node</b> will be omitted if switch is not specified.
+</p>
+<h3><span class="mw-headline" id="vlanmaps">vlanmaps</span></h3>
+<p><b>vlanmaps</b> shows list of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VLAN-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VLAN mapping</a> information.
+This is used for sending VLAN mapping information list to REST client.
+</p>
+<ul>
+<li>When child elements are included
+<ul>
+<li>XML format
+</li>
+</ul>
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;vlanmaps&gt;
+  &lt;vlanmap id="OF-00:00:00:00:00:00:00:03.0" vlan="0"&gt;
+    &lt;node&gt;
+      &lt;type&gt;OF&lt;/type&gt;
+      &lt;id&gt;00:00:00:00:00:00:00:03&lt;/id&gt;
+    &lt;/node&gt;
+  &lt;/vlanmap&gt;
+  &lt;vlanmap id="ANY.7" vlan="7"/&gt;
+&lt;/vlanmaps&gt;
+</pre>
+<dl>
+<dd><ul>
+<li>JSON format
+</li>
+</ul>
+</dd>
+</dl>
+<pre>{
+  "vlanmap": [
+    {
+      "id": "OF-00:00:00:00:00:00:00:03.0",
+      "vlan": "0",
+      "node": {
+        "type": "OF",
+        "id": "00:00:00:00:00:00:00:03"
+      }
+    },
+    {
+      "id": "ANY.7",
+      "vlan": "7"
+    }
+  ]
+}
+</pre>
+<ul>
+<li>When child elements are not included
+<ul>
+<li>XML format
+</li>
+</ul>
+</li>
+</ul>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;vlanmaps/&gt;
+</pre>
+<dl>
+<dd><ul>
+<li>JSON format
+</li>
+</ul>
+</dd>
+</dl>
+<pre>{"vlanmap":[]}
+</pre>
+<p><b>vlanmaps</b> includes 0 or more <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmap">vlanmap</a> as child elements.
+</p>
+<h2><span class="mw-headline" id="MAC_address_table_data">MAC address table data</span></h2>
+<p>This section describes the data that shows the MAC address information learned in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.macTable" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">MAC address table</a> of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h3><span class="mw-headline" id="macentry">macentry</span></h3>
+<p><b>macentry</b> shows the MAC address information learned inside [OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.macTable|MAC address table]].
+This is used to return MAC address information inside MAC address table to REST client.
+</p>
+<dl>
+<dd><ul>
+<li> XML format 
+</li>
+</ul>
+</dd>
+</dl>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;macentry address="01:02:03:04:05:06" vlan="0"&gt;
+  &lt;node&gt;
+    &lt;type&gt;OF&lt;/type&gt;
+    &lt;id&gt;00:00:00:00:00:11:22:33&lt;/id&gt;
+  &lt;/node&gt;
+  &lt;port type="OF" id="1"/&gt;
+  &lt;inetAddresses&gt;
+    &lt;inetAddress address="192.168.10.1"/&gt;
+  &lt;/inetAddresses&gt;
+&lt;/macentry&gt;
+</pre>
+<dl>
+<dd><ul>
+<li> JSON format 
+</li>
+</ul>
+</dd>
+</dl>
+<pre>{ 
+  "address": "01:02:03:04:05:06",
+  "vlan": "0",
+  "node": {
+    "type": "OF",
+    "id": "00:00:00:00:00:11:22:33"
+  },
+  "port": {
+    "type": "OF",
+    "id": "1"
+  },
+  "inetAddresses": {
+    "inetAddress": {"address": "192.168.10.1"}
+  }
+} 
+</pre>
+<p>Meaning of each attribute is as follows. 
+</p>
+<dl>
+<dd><dl>
+<dt><div id="macentry.address">address</div>
+</dt>
+<dd>String showing the learned MAC address gets configured.
+<ul>
+<li> String wherein hexadecimal notation of each octet inside MAC address are concatenated by <tt>':'</tt> gets configured.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="macentry.vlan">vlan</div>
+</dt>
+<dd>VLAN ID configured inside the Ethernet frame, where MAC address is detected, gets configured.
+<ul>
+<li> <b>0</b> implies that VLAN tag was not detected.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Element <b>node</b> shows the <tt>Node</tt> information corresponding to switch where MAC address is detected.
+</p><p>Meaning of elements inside <b>node</b> is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="macentry.node.type">type</div>
+</dt>
+<dd>String showing the type of `Node` gets configured.
+<ul>
+<li> <b>OF</b> gets configured for OpenFlow switches.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="macentry.node.id">id</div>
+</dt>
+<dd>String showing the identifier of <tt>Node</tt> gets configured.
+<ul>
+<li> String representation of DPID gets configured for OpenFlow switches.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Element <b>port</b> shows the <tt>NodeConnector</tt> information corresponding to physical port of switch where MAC address is detected.
+</p><p>Meaning of attributes of element <b>port</b> is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt><div id="macentry.connector.type">type</div>
+</dt>
+<dd>String showing the type of <tt>NodeConnector</tt> gets configured.
+<ul>
+<li> <b>OF</b> gets configured for OpenFlow switches.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt><div id="macentry.connector.id">id</div>
+</dt>
+<dd>String showing the identifier of <tt>NodeConnector</tt> gets configured.
+<ul>
+<li> String representation of port number gets configured for OpenFlow switches.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Element <b>inetAddresses</b> shows the IP address information configured in the Ethernet frame where MAC address was detected.
+</p>
+<ul>
+<li> If multiple IP address corresponding to MAC address are detected, then the information for all the IP addresses that were detected gets configured.
+</li>
+<li> If no IP address is detected, element <b>inetAddresses</b> is omitted.
+</li>
+</ul>
+<p>One or more than one <b>inetAddress</b> elements are configured inside the element <b>inetAddresses</b>.
+String representation of the detected IP address gets configured in the attribute <b>address</b> of each <b>inetAddress</b> element.
+</p>
+<h3><span class="mw-headline" id="macentries">macentries</span></h3>
+<p><b>macentries</b> shows the list of MAC address information learned inside <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.macTable" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">MAC address table</a>.
+This is used to return MAC address information list to REST client.
+</p>
+<ul>
+<li> When child elements are included
+</li>
+</ul>
+<dl>
+<dd><ul>
+<li> XML format
+</li>
+</ul>
+</dd>
+</dl>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;macentries&gt;
+  &lt;macentry address="01:02:03:04:05:06" vlan="0"&gt;
+    &lt;node&gt;
+      &lt;type&gt;OF&lt;/type&gt;
+      &lt;id&gt;00:00:00:00:00:11:22:33&lt;/id&gt;
+    &lt;/node&gt;
+    &lt;port type="OF" id="1"/&gt;
+    &lt;inetAddresses&gt;
+      &lt;inetAddress address="192.168.10.1"/&gt;
+    &lt;/inetAddresses&gt;
+  &lt;/macentry&gt;
+  &lt;macentry address="11:22:33:44:55:66" vlan="1"&gt;
+    &lt;node&gt;
+      &lt;type&gt;OF&lt;/type&gt;
+      &lt;id&gt;00:00:00:00:12:34:56:78&lt;/id&gt;
+    &lt;/node&gt;
+    &lt;port type="OF" id="2"/&gt;
+    &lt;inetAddresses&gt;
+      &lt;inetAddress address="192.168.10.20"/&gt;
+      &lt;inetAddress address="10.1.2.3"/&gt;
+    &lt;/inetAddresses&gt;
+  &lt;/macentry&gt;
+&lt;/macentries&gt;
+</pre>
+<dl>
+<dd><ul>
+<li> JSON format
+</li>
+</ul>
+</dd>
+</dl>
+<pre>{
+  "macentry": [
+    {
+      "address": "01:02:03:04:05:06",
+      "vlan": "0",
+      "node": {
+        "type": "OF",
+        "id": "00:00:00:00:00:11:22:33"
+      },
+      "port": {
+        "type": "OF",
+        "id": "1"
+      },
+      "inetAddresses": {
+        "inetAddress": {"address": "192.168.10.1"}
+      }
+    },
+    {
+      "address": "11:22:33:44:55:66",
+      "vlan": "1",
+      "node": {
+        "type":"OF",
+        "id": "00:00:00:00:12:34:56:78"
+      },
+      "port": {
+        "type": "OF",
+        "id":"2"
+      },
+      "inetAddresses": {
+        "inetAddress": [
+          {"address": "192.168.10.20"},
+          {"address": "10.1.2.3"}
+        ]
+      }
+    }
+  ]
+}
+</pre>
+<ul>
+<li> When child elements are not included 
+</li>
+</ul>
+<dl>
+<dd><ul>
+<li> XML format 
+</li>
+</ul>
+</dd>
+</dl>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;macentries/&gt;
+</pre>
+<dl>
+<dd><ul>
+<li> JSON format
+</li>
+</ul>
+</dd>
+</dl>
+<pre>{"macentry":[]}
+</pre>
+<p><b>macentries</b> includes 0 or more <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#macentry">macentry</a> as child elements.
+</p>
+<h2><span class="mw-headline" id="Other_data">Other data</span></h2>
+<h3><span class="mw-headline" id="version">version</span></h3>
+<p><b>version</b> shows version information of VTN Manager.
+It is used for returning version information of VTN Manager to REST client.
+</p>
+<dl>
+<dd><ul>
+<li> XML format
+</li>
+</ul>
+</dd>
+</dl>
+<pre>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;version api="1"&gt;
+  &lt;bundle major="0" minor="1" micro="0" qualifier="SNAPSHOT"/&gt;
+&lt;/version&gt;
+</pre>
+<dl>
+<dd><ul>
+<li> JSON format
+</li>
+</ul>
+</dd>
+</dl>
+<pre>{
+  "api": "1",
+  "bundle": {
+    "major": "0",
+    "minor": "1",
+    "micro": "0",
+    "qualifier": "SNAPSHOT"
+  }
+}
+</pre>
+<p>Meaning of each attribute is as follows. 
+</p><p><br>
+</p>
+<dl>
+<dd><dl>
+<dt><div id="version.api">api</div>
+</dt>
+<dd>Value showing the API version of VTN Manager will get configured.
+</dd>
+<dd>API version will be a value equal to or greater than 1, and it is incremented if API of VTN Manager is changed.
+<ul>
+<li>Current VTN Manager will return 1 as API version. 
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><b>bundle</b> element shows version information of OSGi bundle that implements VTN Manager. 
+Meaning of each <b>bundle</b> attribute is as follows. 
+</p>
+<dl>
+<dd><dl>
+<dt><div id="version.bundle.major">major</div>
+</dt>
+<dd>major component of OSGi bundle version is configured.
+</dd>
+<dt><div id="version.bundle.minor">minor</div>
+</dt>
+<dd>minor component of OSGi bundle version is configured.
+</dd>
+<dt><div id="version.bundle.micro">micro</div>
+</dt>
+<dd>micro component of OSGi bundle version is configured.
+</dd>
+<dt><div id="version.bundle.qualifier">qualifier</div>
+</dt>
+<dd>qualifier component of OSGi bundle version is configured.
+</dd>
+<dd><b>qualifier</b> is omitted if qualifier is not set in OSGi bundle version.
+</dd>
+</dl>
+</dd>
+</dl>
+<h1><span class="mw-headline" id="REST_API">REST API</span></h1>
+<p>This section describes the specifications of REST API provided by VTN Manager.
+</p><p>Further, specify the name of the target container in the REST URI <b>containerName</b> described in this document. For example, specify <b>default</b> in <b>containerName</b> when operation is to be performed against default container.
+</p>
+<h2><span class="mw-headline" id="VTN_related_API">VTN related API</span></h2>
+<p>This section describes <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VTN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VTN</a> related REST API.
+</p>
+<h3><span class="mw-headline" id="Get_VTN_information_list"><div id="REST.vtns.GET">Get VTN information list</div></span></h3>
+<p>This retrieves the list of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VTN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VTN</a> present in the specified container.
+</p>
+<h4><span class="mw-headline" id="Request">Request</span></h4>
+<pre>GET /controller/nb/v2/vtn/{containerName}/vtns
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify the Container name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtns">vtns</a>, which shows VTN information list, gets configured in Response body.
+</li>
+</ul>
+<p>It returns Status Code showing the error in case of an abnormal end.
+Following are the main Status Codes that get returned in case of error.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>Specified container does not exist.
+</dd>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error in Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Create_VTN"><div id="REST.vtn.POST">Create VTN</div></span></h3>
+<p>It creates <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VTN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VTN</a> inside the specified container.
+</p>
+<h4><span class="mw-headline" id="Request_2">Request</span></h4>
+<pre>POST /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify name of the VTN which is to be created.
+<ul>
+<li>It is necessary to specify a string containing 1 or more characters and 31 or less characters.
+</li>
+<li>Characters allowed for name are US-ASCII alphabet, numbers and underscore (<tt>'_'</tt>) only. Further, the first character should be US-ASCII alphabet or number.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Specify <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf">vtnconf</a> in Request body.
+</p>
+<ul>
+<li>VTN description is not registered if <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf.description">description</a> is omitted.
+</li>
+<li>If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf.idleTimeout">idleTimeout</a> is omitted, it will be treated as if <b>300</b> is specified in the value.
+</li>
+<li>If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf.hardTimeout">hardTimeout</a> is omitted, it will be treated as if <b>0</b> is specified in the value.
+</li>
+</ul>
+<h4><span class="mw-headline" id="Response_2">Response</span></h4>
+<p>It returns <b>201 (Created)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li>Response body is not configured.
+</li>
+<li>URI of the resource that is created (URI specified in request) gets configured in <b>Location</b> header.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Following are the main Status Codes returned during error.
+</p>
+<dl>
+<dd><dl>
+<dt>400 (Bad Request)
+</dt>
+<dd>Incorrect XML or JSON data is specified in Request body.
+</dd>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>Specified container does not exist.
+</dd>
+<dt>406 (Not Acceptable)
+</dt>
+<dd>Specified <tt>"default"</tt> in <b>containerName</b> when a container other than the Default container is present.
+</dd>
+<dt>409 (Conflict)
+</dt>
+<dd>VTN having the name specified in <b>tenantName</b> already exists.
+</dd>
+<dt>415 (Unsupported Media Type)
+</dt>
+<dd>
+<ul>
+<li>Specified unsupported data type in <b>Content-Type</b> header.
+</li>
+<li>Specified incorrect VTN name in <b>tenantName</b>.
+</li>
+<li>Specified incorrect value in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf.idleTimeout">idleTimeout</a> or <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf.hardTimeout">hardTimeout</a> of Request body.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Get_VTN_information"><div id="REST.vtn.GET">Get VTN information</div></span></h3>
+<p>It acquires the information related to the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VTN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VTN</a>.
+</p>
+<h4><span class="mw-headline" id="Request_3">Request</span></h4>
+<pre>GET /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_3">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtn">vtn</a> that shows VTN information gets configured in Response body.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Modify_VTN_information"><div id="REST.vtn.PUT">Modify VTN information</div></span></h3>
+<p>It modifies the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VTN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VTN</a> information.
+</p>
+<h4><span class="mw-headline" id="Request_4">Request</span></h4>
+<pre>PUT /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+</dl>
+</dd>
+</dl>
+<p>You must specify <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf">vtnconf</a> in Request body.
+</p><p>Also, the following query parameter can be specified in URI.
+</p>
+<dl>
+<dd><dl>
+<dt>all
+</dt>
+<dd>Specify the Boolean value that decides the handling of attributes omitted in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf">vtnconf</a>.
+</dd>
+<dd>If nothing is specified, then it is treated as <b>false</b>.
+<ul>
+<li>If <b>true</b> is specified, then all the attributes related to VTN are modified.
+<ul>
+<li>If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf.description">description</a> is omitted, then the description of the specified VTN will get deleted.
+</li>
+<li>If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf.idleTimeout">idleTimeout</a> is omitted, it will be treated as if <b>300</b> is specified in the value.
+</li>
+<li>If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf.hardTimeout">hardTimeout</a> is omitted, it will be treated as if <b>0</b> is specified in the value.
+</li>
+</ul>
+</li>
+<li>If <b>false</b> is specified, then the attributes that are omitted will not be modified.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_4">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li>Response body is not configured.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>400 (Bad Request)
+</dt>
+<dd>Incorrect XML or JSON data is specified in Request body.
+</dd>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>406 (Not Acceptable)
+</dt>
+<dd>Specified <tt>"default"</tt> in <b>containerName</b> when a container other than the Default container is present.
+</dd>
+<dt>415 (Unsupported Media Type)
+</dt>
+<dd>
+<ul>
+<li>Specified unsupported data type in <b>Content-Type</b> header.
+</li>
+<li>Incorrect value is specified in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf.idleTimeout">idleTimeout</a> or <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vtnconf.hardTimeout">hardTimeout</a> of Request body.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Delete_VTN"><div id="REST.vtn.DELETE">Delete VTN</div></span></h3>
+<p>It deletes the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VTN" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VTN</a>.
+All the vBridge etc. that are included in the specified VTN also will get deleted.
+</p>
+<h4><span class="mw-headline" id="Request_5">Request</span></h4>
+<pre>DELETE /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_5">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li>Response body is not configured.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>406 (Not Acceptable)
+</dt>
+<dd>Specified <tt>"default"</tt> in <b>containerName</b> when a container other than the Default container is present.
+</dd>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h2><span class="mw-headline" id="vBridge_related_API">vBridge related API</span></h2>
+<p>This section describes REST APIs related to <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h3><span class="mw-headline" id="Get_vBridge_information_list"><div id="REST.vbridges.GET">Get vBridge information list</div></span></h3>
+<p>It retrieves the list of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a> present inside the specified VTN.
+</p>
+<h4><span class="mw-headline" id="Request_6">Request</span></h4>
+<pre>GET /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_6">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridges">vbridges</a> showing vBridge information list gets configured in Response body.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Create_vBridge"><div id="REST.vbridge.POST">Create vBridge</div></span></h3>
+<p>It creates <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a> inside the specified VTN.
+</p>
+<h4><span class="mw-headline" id="Request_7">Request</span></h4>
+<pre>POST /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify name of the vBridge which is to be created.
+<ul>
+<li>It is necessary to specify a string containing 1 or more characters and 31 or less characters.
+</li>
+<li>Characters allowed for name are US-ASCII alphabet, numbers and underscore (<tt>'_'</tt>) only.
+</li>
+</ul>
+<dl>
+<dd>Further, the first character should be US-ASCII alphabet or number.
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridgeconf">vbridgeconf</a> must be specified in the Request body.
+</p>
+<ul>
+<li>If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridgeconf.description">description</a> is omitted, then vBridge description is not registered.
+</li>
+<li>If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridgeconf.ageInterval">ageInterval</a> is omitted, it will be treated as if <b>600</b> is specified in the value.
+</li>
+</ul>
+<h4><span class="mw-headline" id="Response_7">Response</span></h4>
+<p>It returns <b>201 (Created)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li>Response body is not configured.
+</li>
+<li>URI of the resource that is created (URI specified in request) gets configured in <b>Location</b> header.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Following are the main Status Codes returned during error.
+</p>
+<dl>
+<dd><dl>
+<dt>400 (Bad Request)
+</dt>
+<dd>Incorrect XML or JSON data is specified in Request body.
+</dd>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>406 (Not Acceptable)
+</dt>
+<dd>Specified <tt>"default"</tt> in <b>containerName</b> when a container other than the Default container is present.
+</dd>
+<dt>409 (Conflict)
+</dt>
+<dd>vBridge having the name specified in <b>bridgeName</b> already exists.
+</dd>
+<dt>415 (Unsupported Media Type)
+</dt>
+<dd>
+<ul>
+<li>Specified unsupported data type in <b>Content-Type</b> header.
+</li>
+<li>Specified incorrect vBridge name in <b>bridgeName</b>.
+</li>
+<li>Incorrect value is specified in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridgeconf.ageInterval">ageInterval</a> of Request body.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Get_vBridge_information"><div id="REST.vbridge.GET">Get vBridge information</div></span></h3>
+<p>It retrieves the information related to the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_8">Request</span></h4>
+<pre>GET /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_8">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridge">vbridge</a> showing vBridge information gets configured in Response body.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Modify_vBridge_information"><div id="REST.vbridge.PUT">Modify vBridge information</div></span></h3>
+<p>It modifies the information of specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_9">Request</span></h4>
+<pre>PUT /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+</dl>
+</dd>
+</dl>
+<p><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridgeconf">vbridgeconf</a> must be specified in Request body.
+</p><p>Also, the following query parameter can be specified in URI.
+</p>
+<dl>
+<dd><dl>
+<dt>all
+</dt>
+<dd>Specify the Boolean value that decides the handling of attributes omitted in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridgeconf">vbridgeconf</a>.
+</dd>
+<dd>If nothing is specified, then it is treated as <b>false</b>.
+<ul>
+<li>If <b>true</b> is specified, then all the attributes related to vBridge are modified.
+<ul>
+<li>If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridgeconf.description">description</a> is omitted, then the description of the specified vBridge will get deleted.
+</li>
+<li>If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridgeconf.ageInterval">ageInterval</a> is omitted, it will be treated as if <b>600</b> is specified in the value.
+</li>
+</ul>
+</li>
+<li>If <b>false</b> is specified, then the attributes that are omitted will not be modified.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_9">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li>Response body is not configured.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>400 (Bad Request)
+</dt>
+<dd>Incorrect XML or JSON data is specified in Request body.
+</dd>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>406 (Not Acceptable)
+</dt>
+<dd>Specified <tt>"default"</tt> in <b>containerName</b> when a container other than the Default container is present.
+</dd>
+<dt>415 (Unsupported Media Type)
+</dt>
+<dd>
+<ul>
+<li>Specified unsupported data type in <b>Content-Type</b> header.
+</li>
+<li>Incorrect value is specified in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vbridgeconf.ageInterval">ageInterval</a> of Request body.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Delete_vBridge"><div id="REST.vbridge.DELETE">Delete vBridge</div></span></h3>
+<p>It deletes the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+All the interfaces etc. that are included inside the specified vBridge also get deleted.
+</p>
+<h4><span class="mw-headline" id="Request_10">Request</span></h4>
+<pre>DELETE /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_10">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li>Response body is not configured.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>406 (Not Acceptable)
+</dt>
+<dd>Specified <tt>"default"</tt> in <b>containerName</b> when a container other than the Default container is present.
+</dd>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h2><span class="mw-headline" id="vBridge_interface_related_API">vBridge interface related API</span></h2>
+<p>This section describes the REST API related to <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge interface</a>.
+</p>
+<h3><span class="mw-headline" id="Get_vBridge_interface_information_list"><div id="REST.vbifs.GET">Get vBridge interface information list</div></span></h3>
+<p>It retrieves the list of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">virtual interface</a> present inside the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_11">Request</span></h4>
+<pre>GET /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/interfaces
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_11">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interfaces">interfaces</a> showing vBridge information list gets configured in Response body.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Create_vBridge_interface"><div id="REST.vbif.POST">Create vBridge interface</div></span></h3>
+<p>It creates <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">virtual interface</a> inside the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_12">Request</span></h4>
+<pre>POST /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/interfaces/{ifName}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+<dt>ifName
+</dt>
+<dd>Specify name of the interface which is to be created.
+<ul>
+<li>It is necessary to specify a string containing 1 or more characters and 31 or less characters.
+</li>
+<li>Characters allowed for name are US-ASCII alphabet, numbers and underscore (<tt>'_'</tt>) only.
+</li>
+</ul>
+<dl>
+<dd>Further, the first character should be US-ASCII alphabet or number.
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interfaceconf">interfaceconf</a> must be specified in Request body.
+</p>
+<ul>
+<li>If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interfaceconf.description">description</a> is omitted, then the description of the interface will not get registered.
+</li>
+<li>If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interfaceconf.enabled">enabled</a> is omitted, then it is treated as if <b>true</b> is specified in the value.
+</li>
+</ul>
+<h4><span class="mw-headline" id="Response_12">Response</span></h4>
+<p>It returns <b>201 (Created)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li>Response body is not configured.
+</li>
+<li>URI of the resource that is created (URI specified in request) gets configured in <b>Location</b> header.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Following are the main Status Codes returned during error.
+</p>
+<dl>
+<dd><dl>
+<dt>400 (Bad Request)
+</dt>
+<dd>Incorrect XML or JSON data is specified in Request body.
+</dd>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>406 (Not Acceptable)
+</dt>
+<dd>Specified <tt>"default"</tt> in <b>containerName</b> when a container other than the Default container is present.
+</dd>
+<dt>409 (Conflict)
+</dt>
+<dd>Interface having the name specified in <b>ifName</b> already exists.
+</dd>
+<dt>415 (Unsupported Media Type)
+</dt>
+<dd>
+<ul>
+<li>Specified unsupported data type in <b>Content-Type</b> header.
+</li>
+<li>Specified incorrect interface name in <b>ifName</b>.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Get_vBridge_interface_information"><div id="REST.vbif.GET">Get vBridge interface information</div></span></h3>
+<p>It retrieves information related to a specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">virtual interface</a> inside the <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_13">Request</span></h4>
+<pre>GET /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/interfaces/{ifName}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+<dt>ifName
+</dt>
+<dd>Specify vBridge interface name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_13">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interface">Interface</a> showing vBridge interface information gets configured in Response body.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+<li>Specified vBridge interface does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Modify_vBridge_interface_information"><div id="REST.vbif.PUT">Modify vBridge interface information</div></span></h3>
+<p>It modifies the information of the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">virtual interface</a> inside the <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_14">Request</span></h4>
+<pre>PUT /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/interfaces/{ifName}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+<dt>ifName
+</dt>
+<dd>Specify vBridge interface name.
+</dd>
+</dl>
+</dd>
+</dl>
+<p><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interfaceconf">interfaceconf</a> must be specified in the Request body.
+</p><p>Also, the following query parameter can be specified in URI.
+</p>
+<dl>
+<dd><dl>
+<dt>all
+</dt>
+<dd>Specify the Boolean value that decides the handling of attributes omitted in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interfaceconf">interfaceconf</a>.
+</dd>
+<dd>If nothing is specified, then it is treated as <b>false</b>.
+<ul>
+<li>If <b>true</b> is specified, then all the attributes related to vBridge interface are modified.
+<ul>
+<li>If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interfaceconf.description">description</a> is omitted, then the description of the specified vBridge interface will get deleted.
+</li>
+<li>If <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#interfaceconf.enabled">enabled</a> is omitted, value is modified to <b>true</b>.
+</li>
+</ul>
+</li>
+<li>If <b>false</b> is specified, then the attributes that are omitted will not be modified.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_14">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li>Response body is not configured.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>400 (Bad Request)
+</dt>
+<dd>Incorrect XML or JSON data is specified in Request body.
+</dd>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+<li>Specified vBridge interface does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>406 (Not Acceptable)
+</dt>
+<dd>Specified <tt>"default"</tt> in <b>containerName</b> when a container other than the Default container is present.
+</dd>
+<dt>415 (Unsupported Media Type)
+</dt>
+<dd>Specified unsupported data type in <b>Content-Type</b> header.
+</dd>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Delete_vBridge_interface"><div id="REST.vbif.DELETE">Delete vBridge interface</div></span></h3>
+<p>It deletes the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">virtual interface</a> inside the <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_15">Request</span></h4>
+<pre>DELETE /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/interfaces/{ifName}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+<dt>ifName
+</dt>
+<dd>Specify vBridge interface name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_15">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li>Response body is not configured.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+<li>Specified vBridge interface does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>406 (Not Acceptable)
+</dt>
+<dd>Specified <tt>"default"</tt> in <b>containerName</b> when a container other than the Default container is present.
+</dd>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h2><span class="mw-headline" id="Port_mapping_related_API">Port mapping related API</span></h2>
+<p>This section describes the REST API related to <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#port-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">Port mapping</a>.
+</p>
+<h3><span class="mw-headline" id="Configure_Port_mapping"><div id="REST.portmap.PUT">Configure Port mapping</div></span></h3>
+<p>It configures <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#port-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">Port mapping</a> in the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge interface</a>.
+If Port mapping is already configured on the specified vBridge interface, then old configuration is deleted and the configuration specified in request body gets applied.
+</p>
+<h4><span class="mw-headline" id="Request_16">Request</span></h4>
+<pre>PUT /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/interfaces/{ifName}/portmap
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+<dt>ifName
+</dt>
+<dd>Specify vBridge interface name.
+</dd>
+</dl>
+</dd>
+</dl>
+<p><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf">portmapconf</a> must be specified in the Request body.
+</p>
+<ul>
+<li>Information of the node corresponding to the switch, which is to be mapped to interface, must be specified in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.node">node</a>.
+</li>
+<li>Conditions that specify the physical port of the switch, which is to be mapped to interface, must be specified in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.port">port</a>.
+<ul>
+<li>Currently you can specify physical port of OpenFlow switches only.
+</li>
+</ul>
+</li>
+<li>Specify VLAN ID, which is to be mapped to interface, in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf.vlan">vlan</a>.
+<ul>
+<li>If value other than <b>0</b> is specified, then the ethernet frame that has the specified VLAN ID configured will get mapped.
+</li>
+<li>If <b>0</b> is specified, or if <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmap.vlan">vlan</a> is omitted, then untagged ethernet frame will get mapped to the interface.
+</li>
+</ul>
+</li>
+</ul>
+<h4><span class="mw-headline" id="Response_16">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li>Response body is not configured.
+</li>
+<li>Port map is successful even if the specified physical port of the switch does not exist. Actual mapping will be done when that specified physical port is found later.
+<ul>
+<li>However, when mapping is actually done with the specified physical port, the processing will not be carried out if that physical port and VLAN ID are mapped to another vBridge interface.
+</li>
+</ul>
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Following are the main Status Codes returned during error.
+</p>
+<dl>
+<dd><dl>
+<dt>400 (Bad Request)
+</dt>
+<dd>Incorrect XML or JSON data is specified in Request body.
+</dd>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+<li>Specified vBridge interface does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>406 (Not Acceptable)
+</dt>
+<dd>Specified <tt>"default"</tt> in <b>containerName</b> when a container other than the Default container is present.
+</dd>
+<dt>409 (Conflict)
+</dt>
+<dd>Specified physical port is present and the specified physical port and VLAN ID are mapped to another vBridge interface.
+</dd>
+<dt>415 (Unsupported Media Type)
+</dt>
+<dd>
+<ul>
+<li>Specified unsupported data type in <b>Content-Type</b> header.
+</li>
+<li>Incorrect value is specified inside <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmapconf">portmapconf</a> of Request body.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Get_Port_mapping_information"><div id="REST.portmap.GET">Get Port mapping information</div></span></h3>
+<p>It retrieves the <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#port-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">Port mapping</a> information configured in the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge interface</a>.
+</p>
+<h4><span class="mw-headline" id="Request_17">Request</span></h4>
+<pre>GET /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/interfaces/{ifName}/portmap
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+<dt>ifName
+</dt>
+<dd>Specify vBridge interface name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_17">Response</span></h4>
+<p>It returns the following information in case of normal end.
+</p>
+<ul>
+<li>It returns <b>200 (OK)</b> as Status Code if Port mapping is configured on the specified vBridge interface.
+<ul>
+<li><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#portmap">portmap</a> which shows Port mapping information is configured in the Response body.
+</li>
+</ul>
+</li>
+<li>It returns <b>204 (No Content)</b> as Status Code if port mapping is not configured on the specified vBridge interface.
+<ul>
+<li>Request body is not configured.
+</li>
+</ul>
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+<li>Specified vBridge interface does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Delete_Port_mapping"><div id="REST.portmap.DELETE">Delete Port mapping</div></span></h3>
+<p>It deletes <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#port-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">Port mapping</a> configured in the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vInterface" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge interface</a>.
+</p>
+<h4><span class="mw-headline" id="Request_18">Request</span></h4>
+<pre>DELETE /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/interfaces/{ifName}/portmap
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+<dt>ifName
+</dt>
+<dd>Specify vBridge interface name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_18">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+Further, it will end normally even if Port mapping is not configured in the specified vBridge interface.
+</p>
+<ul>
+<li>Response body is not configured.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+<li>Specified vBridge interface does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>406 (Not Acceptable)
+</dt>
+<dd>Specified <tt>"default"</tt> in <b>containerName</b> when a container other than the Default container is present.
+</dd>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h2><span class="mw-headline" id="VLAN_mapping_related_API">VLAN mapping related API</span></h2>
+<p>This section describes the REST API related to <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VLAN-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VLAN mapping</a>.
+</p>
+<h3><span class="mw-headline" id="Get_VLAN_mapping_information_list"><div id="REST.vlanmaps.GET">Get VLAN mapping information list</div></span></h3>
+<p>It retrieves <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VLAN-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VLAN mapping</a> information list configured in the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_19">Request</span></h4>
+<pre>GET /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/vlanmaps
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_19">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmaps">vlanmaps</a> showing VLAN mapping information list gets configured in Response body.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Configure_VLAN_mapping"><div id="REST.vlanmap.POST">Configure VLAN mapping</div></span></h3>
+<p>It creates the mapping between the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a> and <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VLAN-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VLAN</a>.
+</p>
+<h4><span class="mw-headline" id="Request_20">Request</span></h4>
+<pre>POST /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/vlanmaps
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+</dl>
+</dd>
+</dl>
+<p><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmapconf">vlanmapconf</a> must be specified in the Request body.
+</p>
+<ul>
+<li>Specify the VLAN ID, which is to be mapped to vBridge, in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmapconf.vlan">vlan</a>.
+<ul>
+<li>If value other than <b>0</b> is specified, then the ethernet frame that has the specified VLAN ID configured will get mapped to vBridge.
+</li>
+<li>If <b>0</b> is specified, or if <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmapconf.vlan">vlan</a> is omitted, then untagged ethernet frame will get mapped to the vBridge.
+</li>
+</ul>
+</li>
+<li>Specify the <tt>Node</tt> information corresponding to switch, which is mapped to vBridge, in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmapconf.node">node</a>.
+<ul>
+<li>Currently you can specify <tt>Node</tt> corresponding to OpenFlow switches only.
+</li>
+<li>If it is omitted, then it will be treated as if all the switches are specified.
+</li>
+</ul>
+</li>
+</ul>
+<h4><span class="mw-headline" id="Response_20">Response</span></h4>
+<p>It returns <b>201 (Created)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li>An identifier is allocated to the VLAN mapping information that was created, and the REST resource URI corresponding to that VLAN mapping information gets configured in <b>Location</b> header.
+<ul>
+<li>Last path configuration element of URI configured in <b>Location</b> header is the identifier allocated to VLAN mapping information.
+</li>
+</ul>
+</li>
+<li>Response body is not configured.
+</li>
+<li>VLAN configuration will succeed even if the switch specified in <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmapconf.node">node</a> is not found. Actual mapping is done when the specified switch is found later.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Following are the main Status Codes returned during error.
+</p>
+<dl>
+<dd><dl>
+<dt>400 (Bad Request)
+</dt>
+<dd>Incorrect XML or JSON data is specified in Request body.
+</dd>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>406 (Not Acceptable)
+</dt>
+<dd>Specified <tt>"default"</tt> in <b>containerName</b> when a container other than the Default container is present.
+</dd>
+<dt>409 (Conflict)
+</dt>
+<dd>Specified VLAN is already mapped to the specified vBridge or some other vBridge.
+</dd>
+<dt>415 (Unsupported Media Type)
+</dt>
+<dd>
+<ul>
+<li>Specified unsupported data type in <b>Content-Type</b> header.
+</li>
+<li>Incorrect value is specified inside <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmapconf">vlanmapconf</a> of Request body.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Get_VLAN_mapping_information"><div id="REST.vlanmap.GET">Get VLAN mapping information</div></span></h3>
+<p>It retrieves the <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VLAN-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VLAN mapping</a> information configured in the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_21">Request</span></h4>
+<pre>GET /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/vlanmaps/{mapId}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+<dt>mapId
+</dt>
+<dd>Specify the identifier of VLAN mapping information.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_21">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li><a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmap">vlanmap</a> which shows the VLAN mapping information gets configured in Response body.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+<li>Specified VLAN mapping information does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Search_VLAN_Mapping_information_based_on_config_information"><div id="REST.vlanmapsearch.byconf.GET">Search VLAN Mapping information based on config information</div></span></h3>
+<p>Out of the <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VLAN-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VLAN mapping</a> that are configured on the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>, it retrieves the VLAN Mapping information that matches with the specified config information.
+</p>
+<h4><span class="mw-headline" id="Request_22">Request</span></h4>
+<pre>GET /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/vlanmapsearch/byconf
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name. 
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName</dt>
+<dd>
+</dd>
+<dd>Specify vBridge name. 
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Specify config information of VLAN Mapping by using the query parameter given below. 
+</p>
+<dl>
+<dd><dl>
+<dt>vlan
+</dt>
+<dd>Specify in decimal the VLAN ID mapped by VLAN Mapping. 
+<ul>
+<li> If omitted, it will be treated as if 0 is specified as VLAN ID. 
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>node
+</dt>
+<dd>Specify the string representation of the <tt>Node</tt> that corresponds to switch mapped by VLAN Mapping. 
+<ul>
+<li> For example, specify <b>OF|00:11:22:33:44:55:66:77</b> to specify a OpenFlow switch with DPID 00:11:22:33:44:55:66:77. 
+</li>
+<li> If omitted, VLAN Mapping that maps all switches will be the search target. 
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_22">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end. 
+</p>
+<dl>
+<dd><dl>
+<dd><ul>
+<li> <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#vlanmap">vlanmap</a> which shows the VLAN mapping information gets configured in Response body. 
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows. 
+</p>
+<dl>
+<dd><dl>
+<dt>400 (Bad Request)
+</dt>
+<dd>Value specified in Query parameter has an invalid format. 
+</dd>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li> Specified container does not exist. 
+</li>
+<li> Specified VTN does not exist. 
+</li>
+<li> Specified vBridge does not exist. 
+</li>
+<li> There is no VLAN Mapping information, in vBridge specified in path, which contains the config information specified in query parameter. 
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller. 
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Delete_VLAN_mapping"><div id="REST.vlanmap.DELETE">Delete VLAN mapping</div></span></h3>
+<p>It deletes <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#VLAN-map" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">VLAN mapping</a> configured in the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_23">Request</span></h4>
+<pre>DELETE /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/vlanmaps/{mapId}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+<dt>mapId
+</dt>
+<dd>Specify the identifier of VLAN mapping information.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_23">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li>Response body is not configured.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li>Specified container does not exist.
+</li>
+<li>Specified VTN does not exist.
+</li>
+<li>Specified vBridge does not exist.
+</li>
+<li>Specified VLAN mapping information does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>406 (Not Acceptable)
+</dt>
+<dd>Specified <tt>"default"</tt> in <b>containerName</b> when a container other than the Default container is present.
+</dd>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h2><span class="mw-headline" id="MAC_address_table_related_API">MAC address table related API</span></h2>
+<p>This section describes the REST API related to <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.macTable" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">MAC address table</a> of <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h3><span class="mw-headline" id="Get_MAC_address_information_list"><div id="REST.macentries.GET">Get MAC address information list</div></span></h3>
+<p>It retrieves the MAC address information list learned inside <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.macTable" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">MAC address table</a> of specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_24">Request</span></h4>
+<pre>GET /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/mac
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_24">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li> <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#macentries">macentries</a> that shows the MAC address information list gets configured in Response body.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li> Specified container does not exist.
+</li>
+<li> Specified VTN does not exist.
+</li>
+<li> Specified vBridge does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Flush_MAC_address_table"><div id="REST.macentries.DELETE">Flush MAC address table</div></span></h3>
+<p>It deletes the entire MAC address information learned inside <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.macTable" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">MAC address table</a> of the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_25">Request</span></h4>
+<pre>DELETE /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/mac
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_25">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li> Response body is not configured.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li> Specified container does not exist.
+</li>
+<li> Specified VTN does not exist.
+</li>
+<li> Specified vBridge does not exist.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Get_MAC_address_information"><div id="REST.macentry.GET">Get MAC address information</div></span></h3>
+<p>It retrieves the specific MAC address information learned inside the <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.macTable" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">MAC address table</a> of specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_26">Request</span></h4>
+<pre>GET /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/mac/{macAddr}
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+<dt>macAddr
+</dt>
+<dd>Specify the string representation of MAC address.
+<ul>
+<li> Specify the string wherein hexadecimal notation of each octet inside MAC address are concatenated by <tt>':'</tt>.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_26">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li> <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#macentry">macentry</a> showing the showing the information of the MAC address specified in <b>macAddr</b> gets configured in Response body.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li> Specified container does not exist.
+</li>
+<li> Specified VTN does not exist.
+</li>
+<li> Specified vBridge does not exist.
+</li>
+<li> Specified MAC address is not learned in the MAC address table.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h3><span class="mw-headline" id="Delete_MAC_address_information"><div id="REST.macentry.DELETE">Delete MAC address information</div></span></h3>
+<p>It deletes a specific MAC address information learned inside <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge.macTable" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">MAC address table</a> of the specified <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:Specification#vBridge" title="OpenDaylight Virtual Tenant Network (VTN):VTN Manager:Specification">vBridge</a>.
+</p>
+<h4><span class="mw-headline" id="Request_27">Request</span></h4>
+<pre>DELETE /controller/nb/v2/vtn/{containerName}/vtns/{tenantName}/vbridges/{bridgeName}/mac/{macAddr} 
+</pre>
+<dl>
+<dd><dl>
+<dt>containerName
+</dt>
+<dd>Specify Container name.
+</dd>
+<dt>tenantName
+</dt>
+<dd>Specify VTN name.
+</dd>
+<dt>bridgeName
+</dt>
+<dd>Specify vBridge name.
+</dd>
+<dt>macAddr
+</dt>
+<dd>Specify the string representation of MAC address.
+<ul>
+<li> Specify the string wherein hexadecimal notation of each octet inside MAC address are concatenated by <tt>':'</tt>.
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<h4><span class="mw-headline" id="Response_27">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li> Response body is not configured.
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end.
+Main Status Codes returned during error is as follows.
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error.
+</dd>
+<dt>404 (Not Found)
+</dt>
+<dd>
+<ul>
+<li> Specified container does not exist.
+</li>
+<li> Specified VTN does not exist.
+</li>
+<li> Specified vBridge does not exist.
+</li>
+<li> Specified MAC address is not learned in the MAC address table.
+</li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+<h2><span class="mw-headline" id="Container_independent_API">Container independent API</span></h2>
+<p>This section describes the container independent REST API provided by VTN Manager.
+</p>
+<h3><span class="mw-headline" id="Retrieval_of_version_information">Retrieval of version information</span></h3>
+<p>It retrieves the version information of VTN Manager.
+</p>
+<h4><span class="mw-headline" id="Request_28">Request</span></h4>
+<pre>GET /controller/nb/v2/vtn/version
+</pre>
+<h4><span class="mw-headline" id="Response_28">Response</span></h4>
+<p>It returns <b>200 (OK)</b> as Status Code in case of normal end.
+</p>
+<ul>
+<li> <a href="https://wiki.opendaylight.org/view/OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi#version">version</a> showing the version information of VTN Manager gets configured in Response body. 
+</li>
+</ul>
+<p>It returns Status Code showing error in case of abnormal end. 
+Main Status Codes returned during error is as follows. 
+</p>
+<dl>
+<dd><dl>
+<dt>401 (Unauthorized)
+</dt>
+<dd>Authorization error. 
+</dd>
+<dt>500 (Internal Server Error)
+</dt>
+<dd>Process failed due to internal error of Controller.
+</dd>
+<dt>503 (Service Unavailable)
+</dt>
+<dd>Services like VTN Manager etc., that are considered necessary inside controller are not operating.
+</dd>
+</dl>
+</dd>
+</dl>
+
+<!-- 
+NewPP limit report
+CPU time usage: 0.240 seconds
+Real time usage: 0.245 seconds
+Preprocessor visited node count: 1199/1000000
+Preprocessor generated node count: 2076/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key daylight_mwiki:pcache:idhash:256-0!*!0!!en!*!* and timestamp 20160223233026 and revision id 2898
+ -->
+</div>          </div></div>
+                <!-- /innerbodycontent -->
+
+                <!-- printfooter -->
+        <div class="printfooter">
+        Retrieved from "<a href="https://wiki.opendaylight.org/index.php?title=OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi&amp;oldid=2898">https://wiki.opendaylight.org/index.php?title=OpenDaylight_Virtual_Tenant_Network_(VTN):VTN_Manager:RestApi&amp;oldid=2898</a>"        </div>
+        <!-- /printfooter -->
+                        <!-- catlinks -->
+        <div id="catlinks" class="catlinks"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="https://wiki.opendaylight.org/view/Special:Categories" title="Special:Categories">Category</a>: <ul><li><a href="https://wiki.opendaylight.org/view/Category:OpenDaylight_Virtual_Tenant_Network" title="Category:OpenDaylight Virtual Tenant Network">OpenDaylight Virtual Tenant Network</a></li></ul></div></div>        <!-- /catlinks -->
+                        <div class="visualClear"></div>
+        <!-- debughtml -->
+                <!-- /debughtml -->
+      </div>
+      <!-- /bodyContent -->
+    </section>
+    <!-- /content -->
+
+      <!-- footer -->
+
+      
+      <div id="footer" class="footer container">
+        <div class="row">
+    
+            <ul id="footer-places">
+                              <li id="footer-places-privacy"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Project:Privacy_policy" title="OpenDaylight Project:Privacy policy">Privacy policy</a></li>
+                              <li id="footer-places-about"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Project:About" title="OpenDaylight Project:About">About OpenDaylight Project</a></li>
+                              <li id="footer-places-disclaimer"><a href="https://wiki.opendaylight.org/view/OpenDaylight_Project:General_disclaimer" title="OpenDaylight Project:General disclaimer">Disclaimers</a></li>
+                                        </ul>
+                                <ul id="footer-icons" class="noprint">
+                  <li id="footer-poweredbyico">
+                    <a href="https://www.mediawiki.org/"><img src="./vtnjson_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" width="88" height="31"></a>
+                  </li>
+                </ul>
+                  </div>
+      </div>
+      <!-- /footer -->
+
+
+    <script>/*<![CDATA[*/window.jQuery && jQuery.ready();/*]]>*/</script><script>if(window.mw){
+mw.loader.state({"skins.strapping":"loading","site":"loading","user":"ready","user.groups":"ready"});
+}</script>
+<script src="./vtnjson_files/load(6).php"></script>
+<script>if(window.mw){
+mw.loader.load(["mediawiki.action.view.postEdit","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"],null,true);
+}</script>
+<script src="./vtnjson_files/load(7).php"></script>
+<script>if(window.mw){
+mw.config.set({"wgBackendResponseTime":163});
+}</script>
+  
+
+<div class="suggestions" style="display: none; font-size: 13px;"><div class="suggestions-results"></div><div class="suggestions-special"></div></div></body></html>

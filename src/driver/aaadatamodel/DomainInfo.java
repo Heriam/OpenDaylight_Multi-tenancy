@@ -1,11 +1,12 @@
 package driver.aaadatamodel;
 
+import driver.vtndatamodel.Serializable;
 import org.json.JSONObject;
 
 /**
  * Created by Hao on 2/5/16.
  */
-public class DomainInfo extends JSONObject{
+public class DomainInfo extends JSONObject implements Serializable{
 
     private String domainid;
     private String name;

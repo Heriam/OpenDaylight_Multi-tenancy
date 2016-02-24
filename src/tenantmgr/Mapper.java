@@ -16,7 +16,7 @@ public abstract class Mapper {
     protected static final String urlSYSRT = "controller/nb/v2/";
     protected static final String urlVTN = "controller/nb/v2/vtn/default/vtns/";
     protected static final String urlAUTHRT = "auth/v1/";                             // with subdir domains, users, roles
-    protected static final String RESTCONFROOT = "restconf/config/";                 //with subdir authorization-schema:simple-authorization or domain-authorization
+    protected static final String urlServAuth = "restconf/config/authorization-schema:domain-authorization/domains/";                 //with subdir authorization-schema:simple-authorization or domain-authorization
     protected static final String IFDIR = "/interfaces/";
     protected static final String BRIDGEDIR = "/vbridges/";
     protected static final String PORTMAP = "/portmap";
@@ -32,6 +32,8 @@ public abstract class Mapper {
     protected static final String sysType = "system";
     protected static final String servType = "serv";
     protected static final String vtnType = "vtn";
+    protected static final String aaaType = "aaa";
+    protected static final String restconfType = "rest";
 
     protected static final String vtnResource = "vtn";
     protected static final String firewallResource = "firewall";
@@ -57,7 +59,8 @@ public abstract class Mapper {
         typeMap = new HashMap<>();
         typeMap.put(sysType, urlVTN);
         typeMap.put(vtnType, urlVTN);
-        typeMap.put(servType, urlVTN);
+        typeMap.put(servType, urlServAuth);
+        typeMap.put(aaaType, urlAUTHRT);
 
         domainMap = new HashMap<>();
         domainMap.put(adminUsr, adminDOM);
@@ -85,7 +88,7 @@ public abstract class Mapper {
             int domainID = request.getToken().getDomainId();
             String userUrl = request.getURL();
             if(typeMap.containsKey(servType)) {
-                String rootUrl = typeMap.get(servType) + domainID + "/";
+                String rootUrl = typeMap.get(servType) + (domainID==0 ? "" : request.getToken().getUsername() + "/");
                 request.setURL(rootUrl + userUrl);
                 return request;
             }

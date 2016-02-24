@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by Hao on 1/13/16.
  * interfaces shows the list of vBridge interface information. This is used for returning vBridge interface information list to REST client.
  */
-public class InterfaceList extends JSONObject{
+public class InterfaceList extends JSONObject implements Serializable{
 
 
     @JsonProperty(value = "interface")

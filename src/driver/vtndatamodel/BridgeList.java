@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Created by Hao on 1/13/16.
  * vbridges shows the list of vBridge information.
  */
-public class BridgeList extends JSONObject{
+public class BridgeList extends JSONObject implements Serializable{
 
     private ArrayList<BridgeInfo> vbridge;
 

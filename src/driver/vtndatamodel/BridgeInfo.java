@@ -29,7 +29,7 @@ import org.json.JSONObject;
 
  */
 
-public class BridgeInfo extends JSONObject {
+public class BridgeInfo extends JSONObject implements Serializable{
     private String description;
     private String name;
     private String faults;

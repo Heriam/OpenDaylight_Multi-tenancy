@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Created by Hao on 08/01/16.
  * List shows a list of VTN information.
  */
-public class VTNList{
+public class VTNList implements Serializable{
 
 
 

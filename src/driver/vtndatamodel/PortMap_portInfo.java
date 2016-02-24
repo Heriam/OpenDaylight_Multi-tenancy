@@ -6,7 +6,7 @@ import org.json.JSONObject;
  * Created by Hao on 1/13/16.
  * This section describes the data showing Port mapping configuration information.
  */
-public class PortMap_portInfo extends JSONObject{
+public class PortMap_portInfo extends JSONObject implements Serializable{
     private String name;
     private String type;
     private String id;

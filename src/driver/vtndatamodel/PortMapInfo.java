@@ -62,7 +62,7 @@ import org.json.JSONObject;
 
  *
  */
-public class PortMapInfo extends JSONObject {
+public class PortMapInfo extends JSONObject implements Serializable{
     private String vlan;
     private TypeIdInfo node;
     private TypeIdInfo mapped;

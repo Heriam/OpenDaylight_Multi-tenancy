@@ -6,7 +6,7 @@ import org.json.JSONObject;
  * Created by Hao on 1/16/16.
  * Note: MAC mapping will not be activated just by configuring it, a two end communication needs to be establihed to activate Mac Mapping.
  */
-public class MacInfo extends JSONObject {
+public class MacInfo extends JSONObject implements Serializable{
 
 
     //-------------------------------------------------------------------------------------

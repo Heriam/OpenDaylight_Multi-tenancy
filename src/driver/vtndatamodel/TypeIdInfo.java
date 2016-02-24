@@ -6,7 +6,7 @@ import org.json.JSONObject;
  * Created by Hao on 1/13/16.
  * This is a common used Type-ID data strucdture
  */
-public class TypeIdInfo extends JSONObject {
+public class TypeIdInfo extends JSONObject implements Serializable {
     private String type;
     private String id;
 

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by Hao on 1/16/16.
  */
-public class MacListInfo extends JSONObject{
+public class MacListInfo extends JSONObject implements Serializable{
 
 //-----------------------------------------------------------------------------------------
 

@@ -3,13 +3,17 @@ package test;
 
 import aaa.IShiro;
 import aaa.authn.VTNAuthNToken;
+import com.sun.deploy.net.HttpResponse;
 import com.sun.jersey.api.client.ClientResponse;
 import driver.Mappable;
 import driver.MappableMsg;
 import driver.ToODL;
 import driver.vtndatamodel.BridgeInfo;
-import org.apache.http.HttpEntity;
-import org.apache.http.util.EntityUtils;
+import driver.vtndatamodel.Serializable;
+import org.apache.shiro.subject.Subject;
+import org.json.JSONObject;
+import rest.TentProxy;
+import tenantmgr.VTNServ;
 
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -20,6 +24,7 @@ import java.util.Map;
 public class VTNRequests {
 
 
+      private static Subject currentUser;
 
       public static void main(String[] args) throws IOException {
 
@@ -78,55 +83,45 @@ public class VTNRequests {
             servList.add(sa);
             servList.add(sb);
             servList.add(sc);
-            List<String> authNResult = new ArrayList<>();
+
             List<String> authZResult = new ArrayList<>();
 
             for (VTNAuthNToken token: userTokenList) {
-                  Mappable userRequest = new MappableMsg(null,null,token);
-                  String entryAuthN = "Domain "+token.getDomainId()+": "+token.getUsername()+": "+ IShiro.New().isAuthenticated(userRequest.getToken());
-                  authNResult.add(entryAuthN);
-            }
-
-            for (VTNAuthNToken token: userTokenList) {
-                  for (String service: servList){
-                        Mappable userRequest = new MappableMsg(null,null,token);
-                        userRequest.setServID(service);
-                        if(IShiro.New().isAuthorized(userRequest)){
-                              String entryAuthZ = "Domain "+token.getDomainId()+": "+token.getUsername()+": "+ service;
-                              authZResult.add(entryAuthZ);
+                  currentUser = IShiro.New().getLoginedUser(token);
+                  if (currentUser!=null) {
+                        for (String service : servList) {
+                              if (currentUser.isPermitted(service)) {
+                                    String entryAuthZ = "Domain " + token.getDomainId() + ": " + token.getUsername() + ": " + service;
+                                    authZResult.add(entryAuthZ);
+                              }
                         }
+                        currentUser.logout();
                   }
+
             }
 
 
-
-
-            for (String entry: authNResult){
-                  System.out.println(entry);
+            for (String i: authZResult){
+                  System.out.println(i);
             }
 
-            for (String entry: authZResult){
-                  System.out.println(entry);
-            }
+//            MappableMsg{body={"hardTimeout":"0","idleTimeout":"300","description":"1"}, URL='1', Auth=null, msgType='create', servID='vtn:topo', option=false, status=0}
+
+            VTNAuthNToken token = VTNServ.getTentMgr().loginReq("admin", "admin");
+            String json = null;
+            JSONObject jsonObject = (json == null || json.isEmpty()) ? null : new JSONObject(json);
+            Mappable request = new MappableMsg(jsonObject, "1", token);
+            request.setMsgType("delete");
+            request.setServID("vtn:topo");
+
+            TentProxy tentProxy = new TentProxy();
+            Serializable response = VTNServ.getTentMgr().getResponse(request);
+            System.out.println(response.toString());
 
 
 
 
 
-
-
-//      Define a Bridge Data
-          Mappable br1Hao = new MappableMsg(new BridgeInfo("bridge1", "600"), "controller/nb/v2/vtn/default/vtns/Tenant_Hao", adminAuth);
-//          ToODL.Post(br1Hao);
-            br1Hao.setMsgType("read");
-
-            ClientResponse response = ToODL.Send(br1Hao);
-
-            Response resp = clientResponseToResponse(response);
-
-            HttpEntity entity = resp.getEntity();
-            String json_string = EntityUtils.toString(entity);
-            System.out.println(json_string);
 
 
 
@@ -162,19 +157,4 @@ public class VTNRequests {
 
 
     }
-
-      public static Response clientResponseToResponse(ClientResponse r) {
-            // copy the status code
-            Response.ResponseBuilder rb = Response.status(r.getStatus());
-            // copy all the headers
-            for (Map.Entry<String, List<String>> entry : r.getHeaders().entrySet()) {
-                  for (String value : entry.getValue()) {
-                        rb.header(entry.getKey(), value);
-                  }
-            }
-            // copy the entity
-            rb.entity(r.getEntityInputStream());
-            // return the response
-            return rb.build();
-      }
 }

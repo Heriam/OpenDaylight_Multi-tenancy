@@ -16,7 +16,7 @@ import org.json.JSONObject;
  *
  *
  */
-public class ODLVersion extends JSONObject{
+public class ODLVersion extends JSONObject implements Serializable{
 
 
     private int api;

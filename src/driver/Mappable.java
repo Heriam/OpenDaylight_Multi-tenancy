@@ -27,6 +27,6 @@ public interface Mappable {
     String getServID();
     void setServID(String servID);
 
-    int getPriority();
-    void setPriority(int priority);
+    int getStatus();
+    void setStatus(int Status);
 }

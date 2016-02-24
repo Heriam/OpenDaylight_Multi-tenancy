@@ -23,7 +23,7 @@ import org.json.JSONObject;
          Specify the string representation of DPID for OpenFlow switch.
  *
  */
-public class VlanMapInfo extends JSONObject {
+public class VlanMapInfo extends JSONObject implements Serializable{
     private String id;
     private String vlan;
     TypeIdInfo node;

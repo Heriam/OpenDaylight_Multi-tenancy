@@ -1,12 +1,13 @@
 package driver.aaadatamodel;
 
 
+import driver.vtndatamodel.Serializable;
 import org.json.JSONObject;
 
 /**
  * Created by Hao on 2/5/16.
  */
-public class UserInfo extends JSONObject{
+public class UserInfo extends JSONObject implements Serializable{
 
     private int userid;
     private String name;

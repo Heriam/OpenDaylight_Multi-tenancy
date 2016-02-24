@@ -31,7 +31,7 @@ import org.json.JSONObject;
  *Further, the status of network elements are configured irrespective of whether interface is enabled or not. E.g., even if the interface is disabled, 1 will be configured in entityState if the mapped network elements are operating.
  */
 
-public class InterfaceInfo extends JSONObject{
+public class InterfaceInfo extends JSONObject implements Serializable{
     private String description;
     private boolean enabled;
     private String name;

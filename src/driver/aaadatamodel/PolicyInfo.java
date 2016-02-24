@@ -1,11 +1,12 @@
 package driver.aaadatamodel;
 
+import driver.vtndatamodel.Serializable;
 import org.json.JSONObject;
 
 /**
  * Created by Hao on 2/6/16.
  */
-public class PolicyInfo extends JSONObject{
+public class PolicyInfo extends JSONObject implements Serializable{
 
     private enum authorization{}
     private String role;

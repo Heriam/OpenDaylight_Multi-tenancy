@@ -2,6 +2,7 @@ package driver.aaadatamodel;
 
 
 import com.owlike.genson.annotation.JsonProperty;
+import driver.vtndatamodel.Serializable;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by Hao on 2/8/16.
  */
-public class DomainPolicies extends JSONObject {
+public class DomainPolicies extends JSONObject implements Serializable{
 
     @JsonProperty(value = "domain-name")
     private String domainname;

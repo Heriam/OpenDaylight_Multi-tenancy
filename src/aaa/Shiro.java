@@ -17,9 +17,7 @@ import org.apache.shiro.util.Factory;
  * Created by Hao on 2/12/16.
  */
 public class Shiro implements IShiro{
-
     static Subject subject;
-
     public Shiro(){
         Factory<SecurityManager> factory;
         SecurityManager securityManager;
@@ -29,64 +27,68 @@ public class Shiro implements IShiro{
         subject = SecurityUtils.getSubject();
     }
 
+    //返回一个已经登录的用户,否则返回空
     @Override
-    public Subject userLogin(VTNAuthNToken token){
-        Subject userSubject = SecurityUtils.getSubject();
+    public Subject getLoginedUser(VTNAuthNToken token){
         try {
-            userSubject.login(token);
+            subject.login(token);
         } catch (AuthenticationException e) {
             return null;
         }
-        return userSubject;
+        return subject;
     }
 
-    @Override
-    public boolean isAuthenticated(VTNAuthNToken token) {
-        try {
-            subject.login(token);
-        } catch (AuthenticationException e) {
-            return false;
-        }
-        boolean authc = subject.isAuthenticated();
-        subject.logout();
-        return authc;
-    }
 
-    @Override
-    public boolean isAuthorized(Mappable request) {
-        UsernamePasswordToken token = request.getToken();
-        String Serv = request.getServID()+":"+request.getMsgType();
 
-        try {
-            subject.login(token);
-        } catch (AuthenticationException e) {
-            return false;
-        }
-        boolean authz = subject.isPermitted(Serv);
-        subject.logout();
-        return authz;
-    }
 
-    @Override
-    public String generateKey(VTNAuthNToken token){
-        String username = token.getUsername();
-        char[] password = token.getPassword();
-        int domainID = token.getDomainId();
-        String join = username+" : "+password+" : "+domainID;
-        String joinkey;
-        try {
-            subject.login(token);
-            if (subject.isAuthenticated()) {
-                joinkey = Base64.encodeToString(join.getBytes());
-            } else {
-                joinkey = null;
-            }
-            subject.logout();
-            return joinkey;
-        } catch (AuthenticationException e) {
-            return null;
-        }
-    }
+
+//    @Override
+//    public boolean isAuthenticated(VTNAuthNToken token) {
+//        try {
+//            subject.login(token);
+//        } catch (AuthenticationException e) {
+//            return false;
+//        }
+//        boolean authc = subject.isAuthenticated();
+//        subject.logout();
+//        return authc;
+//    }
+
+//    @Override
+//    public boolean isAuthorized(Mappable request) {
+//        UsernamePasswordToken token = request.getToken();
+//        String Serv = request.getServID()+":"+request.getMsgType();
+//
+//        try {
+//            subject.login(token);
+//        } catch (AuthenticationException e) {
+//            return false;
+//        }
+//        boolean authz = subject.isPermitted(Serv);
+//        subject.logout();
+//        return authz;
+//    }
+
+//    @Override
+//    public String generateKey(VTNAuthNToken token){
+//        String username = token.getUsername();
+//        char[] password = token.getPassword();
+//        int domainID = token.getDomainId();
+//        String join = username+" : "+password+" : "+domainID;
+//        String joinkey;
+//        try {
+//            subject.login(token);
+//            if (subject.isAuthenticated()) {
+//                joinkey = Base64.encodeToString(join.getBytes());
+//            } else {
+//                joinkey = null;
+//            }
+//            subject.logout();
+//            return joinkey;
+//        } catch (AuthenticationException e) {
+//            return null;
+//        }
+//    }
 }
 
 

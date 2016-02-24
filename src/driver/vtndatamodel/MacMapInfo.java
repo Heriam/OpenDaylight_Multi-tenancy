@@ -10,7 +10,7 @@ import org.json.JSONObject;
  * so a two end communication need not be establihed like allow ,
  * the hosts can communicate directly without any two way communication enabled.
  */
-public class MacMapInfo extends JSONObject {
+public class MacMapInfo extends JSONObject implements Serializable{
 
 
 //---------------    ------------------    ----------------------     ----------------

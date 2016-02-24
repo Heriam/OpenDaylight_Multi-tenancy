@@ -1,10 +1,10 @@
-<html><head><title>Control Panel</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css"></style></head><body><h3>Control Panel</h3><hr><br><form id="form" enctype="application/x-www-form-urlencoded" action="../odl/virnet/operation" method="post">
+<html><head><title>Control Panel</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css"></style></head><body><h3 style="display: inline;">Control Panel</h3><hr><br><form id="form" target="frameOutput" enctype="application/x-www-form-urlencoded" action="../odl/virnet/operation" method="post">
   <fieldset>
     <legend>Operation:</legend>
-<br><input type="radio" name="method" value="create" />&nbsp;&nbsp;&nbsp;&nbsp;Create&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="method" value="update" />&nbsp;&nbsp;&nbsp;&nbsp;Update&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="method" value="read" />&nbsp;&nbsp;&nbsp;&nbsp;Read&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="method" value="delete" />&nbsp;&nbsp;&nbsp;&nbsp;Delete&nbsp;&nbsp;&nbsp;&nbsp;    <br><br> </fieldset>
+<br><input type="radio" name="method" value="create" />&nbsp;&nbsp;&nbsp;&nbsp;Create&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="method" value="update" />&nbsp;&nbsp;&nbsp;&nbsp;Update&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="method" value="read" checked="checked" />&nbsp;&nbsp;&nbsp;&nbsp;Read&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="method" value="delete" />&nbsp;&nbsp;&nbsp;&nbsp;Delete&nbsp;&nbsp;&nbsp;&nbsp;    <br><br> </fieldset>
 <br><br>  <fieldset>
   <legend>Service:</legend>
-<br><input type="radio" name="service" value="vtn:topo" />&nbsp;&nbsp;&nbsp;&nbsp;Traffic Shaper&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="system:vtn" />&nbsp;&nbsp;&nbsp;&nbsp;IPS/IDS&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="serv:firewall" />&nbsp;&nbsp;&nbsp;&nbsp;Firewall&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="serv:contentfilter" />&nbsp;&nbsp;&nbsp;&nbsp;Content Filtering&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="serv:accelerator" />&nbsp;&nbsp;&nbsp;&nbsp;Accelerator&nbsp;&nbsp;&nbsp;&nbsp;    <br><br> </fieldset>
+<br><input type="radio" name="service" value="vtn:topo" checked="checked"/>&nbsp;&nbsp;&nbsp;&nbsp;Basic VTN &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="aaa:acl" />&nbsp;&nbsp;&nbsp;&nbsp; ACL &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="serv:firewall" />&nbsp;&nbsp;&nbsp;&nbsp;Firewall &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="serv:content" />&nbsp;&nbsp;&nbsp;&nbsp; Content Filtering &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="rest:conf" />&nbsp;&nbsp;&nbsp;&nbsp; BYOC &nbsp;&nbsp;&nbsp;&nbsp;    <br><br> </fieldset>
 <br><br>  <fieldset>
   <legend>Resource:</legend>
 <br><input type="checkbox" name="resource" value="network" />&nbsp;&nbsp;&nbsp;&nbsp; Network &nbsp;&nbsp;&nbsp;&nbsp;  <select name="network">
@@ -39,5 +39,6 @@
 </select>&nbsp;&nbsp;&nbsp;&nbsp;<br> <br> </fieldset>
 <br><br>  <fieldset>
   <legend>Command:</legend>
-<br>URL: &nbsp;&nbsp;&nbsp;&nbsp;virtual_network/<input type="url" name="url" style="width:200px;" /><br><br>JSON:&nbsp;&nbsp;&nbsp;&nbsp;<textarea rows="20" cols="100" form="form" name="json" ></textarea> <br><br> </fieldset>
-<br><div align="center"><button type="submit" form="form" name="username" value="admin" onclick="setTimeout("window.parent.frames.output.location.reload();",3000)" >Commit</button>   &nbsp;&nbsp;&nbsp;&nbsp;   <button type="reset" form="form" >Reset</button></div></form><div><br/><br/><br/><br/></div></body></html>
+<br>URL: &nbsp;&nbsp;&nbsp;&nbsp;virtual_network/<input type="text" name="url" style="width:200px;" /><br><br>JSON:&nbsp;&nbsp;&nbsp;&nbsp;<textarea rows="20" cols="100" form="form" name="json" ></textarea> <br><br> </fieldset>
+<br><div align="center"><button type="submit" form="form" name="username" value="admin" onclick="output()">Commit</button>   &nbsp;&nbsp;&nbsp;&nbsp;   <button type="reset" form="form" >Reset</button></div></form><div><br/><br/><script>
+function output(){document.getElementById("form").submit();} </script><br/><br/></div></body></html>

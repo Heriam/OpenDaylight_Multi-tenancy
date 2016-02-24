@@ -41,7 +41,7 @@ import java.util.ArrayList;
  The behavior is not defined if the vBridge is configured in the above manner.
  *
  */
-public class MacEntryList extends JSONObject{
+public class MacEntryList extends JSONObject implements Serializable{
 
 
 

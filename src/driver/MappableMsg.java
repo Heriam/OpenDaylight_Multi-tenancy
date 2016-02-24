@@ -1,13 +1,14 @@
 package driver;
 
 import aaa.authn.VTNAuthNToken;
+import driver.vtndatamodel.Serializable;
 import org.json.JSONObject;
 
 
 /**
  * Created by Hao on 2/5/16.
  */
-public class MappableMsg implements Mappable {
+public class MappableMsg implements Mappable, Serializable {
 
     private JSONObject body;
     private String URL;
@@ -15,7 +16,7 @@ public class MappableMsg implements Mappable {
     private String msgType;
     private String servID;
     private boolean option = false;
-    private int priority;
+    private int status;
 
     public MappableMsg(){}
     public MappableMsg(JSONObject body, String URL, VTNAuthNToken Auth){
@@ -25,13 +26,13 @@ public class MappableMsg implements Mappable {
     }
 
     @Override
-    public int getPriority() {
-        return priority;
+    public int getStatus() {
+        return status;
     }
 
     @Override
-    public void setPriority(int priority) {
-        this.priority = priority;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
 
@@ -102,7 +103,7 @@ public class MappableMsg implements Mappable {
                 ", msgType='" + msgType + '\'' +
                 ", servID='" + servID + '\'' +
                 ", option=" + option +
-                ", priority=" + priority +
+                ", status=" + status +
                 '}';
     }
 }

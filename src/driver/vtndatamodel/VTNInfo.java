@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 
  */
-public class VTNInfo extends JSONObject {
+public class VTNInfo extends JSONObject implements Serializable{
     private String description;
     private String name;
     private String hardTimeout;

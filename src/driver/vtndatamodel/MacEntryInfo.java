@@ -47,7 +47,7 @@ import org.json.JSONObject;
  *
  *
  */
-public class MacEntryInfo extends JSONObject {
+public class MacEntryInfo extends JSONObject implements Serializable{
 
 
     private String address;
