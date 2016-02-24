@@ -16,6 +16,8 @@ import org.apache.shiro.authc.AuthenticationException;
 import java.util.*;
 import java.util.Map.Entry;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import tenantmgr.Mapper;
 import tenantmgr.VTNServ;
 
@@ -34,8 +36,9 @@ import java.io.*;
 @Path("/virnet")
 public class TentProxy implements SingleThreadModel{
 
+    private static final Logger log = LoggerFactory.getLogger(TentProxy.class);
     private VTNAuthNToken token;
-    static private Map<String, VTNAuthNToken> tokenMap = new HashMap<>();
+    static private Map<String, VTNAuthNToken> tokenMap = new IdentityHashMap<>();
 
 
     @Path("/login")
@@ -55,6 +58,7 @@ public class TentProxy implements SingleThreadModel{
 
 
             response.sendRedirect("/" + username + "/home.html");
+            log.info("~~~~~~~User: " + username + " logged in!~~~~~~~~");
         }catch (AuthenticationException e){
             try {
                 response.sendRedirect("/index.html");
@@ -72,8 +76,9 @@ public class TentProxy implements SingleThreadModel{
     public void logout(
             @FormParam("username") String username,
             @Context HttpServletResponse response){
-        VTNServ.getTentMgr().logoutReq(token);
+        VTNServ.getTentMgr().logoutReq(tokenMap.get(username));
         tokenMap.remove(username);
+        log.info("~~~~~~~User: "+username+ " logged out!~~~~~~~");
     }
 
     @Path("/cleanlogout")
@@ -81,7 +86,7 @@ public class TentProxy implements SingleThreadModel{
     public void cleanlogout(
             @FormParam("username") String username,
             @Context HttpServletResponse response){
-        VTNServ.getTentMgr().logoutReq(token);
+        VTNServ.getTentMgr().logoutReq(tokenMap.get(username));
         tokenMap.remove(username);
         String filePath = "/Users/Hao/IdeaProjects/multi-tenancy/web/"+username;
         File fp = new File(filePath);
