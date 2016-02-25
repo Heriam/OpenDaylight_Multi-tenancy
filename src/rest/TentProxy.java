@@ -4,29 +4,26 @@ package rest;
 import aaa.authn.VTNAuthNToken;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.tools.internal.ws.processor.util.DirectoryUtil;
-import driver.ODLDriver;
-import driver.ResponseMsgPOJO;
-import driver.vtndatamodel.Serializable;
 import driver.Mappable;
 import driver.MappableMsg;
-import driver.vtndatamodel.*;
+import driver.ODLDriver;
+import driver.vtndatamodel.Serializable;
 import org.apache.shiro.authc.AuthenticationException;
-
-import java.util.*;
-import java.util.Map.Entry;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tenantmgr.Mapper;
 import tenantmgr.VTNServ;
 
-import javax.servlet.SingleThreadModel;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
 
 
 /**
@@ -34,11 +31,10 @@ import java.io.*;
  */
 
 @Path("/virnet")
-public class TentProxy implements SingleThreadModel{
+public class TentProxy{
 
     private static final Logger log = LoggerFactory.getLogger(TentProxy.class);
-    private VTNAuthNToken token;
-    static private Map<String, VTNAuthNToken> tokenMap = new IdentityHashMap<>();
+    static private Map<String, VTNAuthNToken> tokenMap = new HashMap<>();
 
 
     @Path("/login")
@@ -49,10 +45,17 @@ public class TentProxy implements SingleThreadModel{
             @FormParam("password") String password,
             @Context HttpServletResponse response){
 
-
         try {
-            token = VTNServ.getTentMgr().loginReq(username, password);
-            if(token!=null) tokenMap.put(username, token);
+
+            if(tokenMap.containsKey(username)){
+                throw new AuthenticationException("This account is logged in at another place!");
+            }
+
+            VTNAuthNToken token = VTNServ.getTentMgr().loginReq(username, password);
+            if(token!=null) {
+                tokenMap.put(username, token);
+                log.info("token added to tokenMap with Entry: "+username + ":  "+ tokenMap.get(username));
+            }
             updateFile(username);
 
 
@@ -60,6 +63,7 @@ public class TentProxy implements SingleThreadModel{
             response.sendRedirect("/" + username + "/home.html");
             log.info("~~~~~~~User: " + username + " logged in!~~~~~~~~");
         }catch (AuthenticationException e){
+            log.info(e.getMessage());
             try {
                 response.sendRedirect("/index.html");
             } catch (IOException e1) {
@@ -76,9 +80,12 @@ public class TentProxy implements SingleThreadModel{
     public void logout(
             @FormParam("username") String username,
             @Context HttpServletResponse response){
-        VTNServ.getTentMgr().logoutReq(tokenMap.get(username));
-        tokenMap.remove(username);
-        log.info("~~~~~~~User: "+username+ " logged out!~~~~~~~");
+        if (tokenMap.containsKey(username)) {
+            log.info("~~~~~~~User: "+username+ " logged out with token: "+tokenMap.get(username)+"~~~~~~~");
+            VTNServ.getTentMgr().logoutReq(tokenMap.get(username));
+            tokenMap.remove(username);
+        }
+
     }
 
     @Path("/cleanlogout")
@@ -86,8 +93,13 @@ public class TentProxy implements SingleThreadModel{
     public void cleanlogout(
             @FormParam("username") String username,
             @Context HttpServletResponse response){
-        VTNServ.getTentMgr().logoutReq(tokenMap.get(username));
-        tokenMap.remove(username);
+
+        if (tokenMap.containsKey(username)) {
+            log.info("~~~~~~~CLEAN LOGOUT! User: "+username+ " logged out with token: "+tokenMap.get(username)+"~~~~~~~");
+            VTNServ.getTentMgr().logoutReq(tokenMap.get(username));
+            tokenMap.remove(username);
+        }
+
         String filePath = "/Users/Hao/IdeaProjects/multi-tenancy/web/"+username;
         File fp = new File(filePath);
         if (fp.exists()) {
@@ -99,12 +111,12 @@ public class TentProxy implements SingleThreadModel{
     @Path("/operation")
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public String getOutput(@FormParam("method") String method,
+    public String Operation(@FormParam("method") String method,
                             @FormParam("service") String service,
-                            @FormParam("resource") String resource,
+                            @FormParam("resource") List<String> resources,
                             @FormParam("network") String network,
                             @FormParam("bridge") String bridge,
-                            @FormParam("interface") String intface,
+                            @FormParam("interface") String Interface,
                             @FormParam("router") String router,
                             @FormParam("mapping") String mapping,
                             @FormParam("username") String username,
@@ -113,10 +125,31 @@ public class TentProxy implements SingleThreadModel{
                             @Context HttpServletResponse webresponse) {
         String outputString;
         String requestString=null;
+        String patchedUrl=null;
+        String reloginString="";
+
+
+        if(resources.isEmpty()){
+            log.info("Request doest not specified resource");
+        } else{
+        for(String rsrcType : resources){
+            switch(rsrcType){
+                case "network": patchedUrl = patchedUrl + network; break;
+                case "bridge": patchedUrl = patchedUrl + bridge; break;
+                case "router": patchedUrl = patchedUrl + router; break;
+                case "interface": patchedUrl = patchedUrl + Interface; break;
+                case "mapping": patchedUrl = patchedUrl + mapping; break;
+                default: log.info("WARNING: ~~~~~No Resource Matches!!!~~~~~");
+            }
+            log.info("For resource "+rsrcType+" URL Patched: "+patchedUrl);
+        }}
+
+
+
         try {
 
                 JSONObject jsonObject = (json == null || json.isEmpty()) ? null : new JSONObject(json);
-                Mappable request = new MappableMsg(jsonObject, url, tokenMap.get(username));
+                Mappable request = new MappableMsg(jsonObject, patchedUrl + url, tokenMap.get(username));
                 request.setServID(service);
                 request.setMsgType(method);
                 requestString = request.toString();
@@ -131,15 +164,26 @@ public class TentProxy implements SingleThreadModel{
                 outputString = e.getMessage();
             }
 
+        if(tokenMap.containsKey(username)) {
+            log.info("Operation committed: tokenMap contains key: "+ username + " with value: " + tokenMap.get(username));
+        } else {
+            requestString =null;
+            outputString = null;
+            reloginString = "<script>function redirect(){top.location.href='/index.html';}</script>";
+            log.info("Operation failed: tokenMap does not contain the key: "+ username);
+
+        }
+
         return "<html><head><title>Output</title>" +
                 "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />" +
-                "<style type=\"text/css\"></style></head><body>" +
+                "<style type=\"text/css\"></style></head><body onload=\"redirect()\">" +
                 "<h3>Output</h3><hr><br>" +
                 "<div>" +
                 "<b>REQUEST:</b>"+
                 "<textarea rows=\"5\" cols=\"110\" name=\"textarea\" >"+requestString+"</textarea><br><br><br><br>" +
                 "<b>OUTPUT:</b>"+
                 "<textarea rows=\"15\" cols=\"110\" name=\"textarea\" >"+outputString+"</textarea></div>" +
+                reloginString +
                 "</body></html>";
     }
 
@@ -180,6 +224,16 @@ public class TentProxy implements SingleThreadModel{
                 "<textarea rows=\"15\" cols=\"110\" name=\"textarea\" >"+outputString+"</textarea></div>" +
                 "</body></html>";
     }
+
+
+
+
+
+//    -------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 
 
     public void frameTopPage(String username){
@@ -274,47 +328,49 @@ public class TentProxy implements SingleThreadModel{
 
                     "  <fieldset>\n" +
                     "  <legend>Resource:</legend>\n<br>" +
+
+                    (username.equals("admin")?
                     "<input type=\"checkbox\" name=\"resource\" value=\"network\" />&nbsp;&nbsp;&nbsp;&nbsp; Network &nbsp;&nbsp;&nbsp;&nbsp;  " +
                     "<select name=\"network\">\n" +
-                    "<option value=\"default\">Default</option>\n" +
-                    "<option value=\"net1\">Network1</option>\n" +
-                    "<option value=\"net2\">Network2</option>\n" +
-                    "<option value=\"net3\">Network3</option>\n" +
-                    "<option value=\"net4\">Network4</option>\n" +
-                    "<option value=\"net5\">Network5</option>\n" +
-                    "</select>&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
+                    "<option value=\"\">Default</option>\n" +
+                    "<option value=\"tenant1/\">Network1</option>\n" +
+                    "<option value=\"tenant2/\">Network2</option>\n" +
+                    "<option value=\"tenant3/\">Network3</option>\n" +
+                    "<option value=\"tenant4/\">Network4</option>\n" +
+                    "<option value=\"tenant5/\">Network5</option>\n" +
+                    "</select>&nbsp;&nbsp;&nbsp;&nbsp;<br>" :"" )   +
 
                     "<input type=\"checkbox\" name=\"resource\" value=\"bridge\" />&nbsp;&nbsp;&nbsp;&nbsp; Bridge   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   " +
                     "<select name=\"bridge\">\n" +
-                    "<option value=\"bridge1\">Bridge1</option>\n" +
-                    "<option value=\"bridge2\">Bridge2</option>\n" +
-                    "<option value=\"bridge3\">Bridge3</option>\n" +
-                    "<option value=\"bridge4\">Bridge4</option>\n" +
-                    "<option value=\"bridge5\">Bridge5</option>\n" +
+                    "<option value=\"vbridges/bridge1/\">Bridge1</option>\n" +
+                    "<option value=\"vbridges/bridge2/\">Bridge2</option>\n" +
+                    "<option value=\"vbridges/bridge3/\">Bridge3</option>\n" +
+                    "<option value=\"vbridges/bridge4/\">Bridge4</option>\n" +
+                    "<option value=\"vbridges/bridge5/\">Bridge5</option>\n" +
                     "</select>&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
 
                     "<input type=\"checkbox\" name=\"resource\" value=\"interface\" />&nbsp;&nbsp;&nbsp;&nbsp; Interface &nbsp;&nbsp;&nbsp;&nbsp;   " +
                     "<select name=\"interface\">\n" +
-                    "<option value=\"int1\">Interface1</option>\n" +
-                    "<option value=\"int2\">Interface2</option>\n" +
-                    "<option value=\"int3\">Interface3</option>\n" +
-                    "<option value=\"int4\">Interface4</option>\n" +
-                    "<option value=\"int5\">Interface5</option>\n" +
+                    "<option value=\"interfaces/interface1/\">Interface1</option>\n" +
+                    "<option value=\"interfaces/interface2/\">Interface2</option>\n" +
+                    "<option value=\"interfaces/interface3/\">Interface3</option>\n" +
+                    "<option value=\"interfaces/interface4/\">Interface4</option>\n" +
+                    "<option value=\"interfaces/interface5/\">Interface5</option>\n" +
                     "</select>&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
 
                     "<input type=\"checkbox\" name=\"resource\" value=\"router\" />&nbsp;&nbsp;&nbsp;&nbsp; Router  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   " +
                     "<select name=\"router\">\n" +
-                    "<option value=\"r1\">Router1</option>\n" +
-                    "<option value=\"r2\">Router2</option>\n" +
-                    "<option value=\"r3\">Router3</option>\n" +
-                    "<option value=\"r4\">Router4</option>\n" +
-                    "<option value=\"r5\">Router5</option>\n" +
+                    "<option value=\"vrouters/router1/\">Router1</option>\n" +
+                    "<option value=\"vrouters/router2/\">Router2</option>\n" +
+                    "<option value=\"vrouters/router3/\">Router3</option>\n" +
+                    "<option value=\"vrouters/router4/\">Router4</option>\n" +
+                    "<option value=\"vrouters/router5/\">Router5</option>\n" +
                     "</select>&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
 
                     "<input type=\"checkbox\" name=\"resource\" value=\"mapping\" />&nbsp;&nbsp;&nbsp;&nbsp; Mapping  &nbsp;&nbsp;&nbsp;&nbsp;   " +
                     "<select name=\"mapping\">\n" +
                     "<option value=\"portmap\">PortMap</option>\n" +
-                    "<option value=\"macmap\">MacMap</option>\n" +
+                    "<option value=\"macmap/\">MacMap</option>\n" +
                     "<option value=\"vlanmaps\">VlanMap</option>\n" +
                     "</select>&nbsp;&nbsp;&nbsp;&nbsp;<br>"+
 
@@ -432,6 +488,13 @@ public class TentProxy implements SingleThreadModel{
 //            e.printStackTrace();
 //        }
 //    }
+//
+
+//    --------------------------------------------------------------------------------------------------------------
+
+
+
+
 
     private void updateFile(String username) {
         String filePath = "/Users/Hao/IdeaProjects/multi-tenancy/web/" + username;
@@ -461,6 +524,7 @@ public class TentProxy implements SingleThreadModel{
             System.out.println("所删除的文件不存在！"+'\n');
         }
     }
+
 
 
 
