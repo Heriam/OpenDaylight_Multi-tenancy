@@ -4,28 +4,26 @@ package rest;
 import aaa.authn.VTNAuthNToken;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.tools.internal.ws.processor.util.DirectoryUtil;
-import driver.ODLDriver;
-import driver.ResponseMsgPOJO;
-import driver.vtndatamodel.Serializable;
 import driver.Mappable;
 import driver.MappableMsg;
-import driver.vtndatamodel.*;
+import driver.ODLDriver;
+import driver.vtndatamodel.Serializable;
 import org.apache.shiro.authc.AuthenticationException;
-
-import java.util.*;
-import java.util.Map.Entry;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tenantmgr.Mapper;
 import tenantmgr.VTNServ;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
 
 
 /**
