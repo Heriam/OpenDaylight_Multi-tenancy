@@ -6,17 +6,19 @@ import com.sun.jersey.api.client.WebResource;
 import driver.aaadatamodel.*;
 import driver.vtndatamodel.*;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.el.ELContext;
-import javax.ws.rs.core.MultivaluedHashMap;
-import java.lang.Class;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Hao on 2/5/16.
  */
 public class ODLDriver implements ToODL {
+
+    private static final Logger log = LoggerFactory.getLogger(ODLDriver.class);
+
     public static final String ODLIP = "192.168.0.102:";
     private static final String JSON = "application/json";
     private static Client client =  Client.create();
@@ -31,7 +33,7 @@ public class ODLDriver implements ToODL {
 
     @Override
     public ClientResponse Post(Mappable message) throws RuntimeException{
-
+        log.info("ODLDriver: ~~~~~~~~~POST: "+message.getBody()+"~~~~~~~~~~");
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
                     .header("Authorization", auth)
@@ -47,7 +49,7 @@ public class ODLDriver implements ToODL {
 
     @Override
     public ClientResponse Get(Mappable message) throws RuntimeException{
-
+        log.info("ODLDriver: ~~~~~~~~~GET: "+message.getBody()+"~~~~~~~~~~");
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
                     .header("Accept", JSON)
@@ -63,7 +65,7 @@ public class ODLDriver implements ToODL {
 
     @Override
     public ClientResponse Put(Mappable message) throws RuntimeException{
-
+        log.info("ODLDriver: ~~~~~~~~~PUT: "+message.getBody()+"~~~~~~~~~~");
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
                     .header("Authorization", auth)
@@ -77,7 +79,7 @@ public class ODLDriver implements ToODL {
 
     @Override
     public ClientResponse Delete(Mappable message) throws RuntimeException{
-
+        log.info("ODLDriver: ~~~~~~~~~DELETE: "+message.getBody()+"~~~~~~~~~~");
             response = webResource.path(message.getURL())
                     .header("Content-Type", JSON)
                     .header("Authorization", auth)
@@ -89,9 +91,10 @@ public class ODLDriver implements ToODL {
     }
 
     @Override
-    public Serializable CommitRequest(Mappable message){
+    public Serializable CommitRequest(Mappable request){
         try{
             ClientResponse response;
+            Mappable message = HandleSpecialCases(request);
             switch (message.getMsgType()) {
                 case "create":
                     response = Post(message);
@@ -173,4 +176,40 @@ public class ODLDriver implements ToODL {
     }
 
 
+    private Mappable HandleSpecialCases(Mappable request){
+        if(request.getURL().endsWith("portmap")){
+            JSONObject oldBody = request.getBody();
+            String vlan = Integer.toString(oldBody.getInt("vlan"));
+            JSONObject node = oldBody.getJSONObject("node");
+            String nodeID = node.getString("id");
+            JSONObject port = oldBody.getJSONObject("port");
+            String portID = port.getString("id");
+            String portName = port.getString("name");
+            PortMapInfo newBody = new PortMapInfo(vlan, new TypeIdInfo(nodeID), new PortMap_portInfo(portName, portID));
+            request.setBody(newBody);
+            return request;
+        } else if(request.getURL().contains("flowfilters")){
+            Redirect newRedirect;
+            JSONObject oldBody = request.getBody();
+            int oldIndex = oldBody.getInt("index");
+            String oldCondition = oldBody.getString("condition");
+            JSONObject oldFilterType = oldBody.getJSONObject("filterType");
+            JSONObject oldDrop = oldFilterType.has("drop")? oldFilterType.getJSONObject("drop"): null;
+            if (oldFilterType.has("redirect")) {
+                boolean oldOutput = oldFilterType.getJSONObject("redirect").getBoolean("output");
+                JSONObject oldDestination = oldFilterType.getJSONObject("redirect").getJSONObject("destination");
+                String terminal = oldDestination.getString("terminal");
+                String Interface = oldDestination.getString("interface");
+                Destination newDestination = new Destination(terminal, Interface);
+                newRedirect = new Redirect(newDestination, oldOutput);
+            } else {
+                newRedirect = null;
+            }
+            FlowFilterInfo flowFilter= new FlowFilterInfo(oldIndex,oldCondition, new FilterType(oldDrop, newRedirect));
+            request.setBody(flowFilter);
+            return request;
+        } else{
+            return request;
+        }
+    }
 }

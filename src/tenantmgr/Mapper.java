@@ -2,7 +2,6 @@ package tenantmgr;
 
 import aaa.authn.VTNAuthNToken;
 import driver.Mappable;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.Map;
 public abstract class Mapper {
 
     protected static final String urlSYSRT = "controller/nb/v2/";
-    protected static final String urlVTN = "controller/nb/v2/vtn/default/vtns/";
+    protected static final String urlVTN = "controller/nb/v2/vtn/default/";
     protected static final String urlAUTHRT = "auth/v1/";                             // with subdir domains, users, roles
     protected static final String urlServAuth = "restconf/config/authorization-schema:domain-authorization/domains/";                 //with subdir authorization-schema:simple-authorization or domain-authorization
     protected static final String IFDIR = "/interfaces/";

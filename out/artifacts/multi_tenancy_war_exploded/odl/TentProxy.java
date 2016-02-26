@@ -125,10 +125,10 @@ public class TentProxy{
                             @Context HttpServletResponse webresponse) {
         String outputString;
         String requestString=null;
-        String patchedUrl=null;
+        String patchedUrl="";
         String reloginString="";
 
-
+        if(tokenMap.containsKey(username)) {
         if(resources.isEmpty()){
             log.info("Request doest not specified resource");
         } else{
@@ -144,11 +144,15 @@ public class TentProxy{
             log.info("For resource "+rsrcType+" URL Patched: "+patchedUrl);
         }}
 
-
-
-        try {
-
-                JSONObject jsonObject = (json == null || json.isEmpty()) ? null : new JSONObject(json);
+            JSONObject jsonObject;
+            try {
+                if(json == null || json.isEmpty()){
+                    jsonObject = null;
+                    log.info("~~~~~~~~~~~No JSON INPUT~~~~~~~~~~");
+                } else {
+                    jsonObject = new JSONObject(json);
+                    log.info("~~~~~JSON INPUT: "+jsonObject);
+                    }
                 Mappable request = new MappableMsg(jsonObject, patchedUrl + url, tokenMap.get(username));
                 request.setServID(service);
                 request.setMsgType(method);
@@ -163,12 +167,11 @@ public class TentProxy{
             } catch (RuntimeException e) {
                 outputString = e.getMessage();
             }
-
-        if(tokenMap.containsKey(username)) {
             log.info("Operation committed: tokenMap contains key: "+ username + " with value: " + tokenMap.get(username));
+
         } else {
-            requestString =null;
-            outputString = null;
+            requestString ="";
+            outputString = "";
             reloginString = "<script>function redirect(){top.location.href='/index.html';}</script>";
             log.info("Operation failed: tokenMap does not contain the key: "+ username);
 
@@ -194,8 +197,11 @@ public class TentProxy{
     public String getOutput(
             @FormParam("username") String username,
             @Context HttpServletResponse response){
-        String outputString =null;
+        String outputString;
         List<String> list = new ArrayList<>();
+        String reloginString="";
+        if(tokenMap.containsKey(username)) {
+            log.info("Operation committed: tokenMap contains key: "+ username + " with value: " + tokenMap.get(username));
         try {
             ObjectMapper mapper = new ObjectMapper();
             Iterator iter = tokenMap.entrySet().iterator();
@@ -213,15 +219,22 @@ public class TentProxy{
             outputString = e.getMessage();
         }
 
+        } else {
+            username ="";
+            outputString = "";
+            reloginString = "<script>function redirect(){top.location.href='/index.html';}</script>";
+        }
+
         return "<html><head><title>Output</title>" +
                 "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />" +
-                "<style type=\"text/css\"></style></head><body>" +
+                "<style type=\"text/css\"></style></head><body onload=\"redirect()\">" +
                 "<h3>Output</h3><hr><br>" +
                 "<div>" +
                 "<b>REQUEST:</b>"+
                 "<textarea rows=\"5\" cols=\"110\" name=\"textarea\" >Operated by: "+username+"</textarea><br><br><br><br>" +
                 "<b>OUTPUT:</b>"+
                 "<textarea rows=\"15\" cols=\"110\" name=\"textarea\" >"+outputString+"</textarea></div>" +
+                reloginString +
                 "</body></html>";
     }
 
@@ -333,11 +346,11 @@ public class TentProxy{
                     "<input type=\"checkbox\" name=\"resource\" value=\"network\" />&nbsp;&nbsp;&nbsp;&nbsp; Network &nbsp;&nbsp;&nbsp;&nbsp;  " +
                     "<select name=\"network\">\n" +
                     "<option value=\"\">Default</option>\n" +
-                    "<option value=\"tenant1/\">Network1</option>\n" +
-                    "<option value=\"tenant2/\">Network2</option>\n" +
-                    "<option value=\"tenant3/\">Network3</option>\n" +
-                    "<option value=\"tenant4/\">Network4</option>\n" +
-                    "<option value=\"tenant5/\">Network5</option>\n" +
+                    "<option value=\"vtns/tenant1/\">Network1</option>\n" +
+                    "<option value=\"vtns/tenant2/\">Network2</option>\n" +
+                    "<option value=\"vtns/tenant3/\">Network3</option>\n" +
+                    "<option value=\"vtns/tenant4/\">Network4</option>\n" +
+                    "<option value=\"vtns/tenant5/\">Network5</option>\n" +
                     "</select>&nbsp;&nbsp;&nbsp;&nbsp;<br>" :"" )   +
 
                     "<input type=\"checkbox\" name=\"resource\" value=\"bridge\" />&nbsp;&nbsp;&nbsp;&nbsp; Bridge   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   " +
@@ -378,7 +391,7 @@ public class TentProxy{
 
                     "  <fieldset>\n" +
                     "  <legend>Command:</legend>\n<br>" +
-                    "URL: &nbsp;&nbsp;&nbsp;&nbsp;virtual_network/<input type=\"text\" name=\"url\" style=\"width:200px;\" /><br><br>" +
+                    "URL: &nbsp;&nbsp;&nbsp;&nbsp;/<input type=\"text\" name=\"url\" style=\"width:200px;\" /><br><br>" +
                     "JSON:&nbsp;&nbsp;&nbsp;&nbsp;<textarea rows=\"20\" cols=\"100\" form=\"form\" name=\"json\" ></textarea>" +
                     " <br><br> </fieldset>\n<br>" +
                     "<div align=\"center\">" +
@@ -406,11 +419,10 @@ public class TentProxy{
         StringBuilder sb = new StringBuilder();
         String filePath = "/Users/Hao/IdeaProjects/multi-tenancy/web/"+username+"/output.html";
         File fp = new File(filePath);
-        if (fp.exists()) {
-            fp.deleteOnExit();
-            fp.exists();
-            deleteFile(fp);// 目录存在的情况下删除。
-        }
+//        fp.deleteOnExit();
+//        fp.exists();
+//        deleteFile(fp);// 目录存在的情况下删除。
+        if (!fp.exists()) {
         try {
             PrintStream printStream = new PrintStream(new FileOutputStream("/Users/Hao/IdeaProjects/multi-tenancy/web/"+username+"/output.html"));
             sb.append("<html>");
@@ -429,6 +441,7 @@ public class TentProxy{
             printStream.println(sb.toString());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }
         }
     }
 

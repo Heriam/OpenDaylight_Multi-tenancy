@@ -1,26 +1,19 @@
 package test;
 
 
-
 import aaa.IShiro;
 import aaa.authn.VTNAuthNToken;
-import com.sun.deploy.net.HttpResponse;
-import com.sun.jersey.api.client.ClientResponse;
 import driver.Mappable;
 import driver.MappableMsg;
-import driver.ToODL;
-import driver.vtndatamodel.BridgeInfo;
 import driver.vtndatamodel.Serializable;
 import org.apache.shiro.subject.Subject;
 import org.json.JSONObject;
 import rest.TentProxy;
 import tenantmgr.VTNServ;
 
-import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class VTNRequests {
 
@@ -108,12 +101,12 @@ public class VTNRequests {
 
 //            MappableMsg{body={"hardTimeout":"0","idleTimeout":"300","description":"1"}, URL='1', Auth=null, msgType='create', servID='vtn:topo', option=false, status=0}
 
-            VTNAuthNToken token = VTNServ.getTentMgr().loginReq("admin", "admin");
-            String json = null;
+            VTNAuthNToken token = VTNServ.getTentMgr().loginReq("tenant1", "tenant1");
+            String json = "{\"node\":{\"id\":\"00:00:00:00:00:00:00:01\",\"type\":\"OF\"},\"vlan\":0,\"port\":{\"name\":\"s1-eth2\",\"id\":\"2\",\"type\":\"OF\"}}";
             JSONObject jsonObject = (json == null || json.isEmpty()) ? null : new JSONObject(json);
-            Mappable request = new MappableMsg(jsonObject, "tenant1", token);
-            request.setMsgType("read");
-            request.setServID("serv:firewall");
+            Mappable request = new MappableMsg(jsonObject, "vbridges/bridge1/interfaces/interface1/portmap", token);
+            request.setMsgType("update");
+            request.setServID("vtn:topo");
 
             TentProxy tentProxy = new TentProxy();
             Serializable response = VTNServ.getTentMgr().getResponse(request);
