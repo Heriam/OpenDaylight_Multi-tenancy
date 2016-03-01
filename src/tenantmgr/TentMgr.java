@@ -14,6 +14,8 @@ import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.subject.Subject;
 import org.hamcrest.core.Is;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +25,7 @@ import java.util.Map;
  */
 public class TentMgr extends Mapper implements VTNServ{
 
-
+    private static final Logger log = LoggerFactory.getLogger(TentMgr.class);
     private static Subject currentSubject;
     public TentMgr(){
         super();
@@ -36,6 +38,7 @@ public class TentMgr extends Mapper implements VTNServ{
             throw new AuthenticationException("Authentication Failure: User is not Regiestered in System");
         }
         try{
+            log.info("~~~~~~~~AAA Authentication: "+username+" : "+password);
             currentSubject = IShiro.New().getLoginedUser(token);
             currentSubject.getSession().setAttribute("domainID", token.getDomainId());
             return token;
@@ -59,6 +62,7 @@ public class TentMgr extends Mapper implements VTNServ{
         if (currentSubject.isAuthenticated())currentSubject.logout();
         currentSubject.login(request.getToken());
         String servRequest = request.getServID()+":"+request.getMsgType();
+        log.info("~~~~~~~~~~AAA Authorization: "+request);
         if(currentSubject.isPermitted(servRequest)) {
             Mappable mappedReq = Mapper.mapReq(request);
             return ToODL.Send(mappedReq);

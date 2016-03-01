@@ -3,8 +3,8 @@
     <legend>Operation:</legend>
 <br><input type="radio" name="method" value="create" />&nbsp;&nbsp;&nbsp;&nbsp;Create&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="method" value="update" />&nbsp;&nbsp;&nbsp;&nbsp;Update&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="method" value="read" checked="checked" />&nbsp;&nbsp;&nbsp;&nbsp;Read&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="method" value="delete" />&nbsp;&nbsp;&nbsp;&nbsp;Delete&nbsp;&nbsp;&nbsp;&nbsp;    <br><br> </fieldset>
 <br><br>  <fieldset>
-  <legend>Service:</legend>
-<br><input type="radio" name="service" value="vtn:topo" checked="checked"/>&nbsp;&nbsp;&nbsp;&nbsp;Basic VTN &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="aaa:acl" />&nbsp;&nbsp;&nbsp;&nbsp; DOM ACL &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="serv:firewall" />&nbsp;&nbsp;&nbsp;&nbsp;Firewall &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="serv:content" />&nbsp;&nbsp;&nbsp;&nbsp; Content Filtering &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="rest:conf" />&nbsp;&nbsp;&nbsp;&nbsp; BYOC &nbsp;&nbsp;&nbsp;&nbsp;    <br><br> </fieldset>
+  <legend>Management:</legend>
+<br><input type="radio" name="mngServ" value="vtn:topo" checked="checked"/>&nbsp;&nbsp;&nbsp;&nbsp;Basic VTN &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="mngServ" value="aaa:acl" />&nbsp;&nbsp;&nbsp;&nbsp; DOM ACL &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="mngServ" value="system:vtn" />&nbsp;&nbsp;&nbsp;&nbsp; Flow Control &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="mngServ" value="policy:serv" />&nbsp;&nbsp;&nbsp;&nbsp; Service Policing &nbsp;&nbsp;&nbsp;&nbsp;    <br><br> </fieldset>
 <br><br>  <fieldset>
   <legend>Resource:</legend>
 <br><input type="checkbox" name="resource" value="bridge" />&nbsp;&nbsp;&nbsp;&nbsp; Bridge   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   <select name="bridge">
@@ -32,6 +32,6 @@
 </select>&nbsp;&nbsp;&nbsp;&nbsp;<br> <br> </fieldset>
 <br><br>  <fieldset>
   <legend>Command:</legend>
-<br>URL: &nbsp;&nbsp;&nbsp;&nbsp;virtual_network/<input type="text" name="url" style="width:200px;" /><br><br>JSON:&nbsp;&nbsp;&nbsp;&nbsp;<textarea rows="20" cols="100" form="form" name="json" ></textarea> <br><br> </fieldset>
+<br>URL: &nbsp;&nbsp;&nbsp;&nbsp;/<input type="text" name="url" style="width:200px;" /><br><br>JSON:&nbsp;&nbsp;&nbsp;&nbsp;<textarea rows="20" cols="100" form="form" name="json" ></textarea> <br><br> </fieldset>
 <br><div align="center"><button type="submit" form="form" name="username" value="tenant2" onclick="output()">Commit</button>   &nbsp;&nbsp;&nbsp;&nbsp;   <button type="reset" form="form" >Reset</button></div></form><div><br/><br/><script>
 function output(){document.getElementById("form").submit();} </script><br/><br/></div></body></html>

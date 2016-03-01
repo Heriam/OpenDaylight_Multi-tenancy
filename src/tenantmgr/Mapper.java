@@ -12,12 +12,13 @@ import java.util.Map;
  */
 public abstract class Mapper {
 
-    protected static final String urlSYSRT = "controller/nb/v2/";
-    protected static final String urlVTN = "controller/nb/v2/vtn/default/";
-    protected static final String urlAUTHRT = "auth/v1/";                             // with subdir domains, users, roles
-    protected static final String urlServAuth = "restconf/config/authorization-schema:domain-authorization/domains/";                 //with subdir authorization-schema:simple-authorization or domain-authorization
+    protected static final String urlSYSRT = "controller/nb/v2/vtn/default/";
+    protected static final String urlVTN = "controller/nb/v2/vtn/default/vtns/";
+    protected static final String urlDOMACLRT = "auth/v1/";                             // with subdir domains, users, roles
+    protected static final String urlServPolicing = "restconf/config/authorization-schema:domain-authorization/domains/";                 //with subdir authorization-schema:simple-authorization or domain-authorization
     protected static final String IFDIR = "/interfaces/";
     protected static final String BRIDGEDIR = "/vbridges/";
+    protected static final String POLICYDIR = "/policies/";
     protected static final String PORTMAP = "/portmap";
     protected static final String MACMAPDIR = "/macmap/";
     protected static final String VLANMAP = "/vlanmaps";
@@ -32,11 +33,13 @@ public abstract class Mapper {
     protected static final String servType = "serv";
     protected static final String vtnType = "vtn";
     protected static final String aaodlType = "aaa";
-    protected static final String restconfType = "rest";
+    protected static final String policyType = "policy";
 
     protected static final String vtnResource = "vtn";
     protected static final String firewallResource = "firewall";
     protected static final String topoResource = "topo";
+    protected static final String aclEntries = "acl";
+    protected static final String servPolicyList = "serv";
 
     protected static final int adminDOM = 0;
     protected static final int tent1DOM = 1;
@@ -74,10 +77,11 @@ public abstract class Mapper {
     //Map Url
     public static Mappable mapReq(Mappable request){
         typeMap = new HashMap<>();
-        typeMap.put(sysType, urlVTN);
+        typeMap.put(sysType, urlSYSRT);
         typeMap.put(vtnType, urlVTN);
-        typeMap.put(servType, urlServAuth);
-        typeMap.put(aaodlType, urlAUTHRT);
+        typeMap.put(servType, urlSYSRT);
+        typeMap.put(policyType, urlServPolicing);
+        typeMap.put(aaodlType, urlDOMACLRT);
         if(request.getServID()!=null) {
             String servType = request.getServID().split(":")[0];
             int domainID = request.getToken().getDomainId();

@@ -112,7 +112,7 @@ public class TentProxy{
     @POST
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public String Operation(@FormParam("method") String method,
-                            @FormParam("service") String service,
+                            @FormParam("mngServ") String mngServ,
                             @FormParam("resource") List<String> resources,
                             @FormParam("network") String network,
                             @FormParam("bridge") String bridge,
@@ -154,7 +154,7 @@ public class TentProxy{
                     log.info("~~~~~JSON INPUT: "+jsonObject);
                     }
                 Mappable request = new MappableMsg(jsonObject, patchedUrl + url, tokenMap.get(username));
-                request.setServID(service);
+                request.setServID(mngServ);
                 request.setMsgType(method);
                 requestString = request.toString();
                 Serializable reqresponse = VTNServ.getTentMgr().getResponse(request);
@@ -331,13 +331,17 @@ public class TentProxy{
                     " <br><br> </fieldset>\n<br><br>" +
 
                     "  <fieldset>\n" +
-                    "  <legend>Service:</legend>\n<br>" +
-                    "<input type=\"radio\" name=\"service\" value=\"vtn:topo\" checked=\"checked\"/>&nbsp;&nbsp;&nbsp;&nbsp;Basic VTN &nbsp;&nbsp;&nbsp;&nbsp;   " +
-                    "<input type=\"radio\" name=\"service\" value=\"aaa:acl\" />&nbsp;&nbsp;&nbsp;&nbsp; DOM ACL &nbsp;&nbsp;&nbsp;&nbsp;   " +
-                    "<input type=\"radio\" name=\"service\" value=\"serv:firewall\" />&nbsp;&nbsp;&nbsp;&nbsp;Firewall &nbsp;&nbsp;&nbsp;&nbsp;   " +
-                    "<input type=\"radio\" name=\"service\" value=\"serv:content\" />&nbsp;&nbsp;&nbsp;&nbsp; Content Filtering &nbsp;&nbsp;&nbsp;&nbsp;   " +
-                    "<input type=\"radio\" name=\"service\" value=\"rest:conf\" />&nbsp;&nbsp;&nbsp;&nbsp; BYOC &nbsp;&nbsp;&nbsp;&nbsp;   " +
+                    "  <legend>Management:</legend>\n<br>" +
+                    "<input type=\"radio\" name=\"mngServ\" value=\"vtn:topo\" checked=\"checked\"/>&nbsp;&nbsp;&nbsp;&nbsp;Basic VTN &nbsp;&nbsp;&nbsp;&nbsp;   " +
+                    "<input type=\"radio\" name=\"mngServ\" value=\"aaa:acl\" />&nbsp;&nbsp;&nbsp;&nbsp; DOM ACL &nbsp;&nbsp;&nbsp;&nbsp;   " +
+//                    "<input type=\"radio\" name=\"service\" value=\"rsrc:mngmt\" />&nbsp;&nbsp;&nbsp;&nbsp;Resource Management &nbsp;&nbsp;&nbsp;&nbsp;   " +
+                    "<input type=\"radio\" name=\"mngServ\" value=\"system:vtn\" />&nbsp;&nbsp;&nbsp;&nbsp; Flow Control &nbsp;&nbsp;&nbsp;&nbsp;   " +
+                    "<input type=\"radio\" name=\"mngServ\" value=\"policy:serv\" />&nbsp;&nbsp;&nbsp;&nbsp; Service Policing &nbsp;&nbsp;&nbsp;&nbsp;   " +
                     " <br><br> </fieldset>\n<br><br>" +
+
+
+
+
 
                     "  <fieldset>\n" +
                     "  <legend>Resource:</legend>\n<br>" +
@@ -346,12 +350,13 @@ public class TentProxy{
                     "<input type=\"checkbox\" name=\"resource\" value=\"network\" />&nbsp;&nbsp;&nbsp;&nbsp; Network &nbsp;&nbsp;&nbsp;&nbsp;  " +
                     "<select name=\"network\">\n" +
                     "<option value=\"\">Default</option>\n" +
-                    "<option value=\"vtns/tenant1/\">Network1</option>\n" +
-                    "<option value=\"vtns/tenant2/\">Network2</option>\n" +
-                    "<option value=\"vtns/tenant3/\">Network3</option>\n" +
-                    "<option value=\"vtns/tenant4/\">Network4</option>\n" +
-                    "<option value=\"vtns/tenant5/\">Network5</option>\n" +
+                    "<option value=\"tenant1/\">Network1</option>\n" +
+                    "<option value=\"tenant2/\">Network2</option>\n" +
+                    "<option value=\"tenant3/\">Network3</option>\n" +
+                    "<option value=\"tenant4/\">Network4</option>\n" +
+                    "<option value=\"tenant5/\">Network5</option>\n" +
                     "</select>&nbsp;&nbsp;&nbsp;&nbsp;<br>" :"" )   +
+
 
                     "<input type=\"checkbox\" name=\"resource\" value=\"bridge\" />&nbsp;&nbsp;&nbsp;&nbsp; Bridge   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   " +
                     "<select name=\"bridge\">\n" +

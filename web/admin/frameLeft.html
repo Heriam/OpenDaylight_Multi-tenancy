@@ -3,17 +3,17 @@
     <legend>Operation:</legend>
 <br><input type="radio" name="method" value="create" />&nbsp;&nbsp;&nbsp;&nbsp;Create&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="method" value="update" />&nbsp;&nbsp;&nbsp;&nbsp;Update&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="method" value="read" checked="checked" />&nbsp;&nbsp;&nbsp;&nbsp;Read&nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="method" value="delete" />&nbsp;&nbsp;&nbsp;&nbsp;Delete&nbsp;&nbsp;&nbsp;&nbsp;    <br><br> </fieldset>
 <br><br>  <fieldset>
-  <legend>Service:</legend>
-<br><input type="radio" name="service" value="vtn:topo" checked="checked"/>&nbsp;&nbsp;&nbsp;&nbsp;Basic VTN &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="aaa:acl" />&nbsp;&nbsp;&nbsp;&nbsp; DOM ACL &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="serv:firewall" />&nbsp;&nbsp;&nbsp;&nbsp;Firewall &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="serv:content" />&nbsp;&nbsp;&nbsp;&nbsp; Content Filtering &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="service" value="rest:conf" />&nbsp;&nbsp;&nbsp;&nbsp; BYOC &nbsp;&nbsp;&nbsp;&nbsp;    <br><br> </fieldset>
+  <legend>Management:</legend>
+<br><input type="radio" name="mngServ" value="vtn:topo" checked="checked"/>&nbsp;&nbsp;&nbsp;&nbsp;Basic VTN &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="mngServ" value="aaa:acl" />&nbsp;&nbsp;&nbsp;&nbsp; DOM ACL &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="mngServ" value="system:vtn" />&nbsp;&nbsp;&nbsp;&nbsp; Flow Control &nbsp;&nbsp;&nbsp;&nbsp;   <input type="radio" name="mngServ" value="policy:serv" />&nbsp;&nbsp;&nbsp;&nbsp; Service Policing &nbsp;&nbsp;&nbsp;&nbsp;    <br><br> </fieldset>
 <br><br>  <fieldset>
   <legend>Resource:</legend>
 <br><input type="checkbox" name="resource" value="network" />&nbsp;&nbsp;&nbsp;&nbsp; Network &nbsp;&nbsp;&nbsp;&nbsp;  <select name="network">
 <option value="">Default</option>
-<option value="vtns/tenant1/">Network1</option>
-<option value="vtns/tenant2/">Network2</option>
-<option value="vtns/tenant3/">Network3</option>
-<option value="vtns/tenant4/">Network4</option>
-<option value="vtns/tenant5/">Network5</option>
+<option value="tenant1/">Network1</option>
+<option value="tenant2/">Network2</option>
+<option value="tenant3/">Network3</option>
+<option value="tenant4/">Network4</option>
+<option value="tenant5/">Network5</option>
 </select>&nbsp;&nbsp;&nbsp;&nbsp;<br><input type="checkbox" name="resource" value="bridge" />&nbsp;&nbsp;&nbsp;&nbsp; Bridge   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   <select name="bridge">
 <option value="vbridges/bridge1/">Bridge1</option>
 <option value="vbridges/bridge2/">Bridge2</option>

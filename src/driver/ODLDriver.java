@@ -95,6 +95,7 @@ public class ODLDriver implements ToODL {
         try{
             ClientResponse response;
             Mappable message = HandleSpecialCases(request);
+            log.info("Commit Request: " + message);
             switch (message.getMsgType()) {
                 case "create":
                     response = Post(message);
